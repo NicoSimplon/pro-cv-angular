@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+  - "10"
+before_script:
+  - npm install
+script:
+  - npm run build
+  - cp dist/pro-cv-angular/index.html dist/pro-cv-angular/404.html
+deploy:
+  local-dir: dist/pro-cv-angular
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure
+  keep-history: true
+  on:
+    branch: master
+notifications:
+  email: false
