@@ -5,15 +5,4 @@ export class Authentification {
 
     constructor() {}
 
-    /**
-     * hashPassword
-     */
-    public hashPassword() {
-        const bcrypt = require('bcrypt');
-        const saltRounds = 10;
-        bcrypt.hash(this.motDePasse, saltRounds, (err, hash) => {
-            this.motDePasse = hash;
-        });
-    }
-
 }

@@ -1,0 +1,9 @@
+<h3>Compétences</h3>
+<hr>
+<div *ngFor="let group of skills;">
+    <h4>{{ group.title }}</h4>
+    <ul *ngFor="let skill of group.skills">
+        <li>{{ skill.title }}</li>
+    </ul>
+</div>
+<hr>
