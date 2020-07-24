@@ -1,6 +1,6 @@
 <h3>Technos</h3>
 <hr>
-<div *ngFor="let tech of technos;">
-    <p>{{ tech.logoPath }} - title : <b>{{ tech.title }}</b></p>
-</div>
+<ul *ngFor="let tech of technos;">
+    <li><img src="{{ tech.logoPath }}" alt="Logo de {{tech.title}}" width="50" title="{{tech.title}}"/></li>
+</ul>
 <hr>
