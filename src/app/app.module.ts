@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { ROUTES } from './app.routes';
 import { AppComponent } from './app.component';
@@ -13,6 +14,9 @@ import { ExperiencesComponent } from './experiences/experiences.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { TechnosComponent } from './technos/technos.component';
 import { SkillsComponent } from './skills/skills.component';
+import { LoginComponent } from './login/login.component';
+import { EditComponent } from './edit/edit.component';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -24,12 +28,16 @@ import { SkillsComponent } from './skills/skills.component';
     ExperiencesComponent,
     ProjectsComponent,
     TechnosComponent,
-    SkillsComponent
+    SkillsComponent,
+    LoginComponent,
+    EditComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot(ROUTES)
+    RouterModule.forRoot(ROUTES),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

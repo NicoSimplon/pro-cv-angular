@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { Photo } from '../models/Photo';
@@ -12,6 +12,9 @@ import { SkillGroup } from '../models/SkillGroup';
 import { XpPro } from '../models/XpPro';
 import { Project } from '../models/Project';
 import { Techno } from '../models/Techno';
+import { Phone } from '../models/Phone';
+import { UserEmail } from '../models/UserEmail';
+import { ImageDto } from '../models/ImageDto';
 
 /**
  * Private services for admin exclusive use. With these services the admin can update the various datas of the CV (update, create, delete).
@@ -31,8 +34,39 @@ export class PrivateServicesService {
      *
      * @param photo Photo object containing the photo path.
      */
-    updatePhotoUrl(photo: Photo): Observable<string> {
-        return this._http.patch<string>(`${this.URL_BACKEND}/photo/update`, photo, { withCredentials: true });
+    updatePhotoUrl(photo: Photo): Observable<Photo> {
+        return this._http.patch<Photo>(`${this.URL_BACKEND}/photo/update`, photo, {withCredentials: true});
+    }
+
+    // Image Services
+
+    /**
+     * Upload a new image to be stored in the database.
+     * In return we get the new image ID.
+     *
+     * @param image The image that has to be uploaded.
+     */
+    uploadImage(image: FormData): Observable<ImageDto> {
+        return this._http.post<ImageDto>(`${this.URL_BACKEND}/image/uploadFile`, image, {withCredentials: true});
+    }
+
+    /**
+     * Change the image associated with an ID.
+     *
+     * @param newImage the new image
+     * @param imageId the id of the image that has to be modified
+     */
+    updateImage(newImage: FormData, imageId: number): any {
+        return this._http.patch(`${this.URL_BACKEND}/image/update/${imageId}`, newImage, { withCredentials: true });
+    }
+
+    /**
+     * Call the back API for deleting the image with the provided ID.
+     *
+     * @param imageId the ID od the image that has to be deleted.
+     */
+    deleteImage(imageId: number): Observable<string> {
+        return this._http.delete<string>(`${this.URL_BACKEND}/image/delete/${imageId}`, {withCredentials: true});
     }
 
     // User Service
@@ -42,8 +76,19 @@ export class PrivateServicesService {
      *
      * @param user Oject representing an admin user. It is used to modify admin's email and/or password.
      */
-    updateUserLogins(user: ModifiedUser): Observable<string> {
-        return this._http.patch<string>(`${this.URL_BACKEND}/user/update`, user, { withCredentials: true });
+    updateUserLogins(user: ModifiedUser): Observable<UserEmail> {
+        return this._http.patch<UserEmail>(`${this.URL_BACKEND}/user/update`, user, { withCredentials: true });
+    }
+
+    // Phone Service
+
+    /**
+     * Update the phone number into the database
+     *
+     * @param newNumber Object that contain the new phone number
+     */
+    updatePhoneNumber(newNumber: Phone): Observable<Phone> {
+        return this._http.patch<Phone>(`${this.URL_BACKEND}/phone/update`, newNumber, { withCredentials: true });
     }
 
     // Adress Service
@@ -53,8 +98,8 @@ export class PrivateServicesService {
      *
      * @param newAdress Object representing all the adress parts.
      */
-    updateAdress(newAdress: Adress): Observable<string> {
-        return this._http.patch<string>(`${this.URL_BACKEND}/adress/update`, newAdress, { withCredentials: true });
+    updateAdress(newAdress: Adress): Observable<Adress> {
+        return this._http.patch<Adress>(`${this.URL_BACKEND}/adress/update`, newAdress, { withCredentials: true });
     }
 
     // Formation Services
@@ -230,8 +275,8 @@ export class PrivateServicesService {
      *
      * @param newTechno Object representing a new techno.
      */
-    createTechno(newTechno: Techno): Observable<string> {
-        return this._http.post<string>(`${this.URL_BACKEND}/technos/add/1`, newTechno, { withCredentials: true });
+    createTechno(newTechno: Techno): Observable<Techno> {
+        return this._http.post<Techno>(`${this.URL_BACKEND}/technos/add/1`, newTechno, { withCredentials: true });
     }
 
     /**
@@ -239,8 +284,8 @@ export class PrivateServicesService {
      *
      * @param modifiedTechno Object representing a techno.
      */
-    updateTechno(modifiedTechno: Techno): Observable<string> {
-        return this._http.patch<string>(`${this.URL_BACKEND}/technos/update`, modifiedTechno, { withCredentials: true });
+    updateTechno(modifiedTechno: Techno): Observable<Techno> {
+        return this._http.patch<Techno>(`${this.URL_BACKEND}/technos/update`, modifiedTechno, { withCredentials: true });
     }
 
     /**
@@ -248,8 +293,8 @@ export class PrivateServicesService {
      *
      * @param technoId Id of the techno that have to be removed.
      */
-    deleteTechno(technoId: number): Observable<string> {
-        return this._http.delete<string>(`${this.URL_BACKEND}/teshnos/delete/${technoId}`, { withCredentials: true });
+    deleteTechno(technoId: number): any {
+        return this._http.delete(`${this.URL_BACKEND}/technos/delete/${technoId}`, { withCredentials: true });
     }
 
 }

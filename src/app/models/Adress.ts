@@ -1,7 +1,7 @@
 
 export class Adress {
 
-    public id: number;
+    public id = 1;
 
     constructor(
         public streetNumber: number,

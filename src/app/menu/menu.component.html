@@ -1,0 +1,14 @@
+<div *ngIf="connected">
+    <h1>Mode édition du CV</h1>
+    <br>
+    <p>Bienvenue {{ user.firstName }} {{ user.lastName | uppercase }}, <a href="#" (click)="disconnect()">Se déconnecter</a> ?</p>
+    <div class="alert alert-danger text-center" *ngIf="errorMessage">
+        <p><b>{{ errorMessage }}</b></p>
+    </div>
+    <br>
+    <p><a href="#" routerLink="/accueil">Retourner à l'accueil</a> / <a href="#" routerLink="/edit">Retourner au mode édition</a></p>
+</div>
+
+<div *ngIf="!connected">
+    <a href="#" routerLink="/edit">Editer</a>
+</div>

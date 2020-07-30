@@ -18,14 +18,19 @@ export class AuthService {
 
     user = new Subject<LoggedUser>();
 
-    connecte: boolean;
+    connectedUser: LoggedUser;
+
+    connected: boolean;
 
     constructor(private _http: HttpClient) { }
 
     login(auth: Authentification): Observable<LoggedUser> {
         return this._http.post<LoggedUser>(`${this.URL_BACKEND}/auth`, auth, { withCredentials: true })
             .pipe(
-                tap(() => this.connecte = true)
+                tap((user) => {
+                    this.connected = true;
+                    this.connectedUser = user;
+                })
             );
     }
 
@@ -33,8 +38,9 @@ export class AuthService {
         return this._http.post(`${this.URL_BACKEND}/logout`, null, { withCredentials: true })
             .pipe(
                 tap(
-                    ko => {
-                        this.connecte = false;
+                    () => {
+                        this.connected = false;
+                        this.connectedUser = undefined;
                         localStorage.removeItem('AUTH-TOKEN');
                     }
                 )
@@ -51,7 +57,7 @@ export class AuthService {
             tap(
                 user => {
                     this.user.next(user);
-                    this.connecte = true;
+                    this.connected = true;
                 }
             ),
             map(user => true)

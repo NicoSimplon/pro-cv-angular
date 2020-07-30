@@ -2,10 +2,10 @@ export class IdentificationDatas {
 
     constructor(
         public email: string,
-        public birthDate: Date,
+        public birthDate: string,
         public firstName: string,
         public lastName: string,
         public phoneNumber: string,
-        public photo: string) {}
+        public photoPath: string) {}
 
 }

@@ -1,6 +1,90 @@
-<h3>Technos</h3>
-<hr>
-<ul *ngFor="let tech of technos;">
-    <li><img src="{{ tech.logoPath }}" alt="Logo de {{tech.title}}" width="50" title="{{tech.title}}"/></li>
-</ul>
-<hr>
+<div *ngIf="!editMode">
+    <h3>Technos</h3>
+    <hr>
+    <div class="alert alert-danger text-center" *ngIf="errorMessage">
+        <p><strong>{{ errorMessage }}</strong></p>
+    </div>
+    <ul *ngFor="let tech of technos;">
+        <li><img src="{{ basicUrl + tech.logoPath }}" alt="Logo de {{ tech.title }}" width="50" title="{{ tech.title }}"/></li>
+    </ul>
+    <hr>
+</div>
+
+<div *ngIf="editMode">
+    <h3>Editer les technos</h3>
+    <hr>
+    <div class="alert alert-danger text-center" *ngIf="errorMessage">
+        <p><strong>{{ errorMessage }}</strong></p>
+    </div>
+    <div class="alert alert-succes text-center" *ngIf="sucessMessage">
+        <p><strong>{{ sucessMessage }}</strong></p>
+    </div>
+    <div class="image-preview mb-3" *ngIf="previewUrl">
+        <img [src]="previewUrl" height="300" />
+    </div>
+    <div *ngIf="newTechno">
+        <form #form4="ngForm" (ngSubmit)="addNewTechno()">
+            <div class="form-group">
+                <label for="logoTitle">Nom de la nouvelle techno : </label>
+                <input type="text" [(ngModel)]="newTechno.title" #logoTitle="ngModel" class="form-control" id="logoTitle" name="logoTitle" required >
+                <div class="alert alert-danger" *ngIf="(logoTitle.dirty || logoTitle.touched) && logoTitle.errors">
+                    Une techno a obligatoirement un nom.
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="image">Nouveau logo :</label>
+                <input type="file" name="image" id="image" (change)="fileProgress($event)" />
+            </div>
+            <hr>
+            <div class="text-center">
+                <button [disabled]="form4.invalid" type="submit" class="btn btn-primary">Ajouter</button>
+            </div>
+        </form>
+    </div>
+    <br>
+    <hr>
+    <br>
+    <ul *ngFor="let tech of technos;">
+        <li>
+            <div>
+                <img src="{{ basicUrl + tech.logoPath }}" alt="Logo de {{ tech.title }}" width="50" title="{{ tech.title }}"/>
+                <hr>
+                <form #form="ngForm" (ngSubmit)="updateLogoPath(tech)">
+                    <h4>Modifier le chemin du logo :</h4>
+                    <br>
+                    <div class="form-group">
+                        <label for="logo">Nouveau chemin du logo : </label>
+                        <input type="text" [(ngModel)]="tech.logoPath" #logo="ngModel" class="form-control" id="logo" name="logo" required >
+                        <div class="alert alert-danger" *ngIf="(logo.dirty || logo.touched) && logo.errors">
+                            Le chemin du nouveau logo est invalide (Ce champ est obligatoire).
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="text-center">
+                        <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Modifier</button>
+                    </div>
+                </form>
+                <hr>
+                <form #form2="ngForm" (ngSubmit)="deleteTechno(tech)">
+                    <h4>Supprimer le logo :</h4>
+                    <br>
+                    <div class="text-center">
+                        <button [disabled]="form2.invalid" type="submit" class="btn btn-primary">Supprimer</button>
+                    </div>
+                </form>
+                <hr>
+                <form #form3="ngForm" (ngSubmit)="updateImage(tech)">
+                    <h4>Choisir une nouvelle photo :</h4>
+                    <div class="form-group">
+                        <input type="file" name="image" (change)="fileProgress($event)" />
+                    </div>
+                    <div class="form-group">
+                        <button [disabled]="form3.invalid" type="submit" class="btn btn-primary">Télécharger</button>
+                    </div>
+                </form>
+                <hr>
+            </div>
+        </li>
+    </ul>
+</div>
