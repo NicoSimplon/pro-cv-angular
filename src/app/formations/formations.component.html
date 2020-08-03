@@ -1,6 +1,86 @@
-<h3>Formations</h3>
-<hr>
-<div *ngFor="let formation of formations;">
-    <p><b>{{ formation.year }}</b> : {{ formation.title }}</p>
+<div *ngIf="!editMode">
+    <h3>Formations / Diplômes :</h3>
+    <hr>
+    <div class="alert alert-danger text-center" *ngIf="errorMessage">
+        <p><strong>{{ errorMessage }}</strong></p>
+    </div>
+    <div *ngFor="let formation of formations;">
+        <p><b>{{ formation.year }}</b> : {{ formation.title }}</p>
+    </div>
+    <hr>
 </div>
-<hr>
+
+<div *ngIf="editMode">
+    <h3>Formations / Diplômes :</h3>
+    <hr>
+    <div class="alert alert-danger text-center" *ngIf="errorMessage">
+        <p><strong>{{ errorMessage }}</strong></p>
+    </div>
+    <div class="alert alert-succes text-center" *ngIf="sucessMessage">
+        <p><strong>{{ sucessMessage }}</strong></p>
+    </div>
+    <br>
+    <div>
+        <form #form1="ngForm" (ngSubmit)="createFormation()">
+            <h4>Créer une nouvelle formation :</h4>
+            <br>
+            <div class="form-group">
+                <label for="formationTitle">Intitullé de la formation : </label>
+                <input type="text" [(ngModel)]="newFormation.title" #formationTitle="ngModel" class="form-control" id="formationTitle" name="formationTitle" required >
+                <div class="alert alert-danger" *ngIf="(formationTitle.dirty || formationTitle.touched) && formationTitle.errors">
+                    L'intitulé de la formation est invalide (Ce champ est obligatoire).
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="newFormationYear">Année de la formation : </label>
+                <input type="number" [(ngModel)]="newFormation.year" #newFormationYear="ngModel" class="form-control" id="newFormationYear" name="newFormationYear" required >
+                <div class="alert alert-danger" *ngIf="(newFormationYear.dirty || newFormationYear.touched) && newFormationYear.errors">
+                    Une formation a nécessairement une année (Ce champ est obligatoire).
+                </div>
+            </div>
+            <br>
+            <div class="text-center">
+                <button [disabled]="form1.invalid" type="submit" class="btn btn-primary">Créer</button>
+            </div>
+            <br>
+        </form>
+    </div>
+    <br>
+    <ul>
+        <ul *ngFor="let formation of formations;">
+            <form #form="ngForm" (ngSubmit)="updateFormation(formation)">
+                <h4>Modifier la formation :</h4>
+                <br>
+                <div class="form-group">
+                    <label for="modifiedFormation">Intitullé de la formation : </label>
+                    <input type="text" [(ngModel)]="formation.title" #modifiedFormation="ngModel" class="form-control" id="modifiedFormation" name="modifiedFormation" required >
+                    <div class="alert alert-danger" *ngIf="(modifiedFormation.dirty || modifiedFormation.touched) && modifiedFormation.errors">
+                        L'intitulé de la formation est invalide (Ce champ est obligatoire).
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="formationYear">Année de la formation : </label>
+                    <input type="number" [(ngModel)]="formation.year" #formationYear="ngModel" class="form-control" id="formationYear" name="formationYear" required >
+                    <div class="alert alert-danger" *ngIf="(formationYear.dirty || formationYear.touched) && formationYear.errors">
+                        Une formation a nécessairement une année (Ce champ est obligatoire).
+                    </div>
+                </div>
+                <br>
+                <div class="text-center">
+                    <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Modifier</button>
+                </div>
+                <br>
+            </form>
+            <form #form2="ngForm" (ngSubmit)="deleteFormation(formation)">
+                <h4>Supprimer la formation :</h4>
+                <br>
+                <div class="text-center">
+                    <button [disabled]="form2.invalid" type="submit" class="btn btn-primary">Supprimer</button>
+                </div>
+                <br>
+            </form>
+            <hr>
+        </ul>
+    </ul>
+    <hr>
+</div>

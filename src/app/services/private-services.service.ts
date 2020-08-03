@@ -65,8 +65,8 @@ export class PrivateServicesService {
      *
      * @param imageId the ID od the image that has to be deleted.
      */
-    deleteImage(imageId: number): Observable<string> {
-        return this._http.delete<string>(`${this.URL_BACKEND}/image/delete/${imageId}`, {withCredentials: true});
+    deleteImage(imageId: number): any {
+        return this._http.delete(`${this.URL_BACKEND}/image/delete/${imageId}`, {withCredentials: true});
     }
 
     // User Service
@@ -109,8 +109,8 @@ export class PrivateServicesService {
      *
      * @param newFormation Object representing a formation or a grade.
      */
-    createFormation(newFormation: Formation): Observable<string> {
-        return this._http.post<string>(`${this.URL_BACKEND}/formations/add/1`, newFormation, { withCredentials: true });
+    createFormation(newFormation: Formation): Observable<Formation> {
+        return this._http.post<Formation>(`${this.URL_BACKEND}/formations/add/1`, newFormation, { withCredentials: true });
     }
 
     /**
@@ -118,8 +118,8 @@ export class PrivateServicesService {
      *
      * @param modifiedFormation Object representing a formation or a grade.
      */
-    updateFormation(modifiedFormation: Formation): Observable<string> {
-        return this._http.patch<string>(`${this.URL_BACKEND}/formations/update`, modifiedFormation, { withCredentials: true });
+    updateFormation(modifiedFormation: Formation): Observable<Formation> {
+        return this._http.patch<Formation>(`${this.URL_BACKEND}/formations/update`, modifiedFormation, { withCredentials: true });
     }
 
     /**
@@ -127,8 +127,8 @@ export class PrivateServicesService {
      *
      * @param id Id of the formation that has to be deleted.
      */
-    deleteFormation(id: number): Observable<string> {
-        return this._http.delete<string>(`${this.URL_BACKEND}/formations/delete/${id}`, { withCredentials: true });
+    deleteFormation(id: number): any {
+        return this._http.delete(`${this.URL_BACKEND}/formations/delete/${id}`, { withCredentials: true });
     }
 
     // Hobbies Services
