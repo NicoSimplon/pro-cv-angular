@@ -138,8 +138,8 @@ export class PrivateServicesService {
      *
      * @param newHobby Object representing an hobby.
      */
-    createHobby(newHobby: Hobby): Observable<string> {
-        return this._http.post<string>(`${this.URL_BACKEND}/hobbies/add/1`, newHobby, { withCredentials: true });
+    createHobby(newHobby: Hobby): Observable<Hobby> {
+        return this._http.post<Hobby>(`${this.URL_BACKEND}/hobbies/add/1`, newHobby, { withCredentials: true });
     }
 
     /**
@@ -147,8 +147,8 @@ export class PrivateServicesService {
      *
      * @param modifiedHobby Object representing an hobby.
      */
-    updateHobby(modifiedHobby: Hobby): Observable<string> {
-        return this._http.patch<string>(`${this.URL_BACKEND}/hobbies/update`, modifiedHobby, { withCredentials: true });
+    updateHobby(modifiedHobby: Hobby): Observable<Hobby> {
+        return this._http.patch<Hobby>(`${this.URL_BACKEND}/hobbies/update`, modifiedHobby, { withCredentials: true });
     }
 
     /**
@@ -156,8 +156,8 @@ export class PrivateServicesService {
      *
      * @param id Id of the hobby that has to be deleted.
      */
-    deleteHobby(id: number): Observable<string> {
-        return this._http.delete<string>(`${this.URL_BACKEND}/formations/delete/${id}`, { withCredentials: true });
+    deleteHobby(id: number): any {
+        return this._http.delete(`${this.URL_BACKEND}/hobbies/delete/${id}`, { withCredentials: true });
     }
 
     // Skill Services
@@ -217,8 +217,8 @@ export class PrivateServicesService {
      *
      * @param newXpPro Object representing a new professional experience.
      */
-    createXp(newXpPro: XpPro): Observable<string> {
-        return this._http.post<string>(`${this.URL_BACKEND}/experiences/add/1`, newXpPro, { withCredentials: true });
+    createXp(newXpPro: XpPro): Observable<XpPro> {
+        return this._http.post<XpPro>(`${this.URL_BACKEND}/experiences/add/1`, newXpPro, { withCredentials: true });
     }
 
     /**
@@ -226,8 +226,8 @@ export class PrivateServicesService {
      *
      * @param modifiedXpPro Object representing a professional experience.
      */
-    updateXp(modifiedXpPro: XpPro): Observable<string> {
-        return this._http.patch<string>(`${this.URL_BACKEND}/experiences/update`, modifiedXpPro, { withCredentials: true });
+    updateXp(modifiedXpPro: XpPro): Observable<XpPro> {
+        return this._http.patch<XpPro>(`${this.URL_BACKEND}/experiences/update`, modifiedXpPro, { withCredentials: true });
     }
 
     /**
@@ -235,8 +235,8 @@ export class PrivateServicesService {
      *
      * @param xpId Id of the experience that have to be removed.
      */
-    deleteXp(xpId: number): Observable<string> {
-        return this._http.delete<string>(`${this.URL_BACKEND}/experiences/delete/${xpId}`, { withCredentials: true });
+    deleteXp(xpId: number): any {
+        return this._http.delete(`${this.URL_BACKEND}/experiences/delete/${xpId}`, { withCredentials: true });
     }
 
     // Project Services

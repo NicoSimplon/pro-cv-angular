@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PublicServicesService } from '../services/public-services.service';
 import { Formation } from '../models/Formation';
 import { EditMode } from '../models/EditMode';
@@ -12,7 +12,7 @@ import { PrivateServicesService } from '../services/private-services.service';
     templateUrl: './formations.component.html',
     styleUrls: ['./formations.component.css']
 })
-export class FormationsComponent extends EditMode implements OnInit {
+export class FormationsComponent extends EditMode implements OnInit, OnDestroy {
 
     // Notifications
     errorMessage: string;
@@ -33,7 +33,7 @@ export class FormationsComponent extends EditMode implements OnInit {
     createFormation(): void {
         this.priService.createFormation(this.newFormation).subscribe(
             (formation) => {
-                this.formations[this.formations.length] = formation;
+                this.formations.push(formation);
                 this.sucessMessage =
                     `La formation ${formation.title} a été créée avec succès.`;
                 setInterval(() => {
@@ -124,6 +124,11 @@ export class FormationsComponent extends EditMode implements OnInit {
 
     ngOnInit(): void {
         this.getFormations();
+    }
+
+    ngOnDestroy(): void {
+        // unsubscribe Observable objects
+
     }
 
 }

@@ -20,7 +20,7 @@
         <p><strong>{{ sucessMessage }}</strong></p>
     </div>
     <br>
-    <div>
+    <div *ngIf="newFormation">
         <form #form1="ngForm" (ngSubmit)="createFormation()">
             <h4>Créer une nouvelle formation :</h4>
             <br>
@@ -46,7 +46,7 @@
         </form>
     </div>
     <br>
-    <ul>
+    <ul *ngIf="formations">
         <ul *ngFor="let formation of formations;">
             <form #form="ngForm" (ngSubmit)="updateFormation(formation)">
                 <h4>Modifier la formation :</h4>

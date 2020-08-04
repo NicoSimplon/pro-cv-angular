@@ -71,7 +71,7 @@ export class TechnosComponent extends EditMode implements OnInit {
                         this.previewUrl = null;
                         this.fileData = null;
                         this.formData = new FormData();
-                        this.technos[this.technos.length] = techno;
+                        this.technos.push(techno);
                         this.sucessMessage = 'La nouvelle techno a été créée avec succès.';
                     },
                     () => {
