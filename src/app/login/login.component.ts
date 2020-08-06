@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { Authentification } from '../models/Authentification';
-import { LoggedUser } from '../models/LoggedUser';
+import { Scavenger } from '@wishtack/rx-scavenger';
 
 /**
  * Login component. Authentication is required in order to use private services.
@@ -12,12 +12,13 @@ import { LoggedUser } from '../models/LoggedUser';
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
+
+    private _scavenger = new Scavenger(this);
 
     auth: Authentification = new Authentification();
 
     errorMessage: string;
-
     successMessage: string;
 
     constructor(private service: AuthService, private router: Router) {}
@@ -26,8 +27,8 @@ export class LoginComponent implements OnInit {
      * Login method to authenticate the user into the back end server.
      */
     connect() {
-        this.service.login(this.auth).subscribe(
-            (user) => {
+        this.service.login(this.auth).pipe(this._scavenger.collect()).subscribe(
+            () => {
                 this.router.navigate(['/edit']);
             },
             (error) => {
@@ -44,5 +45,8 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit(): void {
+    }
+
+    ngOnDestroy(): void {
     }
 }

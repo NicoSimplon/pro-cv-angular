@@ -3,6 +3,7 @@ import { PublicServicesService } from '../services/public-services.service';
 import { Formation } from '../models/Formation';
 import { EditMode } from '../models/EditMode';
 import { PrivateServicesService } from '../services/private-services.service';
+import { Scavenger } from '@wishtack/rx-scavenger';
 
 /**
  * Display the list of formations.
@@ -13,6 +14,8 @@ import { PrivateServicesService } from '../services/private-services.service';
     styleUrls: ['./formations.component.css']
 })
 export class FormationsComponent extends EditMode implements OnInit, OnDestroy {
+
+    private _scavenger = new Scavenger(this);
 
     // Notifications
     errorMessage: string;
@@ -31,7 +34,7 @@ export class FormationsComponent extends EditMode implements OnInit, OnDestroy {
      * and then add it to the list for displaying it.
      */
     createFormation(): void {
-        this.priService.createFormation(this.newFormation).subscribe(
+        this.priService.createFormation(this.newFormation).pipe(this._scavenger.collect()).subscribe(
             (formation) => {
                 this.formations.push(formation);
                 this.sucessMessage =
@@ -55,7 +58,7 @@ export class FormationsComponent extends EditMode implements OnInit, OnDestroy {
      * @param modifiedFormation the modified version of the Formation
      */
     updateFormation(modifiedFormation: Formation): void {
-        this.priService.updateFormation(modifiedFormation).subscribe(
+        this.priService.updateFormation(modifiedFormation).pipe(this._scavenger.collect()).subscribe(
             (formation) => {
                 this.formations.forEach(
                     f => {
@@ -85,7 +88,7 @@ export class FormationsComponent extends EditMode implements OnInit, OnDestroy {
      * @param formation the formation to delete (we need it's ID)
      */
     deleteFormation(formation: Formation): void {
-        this.priService.deleteFormation(formation.id).subscribe(
+        this.priService.deleteFormation(formation.id).pipe(this._scavenger.collect()).subscribe(
             () => {
                 this.getFormations();
                 this.sucessMessage =
@@ -107,7 +110,7 @@ export class FormationsComponent extends EditMode implements OnInit, OnDestroy {
      * Get the complete list of formations
      */
     getFormations(): void {
-        this.service.getFormations().subscribe(
+        this.service.getFormations().pipe(this._scavenger.collect()).subscribe(
             formations => {
                 this.formations = formations;
                 this.formations.sort((a, b) => (b.year - a.year));
@@ -127,8 +130,6 @@ export class FormationsComponent extends EditMode implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        // unsubscribe Observable objects
-
     }
 
 }

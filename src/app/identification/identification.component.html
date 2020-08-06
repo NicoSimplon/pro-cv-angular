@@ -1,4 +1,4 @@
-<div *ngIf="!editMode">
+<div *ngIf="!editMode && basicDatas">
     <h3>Identification</h3>
     <hr>
     <img src="{{ completeUrl }}" alt="Photo de profil" height="200" />
@@ -8,7 +8,7 @@
     <p>{{ basicDatas.firstName }}</p>
     <p>{{ basicDatas.lastName | uppercase }}</p>
     <p>{{ basicDatas.phoneNumber }}</p>
-    <p>{{ adress.streetNumber }} {{ adress.street }}, <span *ngIf="adress.appartment != null && adress.appartment != ''">{{ adress.appartment }},</span> {{ adress.postalCode }} {{ adress.town }}</p>
+    <p *ngIf="adress">{{ adress.streetNumber }} {{ adress.street }}, <span *ngIf="adress.appartment != null && adress.appartment != ''">{{ adress.appartment }},</span> {{ adress.postalCode }} {{ adress.town }}</p>
     <hr>
     <div class="alert alert-danger text-center" *ngIf="errorMessage">
         <p><strong>{{ errorMessage }}</strong></p>

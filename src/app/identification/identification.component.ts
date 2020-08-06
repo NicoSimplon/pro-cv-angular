@@ -1,4 +1,4 @@
-import { Component, OnInit, LOCALE_ID } from '@angular/core';
+import { Component, OnInit, LOCALE_ID, OnDestroy } from '@angular/core';
 import { PublicServicesService } from '../services/public-services.service';
 import { IdentificationDatas } from '../models/IdenthificationDatas';
 import { Adress } from '../models/Adress';
@@ -7,6 +7,7 @@ import { PrivateServicesService } from '../services/private-services.service';
 import { Photo } from '../models/Photo';
 import { Phone } from '../models/Phone';
 import { environment } from 'src/environments/environment';
+import { Scavenger } from '@wishtack/rx-scavenger';
 
 /**
  * This component gather together the basic information about the CV (ID, adress, ...)
@@ -16,7 +17,10 @@ import { environment } from 'src/environments/environment';
     templateUrl: './identification.component.html',
     styleUrls: ['./identification.component.css'],
 })
-export class IdentificationComponent extends EditMode implements OnInit {
+export class IdentificationComponent extends EditMode implements OnInit, OnDestroy {
+
+    private _scavenger = new Scavenger(this);
+
     // Notification messages
     sucessMessage: string;
     errorMessage: string;
@@ -44,7 +48,7 @@ export class IdentificationComponent extends EditMode implements OnInit {
      * Update the photo
      */
     updatePhoto(): void {
-        this.privService.updatePhotoUrl(this.photoPath).subscribe(
+        this.privService.updatePhotoUrl(this.photoPath).pipe(this._scavenger.collect()).subscribe(
             (photo) => {
                 this.basicDatas.photoPath = photo.photoPath;
                 this.photoPath.photoPath = photo.photoPath;
@@ -69,7 +73,7 @@ export class IdentificationComponent extends EditMode implements OnInit {
      */
     updatePhotoImage(): void {
         this.formData.append('file', this.fileData);
-        this.privService.updateImage(this.formData, this.photoPath.imageId).subscribe(
+        this.privService.updateImage(this.formData, this.photoPath.imageId).pipe(this._scavenger.collect()).subscribe(
             () => {
                 location.reload(); // to reload the image stored in the browser cache
                 this.sucessMessage = 'La photo de profil a été modifiée avec succès.';
@@ -114,7 +118,7 @@ export class IdentificationComponent extends EditMode implements OnInit {
      * Update the phone number
      */
     updatePhoneNumber(): void {
-        this.privService.updatePhoneNumber(this.phoneNumber).subscribe(
+        this.privService.updatePhoneNumber(this.phoneNumber).pipe(this._scavenger.collect()).subscribe(
             (updatedPhone) => {
                 this.phoneNumber = updatedPhone;
                 this.basicDatas.phoneNumber = updatedPhone.phoneNumber;
@@ -138,7 +142,7 @@ export class IdentificationComponent extends EditMode implements OnInit {
      * Update the postal address
      */
     updateAdress(): void {
-        this.privService.updateAdress(this.adress).subscribe(
+        this.privService.updateAdress(this.adress).pipe(this._scavenger.collect()).subscribe(
             (updatedAdress) => {
                 this.adress = updatedAdress;
                 this.sucessMessage =
@@ -162,7 +166,7 @@ export class IdentificationComponent extends EditMode implements OnInit {
      * (email, firstName, lastName, birthDate, phoneNumber, photo).
      */
     getDatas(): void {
-        this.service.getBasicDatas().subscribe(
+        this.service.getBasicDatas().pipe(this._scavenger.collect()).subscribe(
             (datas) => {
                 this.basicDatas = datas;
                 this.photoPath = new Photo(this.basicDatas.photoPath);
@@ -190,7 +194,7 @@ export class IdentificationComponent extends EditMode implements OnInit {
      * Get the postal address.
      */
     getAdress(): void {
-        this.service.getAdress().subscribe(
+        this.service.getAdress().pipe(this._scavenger.collect()).subscribe(
             (adress) => {
                 this.adress = adress;
             },
@@ -208,5 +212,8 @@ export class IdentificationComponent extends EditMode implements OnInit {
         // Datas initialisation
         this.getDatas();
         this.getAdress();
+    }
+
+    ngOnDestroy(): void {
     }
 }

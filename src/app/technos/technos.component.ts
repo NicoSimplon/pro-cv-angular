@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PublicServicesService } from '../services/public-services.service';
 import { Techno } from '../models/Techno';
 import { EditMode } from '../models/EditMode';
 import { PrivateServicesService } from '../services/private-services.service';
 import { environment } from 'src/environments/environment';
+import { Scavenger } from '@wishtack/rx-scavenger';
 
 /**
  * Display the logos of the various technos used in both personnal and professionnal projects.
@@ -13,7 +14,9 @@ import { environment } from 'src/environments/environment';
     templateUrl: './technos.component.html',
     styleUrls: ['./technos.component.css']
 })
-export class TechnosComponent extends EditMode implements OnInit {
+export class TechnosComponent extends EditMode implements OnInit, OnDestroy {
+
+    private _scavenger = new Scavenger(this);
 
     // Notification messages
     sucessMessage: string;
@@ -61,12 +64,12 @@ export class TechnosComponent extends EditMode implements OnInit {
      */
     addNewTechno(): void {
         this.formData.append('file', this.fileData);
-        this.privService.uploadImage(this.formData).subscribe(
+        this.privService.uploadImage(this.formData).pipe(this._scavenger.collect()).subscribe(
             (image) => {
                 const newLogo = this.newTechno;
                 newLogo.imageId = image.id;
                 newLogo.logoPath = `/image/downloadFile/${newLogo.imageId}`;
-                this.privService.createTechno(newLogo).subscribe(
+                this.privService.createTechno(newLogo).pipe(this._scavenger.collect()).subscribe(
                     (techno) => {
                         this.previewUrl = null;
                         this.fileData = null;
@@ -97,15 +100,9 @@ export class TechnosComponent extends EditMode implements OnInit {
      * @param modifiedTechno techno that has to be updated
      */
     updateLogoPath(modifiedTechno: Techno): void {
-        this.privService.updateTechno(modifiedTechno).subscribe(
+        this.privService.updateTechno(modifiedTechno).pipe(this._scavenger.collect()).subscribe(
             (techno) => {
-                this.technos.forEach(
-                    tech => {
-                        if (tech.id === techno.id) {
-                            tech = techno;
-                        }
-                    }
-                );
+                this.technos.filter(t => t.id === techno.id).map(t => t = techno);
                 this.sucessMessage = `La techno ${techno.title} a été mise à jour avec succès.`;
                 setInterval(() => {
                     this.sucessMessage = undefined;
@@ -126,9 +123,9 @@ export class TechnosComponent extends EditMode implements OnInit {
      * @param techToDelete techno that will be deleted
      */
     deleteTechno(techToDelete: Techno): void {
-        this.privService.deleteTechno(techToDelete.id).subscribe(
+        this.privService.deleteTechno(techToDelete.id).pipe(this._scavenger.collect()).subscribe(
             () => {
-                this.privService.deleteImage(techToDelete.imageId).subscribe(
+                this.privService.deleteImage(techToDelete.imageId).pipe(this._scavenger.collect()).subscribe(
                     () => {
                         this.sucessMessage = `La techno ${techToDelete.title} a bien été supprimée.`;
                         setInterval(() => {
@@ -160,7 +157,7 @@ export class TechnosComponent extends EditMode implements OnInit {
      */
     updateImage(tech: Techno): void {
         this.formData.append('file', this.fileData);
-        this.privService.updateImage(this.formData, tech.imageId).subscribe(
+        this.privService.updateImage(this.formData, tech.imageId).pipe(this._scavenger.collect()).subscribe(
             () => {
                 location.reload();
                 this.sucessMessage = 'La photo de profil a été modifiée avec succès.';
@@ -183,7 +180,7 @@ export class TechnosComponent extends EditMode implements OnInit {
      * into the database
      */
     getTechnos(): void {
-        this.service.getTechnos().subscribe(
+        this.service.getTechnos().pipe(this._scavenger.collect()).subscribe(
             technoList => {
                 this.technos = technoList;
             },
@@ -198,6 +195,9 @@ export class TechnosComponent extends EditMode implements OnInit {
 
     ngOnInit(): void {
         this.getTechnos();
+    }
+
+    ngOnDestroy(): void {
     }
 
 }

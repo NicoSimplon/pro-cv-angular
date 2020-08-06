@@ -56,7 +56,7 @@ export class PrivateServicesService {
      * @param newImage the new image
      * @param imageId the id of the image that has to be modified
      */
-    updateImage(newImage: FormData, imageId: number): any {
+    updateImage(newImage: FormData, imageId: number): Observable<any> {
         return this._http.patch(`${this.URL_BACKEND}/image/update/${imageId}`, newImage, { withCredentials: true });
     }
 
@@ -65,7 +65,7 @@ export class PrivateServicesService {
      *
      * @param imageId the ID od the image that has to be deleted.
      */
-    deleteImage(imageId: number): any {
+    deleteImage(imageId: number): Observable<any> {
         return this._http.delete(`${this.URL_BACKEND}/image/delete/${imageId}`, {withCredentials: true});
     }
 
@@ -127,7 +127,7 @@ export class PrivateServicesService {
      *
      * @param id Id of the formation that has to be deleted.
      */
-    deleteFormation(id: number): any {
+    deleteFormation(id: number): Observable<any> {
         return this._http.delete(`${this.URL_BACKEND}/formations/delete/${id}`, { withCredentials: true });
     }
 
@@ -156,7 +156,7 @@ export class PrivateServicesService {
      *
      * @param id Id of the hobby that has to be deleted.
      */
-    deleteHobby(id: number): any {
+    deleteHobby(id: number): Observable<any> {
         return this._http.delete(`${this.URL_BACKEND}/hobbies/delete/${id}`, { withCredentials: true });
     }
 
@@ -167,8 +167,8 @@ export class PrivateServicesService {
      *
      * @param newHnewSkill Object representing a new skill.
      */
-    createSkill(newHnewSkill: Skill, groupId: number): Observable<string> {
-        return this._http.post<string>(`${this.URL_BACKEND}/skills/add-skill/${groupId}`, newHnewSkill, { withCredentials: true });
+    createSkill(newHnewSkill: Skill, groupId: number): Observable<Skill> {
+        return this._http.post<Skill>(`${this.URL_BACKEND}/skills/add-skill/${groupId}`, newHnewSkill, { withCredentials: true });
     }
 
     /**
@@ -177,8 +177,8 @@ export class PrivateServicesService {
      *
      * @param skillId Id od the skill that have to be removed.
      */
-    removeSkill(skillId: number): Observable<string> {
-        return this._http.delete<string>(`${this.URL_BACKEND}/skills/delete-skill/${skillId}`, { withCredentials: true });
+    deleteSkill(skillId: number): Observable<any> {
+        return this._http.delete<any>(`${this.URL_BACKEND}/skills/delete-skill/${skillId}`, { withCredentials: true });
     }
 
     /**
@@ -186,8 +186,8 @@ export class PrivateServicesService {
      *
      * @param newGroup Object representing a new Skill group.
      */
-    createSkillGroup(newGroup: SkillGroup): Observable<string> {
-        return this._http.post<string>(`${this.URL_BACKEND}/skills/add-group/1`, newGroup, { withCredentials: true });
+    createSkillGroup(newGroup: SkillGroup): Observable<SkillGroup> {
+        return this._http.post<SkillGroup>(`${this.URL_BACKEND}/skills/add-group/1`, newGroup, { withCredentials: true });
     }
 
     /**
@@ -196,8 +196,8 @@ export class PrivateServicesService {
      *
      * @param modifiedSkillGroup An existing skill group with modified title or modified skills.
      */
-    updateSkillGroup(modifiedSkillGroup: SkillGroup): Observable<string> {
-        return this._http.patch<string>(`${this.URL_BACKEND}/skills/update`, modifiedSkillGroup, { withCredentials: true });
+    updateSkillGroup(modifiedSkillGroup: SkillGroup): Observable<SkillGroup> {
+        return this._http.patch<SkillGroup>(`${this.URL_BACKEND}/skills/update`, modifiedSkillGroup, { withCredentials: true });
     }
 
     /**
@@ -206,8 +206,8 @@ export class PrivateServicesService {
      *
      * @param groupId Id od the skill that have to be removed.
      */
-    deleteSkillGroup(groupId: number): Observable<string> {
-        return this._http.delete<string>(`${this.URL_BACKEND}/skills/delete-group/${groupId}`, { withCredentials: true });
+    deleteSkillGroup(groupId: number): Observable<any> {
+        return this._http.delete(`${this.URL_BACKEND}/skills/delete-group/${groupId}`, { withCredentials: true });
     }
 
     // Professional experience Services
@@ -235,7 +235,7 @@ export class PrivateServicesService {
      *
      * @param xpId Id of the experience that have to be removed.
      */
-    deleteXp(xpId: number): any {
+    deleteXp(xpId: number): Observable<any> {
         return this._http.delete(`${this.URL_BACKEND}/experiences/delete/${xpId}`, { withCredentials: true });
     }
 
@@ -246,8 +246,8 @@ export class PrivateServicesService {
      *
      * @param newProject Object representing a new project.
      */
-    createProject(newProject: Project): Observable<string> {
-        return this._http.post<string>(`${this.URL_BACKEND}/projets/add/1`, newProject, { withCredentials: true });
+    createProject(newProject: Project): Observable<Project> {
+        return this._http.post<Project>(`${this.URL_BACKEND}/projects/add/1`, newProject, { withCredentials: true });
     }
 
     /**
@@ -255,8 +255,8 @@ export class PrivateServicesService {
      *
      * @param modifiedProject Object representing a project.
      */
-    updateProject(modifiedProject: Project): Observable<string> {
-        return this._http.patch<string>(`${this.URL_BACKEND}/projects/update`, modifiedProject, { withCredentials: true });
+    updateProject(modifiedProject: Project): Observable<Project> {
+        return this._http.patch<Project>(`${this.URL_BACKEND}/projects/update`, modifiedProject, { withCredentials: true });
     }
 
     /**
@@ -264,8 +264,8 @@ export class PrivateServicesService {
      *
      * @param projectId Id of the project that have to be removed.
      */
-    deleteProject(projectId: number): Observable<string> {
-        return this._http.delete<string>(`${this.URL_BACKEND}/projects/delete/${projectId}`, { withCredentials: true });
+    deleteProject(projectId: number): Observable<any> {
+        return this._http.delete(`${this.URL_BACKEND}/projects/delete/${projectId}`, { withCredentials: true });
     }
 
     // Techno Services
@@ -293,7 +293,7 @@ export class PrivateServicesService {
      *
      * @param technoId Id of the techno that have to be removed.
      */
-    deleteTechno(technoId: number): any {
+    deleteTechno(technoId: number): Observable<any> {
         return this._http.delete(`${this.URL_BACKEND}/technos/delete/${technoId}`, { withCredentials: true });
     }
 

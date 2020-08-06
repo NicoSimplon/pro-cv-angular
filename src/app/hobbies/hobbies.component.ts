@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PublicServicesService } from '../services/public-services.service';
 import { Hobby } from '../models/Hobby';
 import { EditMode } from '../models/EditMode';
 import { PrivateServicesService } from '../services/private-services.service';
+import { Scavenger } from '@wishtack/rx-scavenger';
 
 /**
  * Display the list of hobbies.
@@ -12,7 +13,9 @@ import { PrivateServicesService } from '../services/private-services.service';
     templateUrl: './hobbies.component.html',
     styleUrls: ['./hobbies.component.css']
 })
-export class HobbiesComponent extends EditMode implements OnInit {
+export class HobbiesComponent extends EditMode implements OnInit, OnDestroy {
+
+    private _scavenger = new Scavenger(this);
 
     // Notifications
     errorMessage: string;
@@ -30,7 +33,7 @@ export class HobbiesComponent extends EditMode implements OnInit {
      * Create a new Hobby and call a service to persist it.
      */
     createHobby(): void {
-        this.privService.createHobby(this.newHobby).subscribe(
+        this.privService.createHobby(this.newHobby).pipe(this._scavenger.collect()).subscribe(
             (hobby) => {
                 this.hobbies.push(hobby);
                 this.sucessMessage = 'Le nouveau hobby a été créé avec succès.';
@@ -54,7 +57,7 @@ export class HobbiesComponent extends EditMode implements OnInit {
      * @param modifiedHobby The modified version of the hobby
      */
     updateHobby(modifiedHobby: Hobby): void {
-        this.privService.updateHobby(modifiedHobby).subscribe(
+        this.privService.updateHobby(modifiedHobby).pipe(this._scavenger.collect()).subscribe(
             hobby => {
                 this.hobbies.filter(h => h.id === hobby.id).map(h => h = hobby);
                 this.sucessMessage = 'Le hobby a été modifié avec succès.';
@@ -78,7 +81,7 @@ export class HobbiesComponent extends EditMode implements OnInit {
      * @param hobbyToDelete Hobby object that contains the ID necessary to the operation
      */
     deleteHobby(hobbyToDelete: Hobby): void {
-        this.privService.deleteHobby(hobbyToDelete.id).subscribe(
+        this.privService.deleteHobby(hobbyToDelete.id).pipe(this._scavenger.collect()).subscribe(
             () => {
                 this.getHobbies();
                 this.sucessMessage = 'Le hobby a été supprimé avec succès.';
@@ -100,7 +103,7 @@ export class HobbiesComponent extends EditMode implements OnInit {
      * Get the complete list of hobbies for displaying them
      */
     getHobbies(): void {
-        this.service.getHobby().subscribe(
+        this.service.getHobby().pipe(this._scavenger.collect()).subscribe(
             (hobbyList) => {
                 this.hobbies = hobbyList;
                 this.newHobby = new Hobby('', '');
@@ -117,6 +120,9 @@ export class HobbiesComponent extends EditMode implements OnInit {
 
     ngOnInit(): void {
         this.getHobbies();
+    }
+
+    ngOnDestroy(): void {
     }
 
 }

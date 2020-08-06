@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PublicServicesService } from '../services/public-services.service';
 import { XpPro } from '../models/XpPro';
 import { EditMode } from '../models/EditMode';
 import { PrivateServicesService } from '../services/private-services.service';
+import { Scavenger } from '@wishtack/rx-scavenger';
 
 /**
  * Display the list of professionnal experiences.
@@ -12,7 +13,9 @@ import { PrivateServicesService } from '../services/private-services.service';
     templateUrl: './experiences.component.html',
     styleUrls: ['./experiences.component.css']
 })
-export class ExperiencesComponent extends EditMode implements OnInit {
+export class ExperiencesComponent extends EditMode implements OnInit, OnDestroy {
+
+    private _scavenger = new Scavenger(this);
 
     // Notifications
     errorMessage: string;
@@ -30,7 +33,7 @@ export class ExperiencesComponent extends EditMode implements OnInit {
      * and then add it to the list for displaying it.
      */
     createXp(): void {
-        this.privService.createXp(this.newExperience).subscribe(
+        this.privService.createXp(this.newExperience).pipe(this._scavenger.collect()).subscribe(
             (xp) => {
                 this.experiences.push(xp);
                 this.sucessMessage =
@@ -54,7 +57,7 @@ export class ExperiencesComponent extends EditMode implements OnInit {
      * @param modifiedXp the modified version of the professional experience
      */
     updateXp(modifiedXp: XpPro): void {
-        this.privService.updateXp(modifiedXp).subscribe(
+        this.privService.updateXp(modifiedXp).pipe(this._scavenger.collect()).subscribe(
             (xp) => {
                 this.experiences.filter(e => e.id === xp.id).map(e => e = xp);
                 this.sucessMessage =
@@ -78,7 +81,7 @@ export class ExperiencesComponent extends EditMode implements OnInit {
      * @param xp the XpPro to delete (we need it's ID)
      */
     deleteXp(xp: XpPro): void {
-        this.privService.deleteXp(xp.id).subscribe(
+        this.privService.deleteXp(xp.id).pipe(this._scavenger.collect()).subscribe(
             () => {
                 this.getXp();
                 this.sucessMessage =
@@ -100,7 +103,7 @@ export class ExperiencesComponent extends EditMode implements OnInit {
      * Call a service to retrieve the complete list of the professional experiences.
      */
     getXp(): void {
-        this.service.getXpPro().subscribe(
+        this.service.getXpPro().pipe(this._scavenger.collect()).subscribe(
             xps => {
                 this.experiences = xps;
                 this.newExperience = new XpPro('', '', '');
@@ -116,6 +119,9 @@ export class ExperiencesComponent extends EditMode implements OnInit {
 
     ngOnInit(): void {
         this.getXp();
+    }
+
+    ngOnDestroy(): void {
     }
 
 }

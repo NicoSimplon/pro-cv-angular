@@ -1,9 +1,118 @@
-<h3>Compétences</h3>
-<hr>
-<div *ngFor="let group of skills;">
-    <h4>{{ group.title }}</h4>
-    <ul *ngFor="let skill of group.skills">
-        <li>{{ skill.title }}</li>
-    </ul>
+<div *ngIf="!editMode">
+    <h3>Compétences</h3>
+    <hr>
+    <div *ngFor="let group of skills;">
+        <h4>{{ group.title }}</h4>
+        <ul *ngFor="let skill of group.skills">
+            <li>{{ skill.title }}</li>
+        </ul>
+    </div>
+    <hr>
 </div>
-<hr>
+
+<div *ngIf="editMode">
+    <h3>Compétences :</h3>
+    <hr>
+    <div class="alert alert-danger text-center" *ngIf="errorMessage">
+        <p><strong>{{ errorMessage }}</strong></p>
+    </div>
+    <div class="alert alert-succes text-center" *ngIf="sucessMessage">
+        <p><strong>{{ sucessMessage }}</strong></p>
+    </div>
+    <br>
+    <div *ngIf="newSkillGroup">
+        <form #form1="ngForm" (ngSubmit)="createSkillGroup()">
+            <h4>Créer une nouveau groupe de compétence :</h4>
+            <br>
+            <div class="form-group">
+                <label for="groupTitle">Intitulé du groupe de compétences : </label>
+                <input type="text" [(ngModel)]="newSkillGroup.title" #groupTitle="ngModel" class="form-control" id="groupTitle" name="groupTitle" required >
+                <div class="alert alert-danger" *ngIf="(groupTitle.dirty || groupTitle.touched) && groupTitle.errors">
+                    Veuillez renseigner un nom pour le groupe de compétences (Ce champ est obligatoire).
+                </div>
+            </div>
+            <ul *ngFor="let skill of newSkillGroup.skills;">
+                <li>{{ skill.title }}</li>
+            </ul>
+            <hr>
+            <form #skillForm="ngForm" (ngSubmit)="createSkillInGroup()">
+                <div class="form-group">
+                    <label for="skillTitle">Compétence à ajouter : </label>
+                    <input type="text" [(ngModel)]="newSkill.title" #skillTitle="ngModel" class="form-control" id="skillTitle" name="skillTitle" required >
+                    <div class="alert alert-danger" *ngIf="(skillTitle.dirty || skillTitle.touched) && skillTitle.errors">
+                        Veuillez décrire la compétence à ajouter (Ce champ est obligatoire).
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button [disabled]="skillForm.invalid" type="submit" class="btn btn-primary">Ajouter</button>
+                </div>
+            </form>
+            <hr>
+            <br>
+            <div class="text-center">
+                <button [disabled]="form1.invalid || newSkillGroup.skills.length < 2" type="submit" class="btn btn-primary">Créer</button>
+            </div>
+            <br>
+        </form>
+    </div>
+    <br>
+    <ul *ngIf="skills">
+        <ul *ngFor="let group of skills;">
+            <form #updateGroupForm="ngForm" (ngSubmit)="updateSkillGroup(group)">
+                <h4>Modifier le groupe de compétences :</h4>
+                <br>
+                <div class="form-group">
+                    <label for="modifiedGroupTitle">Intitulé du groupe de compétences : </label>
+                    <input type="text" [(ngModel)]="group.title" #modifiedGroupTitle="ngModel" class="form-control" id="modifiedGroupTitle" name="modifiedGroupTitle" required >
+                    <div class="alert alert-danger" *ngIf="(modifiedGroupTitle.dirty || modifiedGroupTitle.touched) && modifiedGroupTitle.errors">
+                        Veuillez fournir un titre pour groupe de compétences (Ce champ est obligatoire).
+                    </div>
+                </div>
+                <ul *ngFor="let existingSkill of group.skills">
+                    <li>
+                        <form #modifySkill="ngForm">
+                            <div class="form-group">
+                                <label for="modifiedSkillTitle">Compétence à modifier : </label>
+                                <input type="text" [(ngModel)]="existingSkill.title" #modifiedSkillTitle="ngModel" class="form-control" id="modifiedSkillTitle" name="modifiedSkillTitle" required >
+                                <div class="alert alert-danger" *ngIf="(modifiedSkillTitle.dirty || modifiedSkillTitle.touched) && modifiedSkillTitle.errors">
+                                    Veuillez décrire la compétence (Ce champ est obligatoire).
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="button" (click)="updateSkill(existingSkill, group.id)" class="btn btn-primary">Modifier la compétence</button>
+                            </div>
+                            <div class="text-center">
+                                <button type="button" (click)="deleteSkill(existingSkill)" class="btn btn-primary">Supprimer la compétence</button>
+                            </div>
+                        </form>
+                        <br>
+                    </li>
+                </ul>
+                <form #addSkill="ngForm" (ngSubmit)="createSkillAlone(group.id)">
+                    <div class="form-group">
+                        <label for="aloneSkillTitle">Compétence à ajouter : </label>
+                        <input type="text" [(ngModel)]="newAloneSkill.title" #aloneSkillTitle="ngModel" class="form-control" id="aloneSkillTitle" name="aloneSkillTitle" required >
+                        <div class="alert alert-danger" *ngIf="(aloneSkillTitle.dirty || aloneSkillTitle.touched) && aloneSkillTitle.errors">
+                            Veuillez décrire la compétence à ajouter (Ce champ est obligatoire).
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button [disabled]="addSkill.invalid" type="submit" class="btn btn-primary">Ajouter</button>
+                    </div>
+                </form>
+                <br>
+                <div class="text-center">
+                    <button [disabled]="updateGroupForm.invalid" type="submit" class="btn btn-primary">Modifier le groupe</button>
+                </div>
+                <br>
+            </form>
+            <br>
+            <div class="text-center">
+                <button (click)="deleteGroup(group)" class="btn btn-primary">Supprimer le groupe de compétences</button>
+            </div>
+            <br>
+            <hr>
+        </ul>
+    </ul>
+    <hr>
+</div>
