@@ -75,6 +75,7 @@ export class TechnosComponent extends EditMode implements OnInit, OnDestroy {
                         this.fileData = null;
                         this.formData = new FormData();
                         this.technos.push(techno);
+                        this.technos.sort((a, b) => (a.order - b.order));
                         this.sucessMessage = 'La nouvelle techno a été créée avec succès.';
                     },
                     () => {
@@ -103,6 +104,7 @@ export class TechnosComponent extends EditMode implements OnInit, OnDestroy {
         this.privService.updateTechno(modifiedTechno).pipe(this._scavenger.collect()).subscribe(
             (techno) => {
                 this.technos.filter(t => t.id === techno.id).map(t => t = techno);
+                this.technos.sort((a, b) => (a.order - b.order));
                 this.sucessMessage = `La techno ${techno.title} a été mise à jour avec succès.`;
                 setInterval(() => {
                     this.sucessMessage = undefined;
@@ -183,6 +185,7 @@ export class TechnosComponent extends EditMode implements OnInit, OnDestroy {
         this.service.getTechnos().pipe(this._scavenger.collect()).subscribe(
             technoList => {
                 this.technos = technoList;
+                this.technos.sort((a, b) => (a.order - b.order));
             },
             () => {
                 this.errorMessage = 'Une erreur est survenue durant la récupération de la liste des technos.';

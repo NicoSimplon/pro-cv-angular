@@ -36,6 +36,7 @@ export class ExperiencesComponent extends EditMode implements OnInit, OnDestroy 
         this.privService.createXp(this.newExperience).pipe(this._scavenger.collect()).subscribe(
             (xp) => {
                 this.experiences.push(xp);
+                this.experiences.sort((a, b) => (a.order - b.order));
                 this.sucessMessage =
                     `L'expérience ${xp.title} a été créée avec succès.`;
                 setInterval(() => {
@@ -60,6 +61,7 @@ export class ExperiencesComponent extends EditMode implements OnInit, OnDestroy 
         this.privService.updateXp(modifiedXp).pipe(this._scavenger.collect()).subscribe(
             (xp) => {
                 this.experiences.filter(e => e.id === xp.id).map(e => e = xp);
+                this.experiences.sort((a, b) => (a.order - b.order));
                 this.sucessMessage =
                     `L'expérience ${xp.title} a été modifiée avec succès.`;
                 setInterval(() => {
@@ -106,6 +108,7 @@ export class ExperiencesComponent extends EditMode implements OnInit, OnDestroy 
         this.service.getXpPro().pipe(this._scavenger.collect()).subscribe(
             xps => {
                 this.experiences = xps;
+                this.experiences.sort((a, b) => (a.order - b.order));
                 this.newExperience = new XpPro('', '', '');
             },
             () => {

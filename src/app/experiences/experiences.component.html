@@ -39,7 +39,14 @@
                 <label for="xpPeriod">Période de l'expérience professionnelle : </label>
                 <input type="text" [(ngModel)]="newExperience.period" #xpPeriod="ngModel" class="form-control" id="xpPeriod" name="xpPeriod" required >
                 <div class="alert alert-danger" *ngIf="(xpPeriod.dirty || xpPeriod.touched) && xpPeriod.errors">
-                    Veuillez la période de cette expérience (Ce champ est obligatoire).
+                    Veuillez renseigner la période de cette expérience (Ce champ est obligatoire).
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="xpOrder">Ordre d'affichage de l'expérience professionnelle : </label>
+                <input type="number" [(ngModel)]="newExperience.order" #xpOrder="ngModel" class="form-control" id="xpOrder" name="xpOrder" required >
+                <div class="alert alert-danger" *ngIf="(xpOrder.dirty || xpOrder.touched) && xpOrder.errors">
+                    Veuillez définir l'ordre d'affichage de cette expérience (Par défaut elle est de 0).
                 </div>
             </div>
             <br>
@@ -74,6 +81,13 @@
                     <input type="text" [(ngModel)]="xp.period" #modifiedxpPeriod="ngModel" class="form-control" id="modifiedxpPeriod" name="modifiedxpPeriod" required >
                     <div class="alert alert-danger" *ngIf="(modifiedxpPeriod.dirty || modifiedxpPeriod.touched) && modifiedxpPeriod.errors">
                         Veuillez la période de cette expérience (Ce champ est obligatoire).
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="xmodifiedxpOrder">Ordre d'affichage de l'expérience professionnelle : </label>
+                    <input type="number" [(ngModel)]="xp.order" #xmodifiedxpOrder="ngModel" class="form-control" id="xmodifiedxpOrder" name="xmodifiedxpOrder" required >
+                    <div class="alert alert-danger" *ngIf="(xmodifiedxpOrder.dirty || xmodifiedxpOrder.touched) && xmodifiedxpOrder.errors">
+                        Veuillez définir l'ordre d'affichage de cette expérience (Par défaut elle est de 0).
                     </div>
                 </div>
                 <br>
