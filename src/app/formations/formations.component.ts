@@ -21,89 +21,40 @@ export class FormationsComponent extends EditMode implements OnInit, OnDestroy {
     errorMessage: string;
     sucessMessage: string;
 
-    // Variables for displaying and modifying formations
     formations: Formation[];
-    newFormation: Formation;
 
-    constructor(private service: PublicServicesService, private priService: PrivateServicesService) {
+    constructor(private service: PublicServicesService) {
         super();
     }
 
     /**
-     * Call a service to persist the new Formation
-     * and then add it to the list for displaying it.
+     * Update the list of formations when a new one is created.
      */
-    createFormation(): void {
-        this.priService.createFormation(this.newFormation).pipe(this._scavenger.collect()).subscribe(
-            (formation) => {
-                this.formations.push(formation);
-                this.sucessMessage =
-                    `La formation ${formation.title} a été créée avec succès.`;
-                setInterval(() => {
-                    this.sucessMessage = undefined;
-                }, 7000);
-            },
-            () => {
-                this.errorMessage = 'Une erreur est survenue lors de la création de la nouvelle formation.';
-                setInterval(() => {
-                    this.errorMessage = undefined;
-                }, 7000);
-            }
-        );
+    createFormation(newFormation: Formation): void {
+        this.formations.push(newFormation);
+        this.formations.sort((a, b) => (b.year - a.year));
     }
 
     /**
-     * Call a service to persist the modified values of an existing formation.
-     *
-     * @param modifiedFormation the modified version of the Formation
+     * Update the list of formations after an existing one has been modified.
      */
     updateFormation(modifiedFormation: Formation): void {
-        this.priService.updateFormation(modifiedFormation).pipe(this._scavenger.collect()).subscribe(
-            (formation) => {
-                this.formations.forEach(
-                    f => {
-                        if (formation.id === f.id) {
-                            f = formation;
-                        }
-                    }
-                );
-                this.sucessMessage =
-                    `La formation ${formation.title} a été modifiée avec succès.`;
-                setInterval(() => {
-                    this.sucessMessage = undefined;
-                }, 7000);
-            },
-            () => {
-                this.errorMessage = 'Une erreur est survenue lors de la modification de la formation.';
-                setInterval(() => {
-                    this.errorMessage = undefined;
-                }, 7000);
-            }
-        );
+
+        this.formations.filter(f => f.id === modifiedFormation.id)
+            .map(f => f = modifiedFormation);
+
+        this.formations.sort((a, b) => (b.year - a.year));
     }
 
     /**
-     * Call a service to remove the selected formation in the database.
-     *
-     * @param formation the formation to delete (we need it's ID)
+     * Update the formations list after one is deleted.
      */
-    deleteFormation(formation: Formation): void {
-        this.priService.deleteFormation(formation.id).pipe(this._scavenger.collect()).subscribe(
-            () => {
-                this.getFormations();
-                this.sucessMessage =
-                    `La formation ${formation.title} a été supprimée avec succès.`;
-                setInterval(() => {
-                    this.sucessMessage = undefined;
-                }, 7000);
-            },
-            () => {
-                this.errorMessage = 'Une erreur est survenue lors de la suppression de la formation.';
-                setInterval(() => {
-                    this.errorMessage = undefined;
-                }, 7000);
-            }
-        );
+    deleteFormation(message: string): void {
+        this.getFormations();
+        this.sucessMessage = message;
+        setInterval(() => {
+            this.sucessMessage = undefined;
+        }, 7000);
     }
 
     /**
@@ -114,7 +65,6 @@ export class FormationsComponent extends EditMode implements OnInit, OnDestroy {
             formations => {
                 this.formations = formations;
                 this.formations.sort((a, b) => (b.year - a.year));
-                this.newFormation = new Formation('', new Date().getFullYear());
             },
             () => {
                 this.errorMessage = 'Une erreur est survenue lors de la récupération des formations.';
@@ -129,7 +79,6 @@ export class FormationsComponent extends EditMode implements OnInit, OnDestroy {
         this.getFormations();
     }
 
-    ngOnDestroy(): void {
-    }
+    ngOnDestroy(): void {}
 
 }

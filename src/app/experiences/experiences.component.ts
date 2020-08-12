@@ -17,88 +17,41 @@ export class ExperiencesComponent extends EditMode implements OnInit, OnDestroy 
 
     private _scavenger = new Scavenger(this);
 
-    // Notifications
     errorMessage: string;
     sucessMessage: string;
 
     experiences: XpPro[];
-    newExperience: XpPro;
 
-    constructor(private service: PublicServicesService, private privService: PrivateServicesService) {
+    constructor(private service: PublicServicesService) {
         super();
     }
 
     /**
-     * Call a service to persist the new professional experience
-     * and then add it to the list for displaying it.
+     * Update the list of experiences after creating a new one.
      */
-    createXp(): void {
-        this.privService.createXp(this.newExperience).pipe(this._scavenger.collect()).subscribe(
-            (xp) => {
-                this.experiences.push(xp);
-                this.experiences.sort((a, b) => (a.order - b.order));
-                this.sucessMessage =
-                    `L'expérience ${xp.title} a été créée avec succès.`;
-                setInterval(() => {
-                    this.sucessMessage = undefined;
-                }, 7000);
-            },
-            () => {
-                this.errorMessage = 'Une erreur est survenue lors de la création de la nouvelle expérience.';
-                setInterval(() => {
-                    this.errorMessage = undefined;
-                }, 7000);
-            }
-        );
+    addNewXp(event): void {
+        this.experiences.push(event);
+        this.experiences.sort((a, b) => (a.order - b.order));
     }
 
     /**
-     * Call a service to persist the modified values of an existing professional experience.
-     *
-     * @param modifiedXp the modified version of the professional experience
+     * Update the list when an update event is thrown.
      */
-    updateXp(modifiedXp: XpPro): void {
-        this.privService.updateXp(modifiedXp).pipe(this._scavenger.collect()).subscribe(
-            (xp) => {
-                this.experiences.filter(e => e.id === xp.id).map(e => e = xp);
-                this.experiences.sort((a, b) => (a.order - b.order));
-                this.sucessMessage =
-                    `L'expérience ${xp.title} a été modifiée avec succès.`;
-                setInterval(() => {
-                    this.sucessMessage = undefined;
-                }, 7000);
-            },
-            () => {
-                this.errorMessage = 'Une erreur est survenue lors de la modification de l\'expérience professionnelle.';
-                setInterval(() => {
-                    this.errorMessage = undefined;
-                }, 7000);
-            }
-        );
+    updateXp(event: XpPro): void {
+
+        this.experiences.filter(e => e.id === event.id).map(e => e = event);
+        this.experiences.sort((a, b) => (a.order - b.order));
     }
 
     /**
-     * Call a service to remove the selected professional experience in the database.
-     *
-     * @param xp the XpPro to delete (we need it's ID)
+     * When get the delete event this method refresh the list of experiences.
      */
-    deleteXp(xp: XpPro): void {
-        this.privService.deleteXp(xp.id).pipe(this._scavenger.collect()).subscribe(
-            () => {
-                this.getXp();
-                this.sucessMessage =
-                    `L'expérience professionnelle ${xp.title} a été supprimée avec succès.`;
-                setInterval(() => {
-                    this.sucessMessage = undefined;
-                }, 7000);
-            },
-            () => {
-                this.errorMessage = 'Une erreur est survenue lors de la suppression de l\'expérience professionnelle.';
-                setInterval(() => {
-                    this.errorMessage = undefined;
-                }, 7000);
-            }
-        );
+    deleteXp(event: string): void {
+        this.getXp();
+        this.sucessMessage = 'Une erreur est survenue lors de la récupération des expériences professionnelles.';
+        setInterval(() => {
+            this.sucessMessage = undefined;
+        }, 7000);
     }
 
     /**
@@ -109,7 +62,6 @@ export class ExperiencesComponent extends EditMode implements OnInit, OnDestroy 
             xps => {
                 this.experiences = xps;
                 this.experiences.sort((a, b) => (a.order - b.order));
-                this.newExperience = new XpPro('', '', '');
             },
             () => {
                 this.errorMessage = 'Une erreur est survenue lors de la récupération des expériences professionnelles.';

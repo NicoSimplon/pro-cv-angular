@@ -1,0 +1,25 @@
+<div *ngIf="hobby">
+    <form #form="ngForm" (ngSubmit)="updateHobby()">
+        <h4>Modifier le hobby :</h4>
+        <br>
+        <div class="form-group">
+            <label for="modifiedHobbyTitle">Intitullé du hobby : </label>
+            <input type="text" [(ngModel)]="hobby.title" #modifiedHobbyTitle="ngModel" class="form-control" id="modifiedHobbyTitle" name="modifiedHobbyTitle" required >
+            <div class="alert alert-danger" *ngIf="(modifiedHobbyTitle.dirty || modifiedHobbyTitle.touched) && modifiedHobbyTitle.errors">
+                Veuillez fournir un titre pour le hobby (Ce champ est obligatoire).
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="modifiedHobbyDescription">Description du hobby : </label>
+            <input type="text" [(ngModel)]="hobby.description" #modifiedHobbyDescription="ngModel" class="form-control" id="modifiedHobbyDescription" name="modifiedHobbyDescription" required >
+            <div class="alert alert-danger" *ngIf="(modifiedHobbyDescription.dirty || modifiedHobbyDescription.touched) && modifiedHobbyDescription.errors">
+                Veuillez fournir une description du hobby (Ce champ est obligatoire).
+            </div>
+        </div>
+        <br>
+        <div class="text-center">
+            <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Modifier</button>
+        </div>
+        <br>
+    </form>
+</div>

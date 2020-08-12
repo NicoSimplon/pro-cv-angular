@@ -1,0 +1,39 @@
+<div *ngIf="experience">
+    <form #form="ngForm" (ngSubmit)="updateXp()">
+        <h4>Modifier l'epérience professionnelle :</h4>
+        <br>
+        <div class="form-group">
+            <label for="modifiedxpTitle">Intitullé de l'expérience professionnelle : </label>
+            <input type="text" [(ngModel)]="experience.title" #modifiedxpTitle="ngModel" class="form-control" id="modifiedxpTitle" name="modifiedxpTitle" required >
+            <div class="alert alert-danger" *ngIf="(modifiedxpTitle.dirty || modifiedxpTitle.touched) && modifiedxpTitle.errors">
+                Veuillez renseigner un titre pour l'expérience (Ce champ est obligatoire).
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="modifiedxpDescription">Description de l'expérience professionnelle : </label>
+            <input type="text" [(ngModel)]="experience.description" #modifiedxpDescription="ngModel" class="form-control" id="modifiedxpDescription" name="modifiedxpDescription" required >
+            <div class="alert alert-danger" *ngIf="(modifiedxpDescription.dirty || modifiedxpDescription.touched) && modifiedxpDescription.errors">
+                Veuillez remplir une description de l'expérience (Ce champ est obligatoire).
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="modifiedxpPeriod">Période de l'expérience professionnelle : </label>
+            <input type="text" [(ngModel)]="experience.period" #modifiedxpPeriod="ngModel" class="form-control" id="modifiedxpPeriod" name="modifiedxpPeriod" required >
+            <div class="alert alert-danger" *ngIf="(modifiedxpPeriod.dirty || modifiedxpPeriod.touched) && modifiedxpPeriod.errors">
+                Veuillez la période de cette expérience (Ce champ est obligatoire).
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="xmodifiedxpOrder">Ordre d'affichage de l'expérience professionnelle : </label>
+            <input type="number" [(ngModel)]="experience.order" #xmodifiedxpOrder="ngModel" class="form-control" id="xmodifiedxpOrder" name="xmodifiedxpOrder" required >
+            <div class="alert alert-danger" *ngIf="(xmodifiedxpOrder.dirty || xmodifiedxpOrder.touched) && xmodifiedxpOrder.errors">
+                Veuillez définir l'ordre d'affichage de cette expérience (Par défaut elle est de 0).
+            </div>
+        </div>
+        <br>
+        <div class="text-center">
+            <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Modifier</button>
+        </div>
+        <br>
+    </form>
+</div>

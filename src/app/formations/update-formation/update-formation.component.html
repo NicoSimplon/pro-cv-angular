@@ -1,0 +1,31 @@
+<div *ngIf="formation">
+    <div class="alert alert-danger text-center" *ngIf="errorMessage">
+        <p><strong>{{ errorMessage }}</strong></p>
+    </div>
+    <div class="alert alert-succes text-center" *ngIf="sucessMessage">
+        <p><strong>{{ sucessMessage }}</strong></p>
+    </div>
+    <form #form="ngForm" (ngSubmit)="updateFormation()">
+        <h4>Modifier la formation :</h4>
+        <br>
+        <div class="form-group">
+            <label for="modifiedFormation">Intitullé de la formation : </label>
+            <input type="text" [(ngModel)]="formation.title" #modifiedFormation="ngModel" class="form-control" id="modifiedFormation" name="modifiedFormation" required >
+            <div class="alert alert-danger" *ngIf="(modifiedFormation.dirty || modifiedFormation.touched) && modifiedFormation.errors">
+                L'intitulé de la formation est invalide (Ce champ est obligatoire).
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="formationYear">Année de la formation : </label>
+            <input type="number" [(ngModel)]="formation.year" #formationYear="ngModel" class="form-control" id="formationYear" name="formationYear" required >
+            <div class="alert alert-danger" *ngIf="(formationYear.dirty || formationYear.touched) && formationYear.errors">
+                Une formation a nécessairement une année (Ce champ est obligatoire).
+            </div>
+        </div>
+        <br>
+        <div class="text-center">
+            <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Modifier</button>
+        </div>
+        <br>
+    </form>
+</div>

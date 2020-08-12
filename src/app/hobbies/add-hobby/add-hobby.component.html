@@ -1,0 +1,25 @@
+<div *ngIf="newHobby">
+    <form #form1="ngForm" (ngSubmit)="createHobby()">
+        <h4>Créer une nouveau hobby :</h4>
+        <br>
+        <div class="form-group">
+            <label for="hobbyTitle">Intitullé du hobby : </label>
+            <input type="text" [(ngModel)]="newHobby.title" #hobbyTitle="ngModel" class="form-control" id="hobbyTitle" name="hobbyTitle" required >
+            <div class="alert alert-danger" *ngIf="(hobbyTitle.dirty || hobbyTitle.touched) && hobbyTitle.errors">
+                L'intitulé du hobby est invalide (Ce champ est obligatoire).
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="hobbyDescription">Description du hobby : </label>
+            <input type="text" [(ngModel)]="newHobby.description" #hobbyDescription="ngModel" class="form-control" id="hobbyDescription" name="hobbyDescription" required >
+            <div class="alert alert-danger" *ngIf="(hobbyDescription.dirty || hobbyDescription.touched) && hobbyDescription.errors">
+                Veuillez remplir une description du hobby (Ce champ est obligatoire).
+            </div>
+        </div>
+        <br>
+        <div class="text-center">
+            <button [disabled]="form1.invalid" type="submit" class="btn btn-primary">Créer</button>
+        </div>
+        <br>
+    </form>
+</div>

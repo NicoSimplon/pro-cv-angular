@@ -21,82 +21,39 @@ export class HobbiesComponent extends EditMode implements OnInit, OnDestroy {
     errorMessage: string;
     sucessMessage: string;
 
-    // Variables for displaying or editing hobbies
     hobbies: Hobby[];
-    newHobby: Hobby;
 
-    constructor(private service: PublicServicesService, private privService: PrivateServicesService) {
+    constructor(private service: PublicServicesService) {
         super();
     }
 
     /**
-     * Create a new Hobby and call a service to persist it.
+     * Update the list of hobbies when a create event is thrown.
      */
-    createHobby(): void {
-        this.privService.createHobby(this.newHobby).pipe(this._scavenger.collect()).subscribe(
-            (hobby) => {
-                this.hobbies.push(hobby);
-                this.sucessMessage = 'Le nouveau hobby a été créé avec succès.';
-                setInterval(() => {
-                    this.sucessMessage = undefined;
-                }, 7000);
-            },
-            () => {
-                this.errorMessage =
-                    'Une erreur est survenue durant la création du nouveau hobby.';
-                setInterval(() => {
-                    this.errorMessage = undefined;
-                }, 7000);
-            }
-        );
+    createHobby(event: Hobby): void {
+        this.hobbies.push(event);
     }
 
     /**
-     * Call a service to persist a new version of an existing hobby.
+     * After an hobby has been updated and the update event is received,
+     * the list oh hobbies is updated.
      *
      * @param modifiedHobby The modified version of the hobby
      */
     updateHobby(modifiedHobby: Hobby): void {
-        this.privService.updateHobby(modifiedHobby).pipe(this._scavenger.collect()).subscribe(
-            hobby => {
-                this.hobbies.filter(h => h.id === hobby.id).map(h => h = hobby);
-                this.sucessMessage = 'Le hobby a été modifié avec succès.';
-                setInterval(() => {
-                    this.sucessMessage = undefined;
-                }, 7000);
-            },
-            () => {
-                this.errorMessage =
-                    'Une erreur est survenue durant la modification du hobby.';
-                setInterval(() => {
-                    this.errorMessage = undefined;
-                }, 7000);
-            }
-        );
+        this.hobbies.filter(h => h.id === modifiedHobby.id).map(h => h = modifiedHobby);
     }
 
     /**
-     * Call a service and provide it with an ID of the hobby that has to be removed in the database.
-     *
-     * @param hobbyToDelete Hobby object that contains the ID necessary to the operation
+     * When a delete event is thronw, the list of hobbies is refresh
+     * and a success notification is displayed.
      */
-    deleteHobby(hobbyToDelete: Hobby): void {
-        this.privService.deleteHobby(hobbyToDelete.id).pipe(this._scavenger.collect()).subscribe(
-            () => {
-                this.getHobbies();
-                this.sucessMessage = 'Le hobby a été supprimé avec succès.';
-                setInterval(() => {
-                    this.sucessMessage = undefined;
-                }, 7000);
-            },
-            () => {
-                this.errorMessage =
-                    'Une erreur est survenue durant la suppression du hobby.';
-                setInterval(() => {
-                    this.errorMessage = undefined;
-                }, 7000);
-            }
-        );
+    deleteHobby(message: string): void {
+        this.getHobbies();
+        this.sucessMessage = message;
+        setInterval(() => {
+            this.sucessMessage = undefined;
+        }, 7000);
     }
 
     /**
@@ -106,7 +63,6 @@ export class HobbiesComponent extends EditMode implements OnInit, OnDestroy {
         this.service.getHobby().pipe(this._scavenger.collect()).subscribe(
             (hobbyList) => {
                 this.hobbies = hobbyList;
-                this.newHobby = new Hobby('', '');
             },
             () => {
                 this.errorMessage =
@@ -122,7 +78,6 @@ export class HobbiesComponent extends EditMode implements OnInit, OnDestroy {
         this.getHobbies();
     }
 
-    ngOnDestroy(): void {
-    }
+    ngOnDestroy(): void {}
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Output, Input, OnDestroy, EventEmitter } from '@angular/core';
 import { LoggedUser } from '../models/LoggedUser';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
@@ -21,12 +21,22 @@ export class MenuComponent implements OnInit, OnDestroy {
 
     errorMessage: string;
 
-    @Output() deco = new EventEmitter();
+    @Output()
+    deco = new EventEmitter();
 
     @Input()
     user: LoggedUser;
 
+    profileVisible = false;
+
     constructor(private service: AuthService, private router: Router) {}
+
+    /**
+     * Display the profile part
+     */
+    editUser(): void {
+        this.profileVisible = !this.profileVisible;
+    }
 
     disconnect() {
         this.service.logout().pipe(this._scavenger.collect()).subscribe(
@@ -48,6 +58,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 
     getUser(): void {
         this.service.user.pipe(this._scavenger.collect()).subscribe(() => (this.connected = true));
+        this.profileVisible = false;
     }
 
     ngOnInit(): void {

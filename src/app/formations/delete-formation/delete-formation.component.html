@@ -1,0 +1,10 @@
+<div *ngIf="formation">
+    <form #form2="ngForm" (ngSubmit)="deleteFormation()">
+        <h4>Supprimer la formation :</h4>
+        <br>
+        <div class="text-center">
+            <button [disabled]="form2.invalid" type="submit" class="btn btn-primary">Supprimer</button>
+        </div>
+        <br>
+    </form>
+</div>

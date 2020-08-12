@@ -6,9 +6,13 @@
         <p><b>{{ errorMessage }}</b></p>
     </div>
     <br>
-    <p><a href="#" routerLink="/accueil">Retourner à l'accueil</a> / <a href="#" routerLink="/edit">Retourner au mode édition</a></p>
+    <p><a href="#" routerLink="/accueil">Retourner à l'accueil</a> / <a href="#" routerLink="/edit">Retourner au mode édition</a> / <button type="button" (click)="editUser()">Profil</button></p>
 </div>
 
 <div *ngIf="!connected">
     <a href="#" routerLink="/edit">Editer</a>
+</div>
+
+<div *ngIf="profileVisible && user != undefined">
+    <app-account [user]="user"></app-account>
 </div>

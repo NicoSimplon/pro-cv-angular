@@ -1,8 +1,11 @@
 <div *ngIf="!editMode">
     <h3>Expériences Professionnelles</h3>
     <hr>
+    <div class="alert alert-danger text-center" *ngIf="errorMessage">
+        <p><strong>{{ errorMessage }}</strong></p>
+    </div>
     <div *ngFor="let xp of experiences;">
-        <p><b>{{ xp.period }}</b> : <i>{{ xp.title }}</i> => {{ xp.description }}</p>
+        <app-xp [experience]="xp"></app-xp>
     </div>
     <hr>
 </div>
@@ -16,96 +19,14 @@
     <div class="alert alert-succes text-center" *ngIf="sucessMessage">
         <p><strong>{{ sucessMessage }}</strong></p>
     </div>
+    <app-add-new-xp (create)="addNewXp($event)"></app-add-new-xp>
     <br>
-    <div *ngIf="newExperience">
-        <form #form1="ngForm" (ngSubmit)="createXp()">
-            <h4>Créer une nouvelle expérience professionnelle :</h4>
-            <br>
-            <div class="form-group">
-                <label for="xpTitle">Intitullé de l'expérience : </label>
-                <input type="text" [(ngModel)]="newExperience.title" #xpTitle="ngModel" class="form-control" id="xpTitle" name="xpTitle" required >
-                <div class="alert alert-danger" *ngIf="(xpTitle.dirty || xpTitle.touched) && xpTitle.errors">
-                    Veuillez renseigner un titre pour la nouvelle expérience (Ce champ est obligatoire).
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="xpDescription">Description de l'expérience : </label>
-                <input type="text" [(ngModel)]="newExperience.description" #xpDescription="ngModel" class="form-control" id="xpDescription" name="xpDescription" required >
-                <div class="alert alert-danger" *ngIf="(xpDescription.dirty || xpDescription.touched) && xpDescription.errors">
-                    Veuillez remplir une description de l'expérience (Ce champ est obligatoire).
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="xpPeriod">Période de l'expérience professionnelle : </label>
-                <input type="text" [(ngModel)]="newExperience.period" #xpPeriod="ngModel" class="form-control" id="xpPeriod" name="xpPeriod" required >
-                <div class="alert alert-danger" *ngIf="(xpPeriod.dirty || xpPeriod.touched) && xpPeriod.errors">
-                    Veuillez renseigner la période de cette expérience (Ce champ est obligatoire).
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="xpOrder">Ordre d'affichage de l'expérience professionnelle : </label>
-                <input type="number" [(ngModel)]="newExperience.order" #xpOrder="ngModel" class="form-control" id="xpOrder" name="xpOrder" required >
-                <div class="alert alert-danger" *ngIf="(xpOrder.dirty || xpOrder.touched) && xpOrder.errors">
-                    Veuillez définir l'ordre d'affichage de cette expérience (Par défaut elle est de 0).
-                </div>
-            </div>
-            <br>
-            <div class="text-center">
-                <button [disabled]="form1.invalid" type="submit" class="btn btn-primary">Créer</button>
-            </div>
-            <br>
-        </form>
-    </div>
-    <br>
-    <ul *ngIf="experiences">
+    <div *ngIf="experiences">
         <ul *ngFor="let xp of experiences;">
-            <form #form="ngForm" (ngSubmit)="updateXp(xp)">
-                <h4>Modifier l'epérience professionnelle :</h4>
-                <br>
-                <div class="form-group">
-                    <label for="modifiedxpTitle">Intitullé de l'expérience professionnelle : </label>
-                    <input type="text" [(ngModel)]="xp.title" #modifiedxpTitle="ngModel" class="form-control" id="modifiedxpTitle" name="modifiedxpTitle" required >
-                    <div class="alert alert-danger" *ngIf="(modifiedxpTitle.dirty || modifiedxpTitle.touched) && modifiedxpTitle.errors">
-                        Veuillez renseigner un titre pour l'expérience (Ce champ est obligatoire).
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="modifiedxpDescription">Description de l'expérience professionnelle : </label>
-                    <input type="text" [(ngModel)]="xp.description" #modifiedxpDescription="ngModel" class="form-control" id="modifiedxpDescription" name="modifiedxpDescription" required >
-                    <div class="alert alert-danger" *ngIf="(modifiedxpDescription.dirty || modifiedxpDescription.touched) && modifiedxpDescription.errors">
-                        Veuillez remplir une description de l'expérience (Ce champ est obligatoire).
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="modifiedxpPeriod">Période de l'expérience professionnelle : </label>
-                    <input type="text" [(ngModel)]="xp.period" #modifiedxpPeriod="ngModel" class="form-control" id="modifiedxpPeriod" name="modifiedxpPeriod" required >
-                    <div class="alert alert-danger" *ngIf="(modifiedxpPeriod.dirty || modifiedxpPeriod.touched) && modifiedxpPeriod.errors">
-                        Veuillez la période de cette expérience (Ce champ est obligatoire).
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="xmodifiedxpOrder">Ordre d'affichage de l'expérience professionnelle : </label>
-                    <input type="number" [(ngModel)]="xp.order" #xmodifiedxpOrder="ngModel" class="form-control" id="xmodifiedxpOrder" name="xmodifiedxpOrder" required >
-                    <div class="alert alert-danger" *ngIf="(xmodifiedxpOrder.dirty || xmodifiedxpOrder.touched) && xmodifiedxpOrder.errors">
-                        Veuillez définir l'ordre d'affichage de cette expérience (Par défaut elle est de 0).
-                    </div>
-                </div>
-                <br>
-                <div class="text-center">
-                    <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Modifier</button>
-                </div>
-                <br>
-            </form>
-            <form #form2="ngForm" (ngSubmit)="deleteXp(xp)">
-                <h4>Supprimer l'expérience professionnelle :</h4>
-                <br>
-                <div class="text-center">
-                    <button [disabled]="form2.invalid" type="submit" class="btn btn-primary">Supprimer</button>
-                </div>
-                <br>
-            </form>
+            <app-update-xp [experience]="xp" (update)="updateXp($event)"></app-update-xp>
+            <app-delete-xp [experience]="xp" (delete)="deleteXp($event)"></app-delete-xp>
             <hr>
         </ul>
-    </ul>
+    </div>
     <hr>
 </div>
