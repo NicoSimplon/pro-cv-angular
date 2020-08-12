@@ -22,89 +22,34 @@ export class ProjectsComponent extends EditMode implements OnInit, OnDestroy {
     sucessMessage: string;
 
     projects: Project[];
-    newProject: Project;
 
-    constructor(private service: PublicServicesService, private privService: PrivateServicesService) {
+    constructor(private service: PublicServicesService) {
         super();
     }
 
     /**
-     * Call a service to persist a new project
+     * Update the list of projects after a new one has been created.
      */
-    createProject(): void {
-        this.privService.createProject(this.newProject)
-            .pipe(
-                this._scavenger.collect()
-            )
-            .subscribe(
-                project => {
-                    this.projects.push(project);
-                    this.sucessMessage = `Le nouveau projet ${project.title} a bien été créé.`;
-                    setInterval(() => {
-                        this.sucessMessage = undefined;
-                    }, 7000);
-                },
-                () => {
-                    this.errorMessage = 'Une erreur est survenue lors de la création du nouveau projet.';
-                    setInterval(() => {
-                        this.errorMessage = undefined;
-                    }, 7000);
-                }
-            );
+    createProject(project: Project): void {
+        this.projects.push(project);
     }
 
     /**
-     * Call a service to persist modifications to an existing project.
-     *
-     * @param modifiedProject the modified version of an existing project
+     * Update the list of projects when an existing one has been updated.
      */
-    updateProject(modifiedProject: Project): void {
-        this.privService.updateProject(modifiedProject)
-            .pipe(
-                this._scavenger.collect()
-            )
-            .subscribe(
-                project => {
-                    this.projects.filter(p => p.id === project.id).map(p => p = project);
-                    this.sucessMessage = `Le projet ${project.title} a bien été modifié.`;
-                    setInterval(() => {
-                        this.sucessMessage = undefined;
-                    }, 7000);
-                },
-                () => {
-                    this.errorMessage = 'Une erreur est survenue lors de la modification du projet.';
-                    setInterval(() => {
-                        this.errorMessage = undefined;
-                    }, 7000);
-                }
-            );
+    updateProject(project: Project): void {
+        this.projects.filter(p => p.id === project.id).map(p => p = project);
     }
 
     /**
-     * Give the project ID to a service for removing it from the database.
-     *
-     * @param projectToDelete the project to delete from the database
+     * Refresh the list of project after on is deleted.
      */
-    deleteProject(projectToDelete: Project): void {
-        this.privService.deleteProject(projectToDelete.id)
-            .pipe(
-                this._scavenger.collect()
-            )
-            .subscribe(
-                () => {
-                    this.getProjects();
-                    this.sucessMessage = `Le projet ${projectToDelete.title} a bien été supprimé.`;
-                    setInterval(() => {
-                        this.sucessMessage = undefined;
-                    }, 7000);
-                },
-                () => {
-                    this.errorMessage = 'Une erreur est survenue lors de la suppression du projet.';
-                    setInterval(() => {
-                        this.errorMessage = undefined;
-                    }, 7000);
-                }
-            );
+    deleteProject(message: string): void {
+        this.getProjects();
+        this.sucessMessage = message;
+        setInterval(() => {
+            this.sucessMessage = undefined;
+        }, 7000);
     }
 
     /**
@@ -118,7 +63,6 @@ export class ProjectsComponent extends EditMode implements OnInit, OnDestroy {
         .subscribe(
             projects => {
                 this.projects = projects;
-                this.newProject = new Project('', '');
             },
             () => {
                 this.errorMessage = 'Une erreur est survenue lors de la récupération des projets.';
@@ -133,7 +77,6 @@ export class ProjectsComponent extends EditMode implements OnInit, OnDestroy {
         this.getProjects();
     }
 
-    ngOnDestroy(): void {
-    }
+    ngOnDestroy(): void {}
 
 }

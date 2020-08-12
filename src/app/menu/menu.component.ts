@@ -38,6 +38,10 @@ export class MenuComponent implements OnInit, OnDestroy {
         this.profileVisible = !this.profileVisible;
     }
 
+    /**
+     * Logout of the application back end part
+     * and redirect the user to the main page.
+     */
     disconnect() {
         this.service.logout().pipe(this._scavenger.collect()).subscribe(
             () => {
@@ -56,6 +60,11 @@ export class MenuComponent implements OnInit, OnDestroy {
         this.router.navigate(['/accueil']);
     }
 
+    /**
+     * Check the private service to see if a user is defined.
+     * If it is the user is loggued and the display of the menu
+     * change.
+     */
     getUser(): void {
         this.service.user.pipe(this._scavenger.collect()).subscribe(() => (this.connected = true));
         this.profileVisible = false;

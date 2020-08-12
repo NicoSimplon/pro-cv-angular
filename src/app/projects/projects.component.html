@@ -5,7 +5,7 @@
         <p><strong>{{ errorMessage }}</strong></p>
     </div>
     <div *ngFor="let project of projects;">
-        <p><b>{{ project.title }}</b> : {{ project.description }}</p>
+        <app-project [project]="project"></app-project>
     </div>
     <hr>
 </div>
@@ -13,75 +13,19 @@
 <div *ngIf="editMode">
     <h3>Projets :</h3>
     <hr>
-    <div class="alert alert-danger text-center" *ngIf="errorMessage">
-        <p><strong>{{ errorMessage }}</strong></p>
-    </div>
     <div class="alert alert-succes text-center" *ngIf="sucessMessage">
         <p><strong>{{ sucessMessage }}</strong></p>
     </div>
     <br>
-    <div *ngIf="newProject">
-        <form #form1="ngForm" (ngSubmit)="createProject()">
-            <h4>Créer une nouveau projet :</h4>
-            <br>
-            <div class="form-group">
-                <label for="projectTitle">Titre du projet : </label>
-                <input type="text" [(ngModel)]="newProject.title" #projectTitle="ngModel" class="form-control" id="projectTitle" name="projectTitle" required >
-                <div class="alert alert-danger" *ngIf="(projectTitle.dirty || projectTitle.touched) && projectTitle.errors">
-                    Veuillez renseigner un titre pour ce projet (Ce champ est obligatoire).
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="projectDescription">Description du projet : </label>
-                <input type="text" [(ngModel)]="newProject.description" #projectDescription="ngModel" class="form-control" id="projectDescription" name="projectDescription" required >
-                <div class="alert alert-danger" *ngIf="(projectDescription.dirty || projectDescription.touched) && projectDescription.errors">
-                    Veuillez remplir une description du projet (Ce champ est obligatoire).
-                </div>
-            </div>
-            <br>
-            <div class="text-center">
-                <button [disabled]="form1.invalid" type="submit" class="btn btn-primary">Créer</button>
-            </div>
-            <br>
-        </form>
-    </div>
+    <app-add-project (create)="createProject($event)"></app-add-project>
     <br>
-    <ul *ngIf="projects">
+    <div *ngIf="projects">
         <ul *ngFor="let project of projects;">
-            <form #form="ngForm" (ngSubmit)="updateProject(project)">
-                <h4>Modifier le projet :</h4>
-                <br>
-                <div class="form-group">
-                    <label for="modifiedProjectTitle">Titre du projet : </label>
-                    <input type="text" [(ngModel)]="project.title" #modifiedProjectTitle="ngModel" class="form-control" id="modifiedProjectTitle" name="modifiedProjectTitle" required >
-                    <div class="alert alert-danger" *ngIf="(modifiedProjectTitle.dirty || modifiedProjectTitle.touched) && modifiedProjectTitle.errors">
-                        Veuillez fournir un titre pour le projet (Ce champ est obligatoire).
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="modifiedProjectDescription">Description du projet : </label>
-                    <input type="text" [(ngModel)]="project.description" #modifiedProjectDescription="ngModel" class="form-control" id="modifiedProjectDescription" name="modifiedProjectDescription" required >
-                    <div class="alert alert-danger" *ngIf="(modifiedProjectDescription.dirty || modifiedProjectDescription.touched) && modifiedProjectDescription.errors">
-                        Veuillez fournir une description du projet (Ce champ est obligatoire).
-                    </div>
-                </div>
-                <br>
-                <div class="text-center">
-                    <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Modifier</button>
-                </div>
-                <br>
-            </form>
-            <form #form2="ngForm" (ngSubmit)="deleteProject(project)">
-                <h4>Supprimer le projet :</h4>
-                <br>
-                <div class="text-center">
-                    <button [disabled]="form2.invalid" type="submit" class="btn btn-primary">Supprimer</button>
-                </div>
-                <br>
-            </form>
+            <app-update-project [project]="project" (update)="updateProject($event)"></app-update-project>
+            <app-delete-project [project]="project" (delete)="deleteProject($event)"></app-delete-project>
             <hr>
         </ul>
-    </ul>
+    </div>
     <hr>
 </div>
 

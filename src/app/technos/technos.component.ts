@@ -22,101 +22,26 @@ export class TechnosComponent extends EditMode implements OnInit, OnDestroy {
     sucessMessage: string;
     errorMessage: string;
 
-    // Variables necessary to display or modify technos
-    basicUrl = `${environment.backendUrl}`;
-    newTechno = new Techno('', '', 2);
     technos: Techno[];
-    fileData: File = null;
-    previewUrl: any = null;
-    formData = new FormData();
 
-    constructor(private service: PublicServicesService, private privService: PrivateServicesService) {
+    constructor(private service: PublicServicesService) {
         super();
     }
 
     /**
-     * Display upload progress
-     *
+     * Update the techno list after a nex one has been created.
      */
-    fileProgress(fileInput: any) {
-        this.fileData = fileInput.target.files[0] as File;
-        this.preview();
+    addNewTechno(techno: Techno): void {
+        this.technos.push(techno);
+        this.technos.sort((a, b) => (a.order - b.order));
     }
 
     /**
-     * Display the new image preview
-     */
-    preview() {
-        const mimeType = this.fileData.type;
-        if (mimeType.match(/image\/*/) == null) {
-            return;
-        }
-        const reader = new FileReader();
-        reader.readAsDataURL(this.fileData);
-        reader.onload = (_event) => {
-            this.previewUrl = reader.result;
-        };
-    }
-
-    /**
-     * Create a new techno and associate it
-     * with the new image (logo) that has been provided.
-     */
-    addNewTechno(): void {
-        this.formData.append('file', this.fileData);
-        this.privService.uploadImage(this.formData).pipe(this._scavenger.collect()).subscribe(
-            (image) => {
-                const newLogo = this.newTechno;
-                newLogo.imageId = image.id;
-                newLogo.logoPath = `/image/downloadFile/${newLogo.imageId}`;
-                this.privService.createTechno(newLogo).pipe(this._scavenger.collect()).subscribe(
-                    (techno) => {
-                        this.previewUrl = null;
-                        this.fileData = null;
-                        this.formData = new FormData();
-                        this.technos.push(techno);
-                        this.technos.sort((a, b) => (a.order - b.order));
-                        this.sucessMessage = 'La nouvelle techno a été créée avec succès.';
-                    },
-                    () => {
-                        this.errorMessage = 'Une erreur est survenue durant la création de la nouvelle techno.';
-                        setInterval(() => {
-                            this.errorMessage = undefined;
-                        }, 7000);
-                    }
-                );
-            },
-            () => {
-                this.errorMessage = 'Une erreur est survenue durant l\'upload du nouveau logo.';
-                setInterval(() => {
-                    this.errorMessage = undefined;
-                }, 7000);
-            }
-        );
-    }
-
-    /**
-     * Update a techno logo path.
-     *
-     * @param modifiedTechno techno that has to be updated
+     * Update the list of technos when one's path has been modified.
      */
     updateLogoPath(modifiedTechno: Techno): void {
-        this.privService.updateTechno(modifiedTechno).pipe(this._scavenger.collect()).subscribe(
-            (techno) => {
-                this.technos.filter(t => t.id === techno.id).map(t => t = techno);
-                this.technos.sort((a, b) => (a.order - b.order));
-                this.sucessMessage = `La techno ${techno.title} a été mise à jour avec succès.`;
-                setInterval(() => {
-                    this.sucessMessage = undefined;
-                }, 7000);
-            },
-            () => {
-                this.errorMessage = 'Une erreur est survenue durant la modification de la techno.';
-                setInterval(() => {
-                    this.errorMessage = undefined;
-                }, 7000);
-            }
-        );
+        this.technos.filter(t => t.id === modifiedTechno.id).map(t => t = modifiedTechno);
+        this.technos.sort((a, b) => (a.order - b.order));
     }
 
     /**
@@ -124,57 +49,25 @@ export class TechnosComponent extends EditMode implements OnInit, OnDestroy {
      *
      * @param techToDelete techno that will be deleted
      */
-    deleteTechno(techToDelete: Techno): void {
-        this.privService.deleteTechno(techToDelete.id).pipe(this._scavenger.collect()).subscribe(
-            () => {
-                this.privService.deleteImage(techToDelete.imageId).pipe(this._scavenger.collect()).subscribe(
-                    () => {
-                        this.sucessMessage = `La techno ${techToDelete.title} a bien été supprimée.`;
-                        setInterval(() => {
-                            this.sucessMessage = undefined;
-                        }, 7000);
-                        this.getTechnos();
-                    },
-                    () => {
-                        this.errorMessage = 'Une erreur est survenue durant la suppression du logo.';
-                        setInterval(() => {
-                            this.errorMessage = undefined;
-                        }, 7000);
-                    }
-                );
-            },
-            () => {
-                this.errorMessage = 'Une erreur est survenue durant la suppression de la techno.';
-                setInterval(() => {
-                    this.errorMessage = undefined;
-                }, 7000);
-            }
-        );
+    deleteTechno(message: string): void {
+        this.getTechnos();
+        this.sucessMessage = message;
+        setInterval(() => {
+            this.sucessMessage = undefined;
+        }, 7000);
     }
 
     /**
-     * Update the logo of a techno.
-     *
-     * @param tech techno object for retrieving the id of the image to change
+     * Reload the page after an image has been modified. Images are stored in browser cache
+     * and the path of the image don't change. So it is necessary to reload
+     * to see the new image displayed.
      */
-    updateImage(tech: Techno): void {
-        this.formData.append('file', this.fileData);
-        this.privService.updateImage(this.formData, tech.imageId).pipe(this._scavenger.collect()).subscribe(
-            () => {
-                location.reload();
-                this.sucessMessage = 'La photo de profil a été modifiée avec succès.';
-                setInterval(() => {
-                    this.sucessMessage = undefined;
-                }, 7000);
-            },
-            () => {
-                this.errorMessage = 'Une erreur est survenue durant la modification du logo.';
-                setInterval(() => {
-                    this.errorMessage = undefined;
-                }, 7000);
-            }
-        );
-
+    updateImage(message: string): void {
+        location.reload();
+        this.sucessMessage = message;
+        setInterval(() => {
+            this.sucessMessage = undefined;
+        }, 7000);
     }
 
     /**
@@ -200,7 +93,6 @@ export class TechnosComponent extends EditMode implements OnInit, OnDestroy {
         this.getTechnos();
     }
 
-    ngOnDestroy(): void {
-    }
+    ngOnDestroy(): void {}
 
 }

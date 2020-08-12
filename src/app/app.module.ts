@@ -30,6 +30,14 @@ import { FormationComponent } from './formations/formation/formation.component';
 import { AddFormationComponent } from './formations/add-formation/add-formation.component';
 import { UpdateFormationComponent } from './formations/update-formation/update-formation.component';
 import { DeleteFormationComponent } from './formations/delete-formation/delete-formation.component';
+import { ProjectComponent } from './projects/project/project.component';
+import { AddProjectComponent } from './projects/add-project/add-project.component';
+import { UpdateProjectComponent } from './projects/update-project/update-project.component';
+import { DeleteProjectComponent } from './projects/delete-project/delete-project.component';
+import { TechnoComponent } from './technos/techno/techno.component';
+import { AddTechnoComponent } from './technos/add-techno/add-techno.component';
+import { UpdateTechnoComponent } from './technos/update-techno/update-techno.component';
+import { DeleteTechnoComponent } from './technos/delete-techno/delete-techno.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +65,15 @@ import { DeleteFormationComponent } from './formations/delete-formation/delete-f
     FormationComponent,
     AddFormationComponent,
     UpdateFormationComponent,
-    DeleteFormationComponent
+    DeleteFormationComponent,
+    ProjectComponent,
+    AddProjectComponent,
+    UpdateProjectComponent,
+    DeleteProjectComponent,
+    TechnoComponent,
+    AddTechnoComponent,
+    UpdateTechnoComponent,
+    DeleteTechnoComponent
   ],
   imports: [
     BrowserModule,
