@@ -1,0 +1,6 @@
+<div *ngIf="skillGroup">
+    <h4>{{ skillGroup.title }}</h4>
+    <ul *ngFor="let skill of skillGroup.skills">
+        <li>{{ skill.title }}</li>
+    </ul>
+</div>

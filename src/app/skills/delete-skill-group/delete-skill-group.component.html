@@ -1,0 +1,6 @@
+<div *ngIf="skillGroup" class="text-center">
+    <div class="alert alert-danger text-center" *ngIf="errorMessage">
+        <p><strong>{{ errorMessage }}</strong></p>
+    </div>
+    <button (click)="deleteGroup()" class="btn btn-primary">Supprimer le groupe de compétences</button>
+</div>

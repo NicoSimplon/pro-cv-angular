@@ -38,6 +38,17 @@ import { TechnoComponent } from './technos/techno/techno.component';
 import { AddTechnoComponent } from './technos/add-techno/add-techno.component';
 import { UpdateTechnoComponent } from './technos/update-techno/update-techno.component';
 import { DeleteTechnoComponent } from './technos/delete-techno/delete-techno.component';
+import { SkillGroupDisplayComponent } from './skills/skill-group-display/skill-group-display.component';
+import { UpdateSkillGroupComponent } from './skills/update-skill-group/update-skill-group.component';
+import { DeleteSkillGroupComponent } from './skills/delete-skill-group/delete-skill-group.component';
+import { AddSkillGroupComponent } from './skills/add-skill-group/add-skill-group.component';
+import { DisplayAdressComponent } from './identification/display-adress/display-adress.component';
+import { UpdateAdressComponent } from './identification/update-adress/update-adress.component';
+import { DisplayPhotoComponent } from './identification/display-photo/display-photo.component';
+import { UpdatePhotoComponent } from './identification/update-photo/update-photo.component';
+import { DisplayPhoneComponent } from './identification/display-phone/display-phone.component';
+import { UpdatePhoneComponent } from './identification/update-phone/update-phone.component';
+import { DisplayEmailComponent } from './identification/display-email/display-email.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +84,18 @@ import { DeleteTechnoComponent } from './technos/delete-techno/delete-techno.com
     TechnoComponent,
     AddTechnoComponent,
     UpdateTechnoComponent,
-    DeleteTechnoComponent
+    DeleteTechnoComponent,
+    SkillGroupDisplayComponent,
+    UpdateSkillGroupComponent,
+    DeleteSkillGroupComponent,
+    AddSkillGroupComponent,
+    DisplayAdressComponent,
+    UpdateAdressComponent,
+    DisplayPhotoComponent,
+    UpdatePhotoComponent,
+    DisplayPhoneComponent,
+    UpdatePhoneComponent,
+    DisplayEmailComponent
   ],
   imports: [
     BrowserModule,

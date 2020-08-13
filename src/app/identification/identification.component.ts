@@ -33,132 +33,40 @@ export class IdentificationComponent extends EditMode implements OnInit, OnDestr
     phoneNumber: Phone;
     photoPath: Photo;
     completeUrl: string;
-    fileData: File = null;
-    previewUrl: any = null;
-    formData = new FormData();
 
-    constructor(
-        private service: PublicServicesService,
-        private privService: PrivateServicesService
-    ) {
+    constructor(private service: PublicServicesService) {
         super();
     }
 
     /**
-     * Update the photo
+     * Update the photo path.
      */
-    updatePhoto(): void {
-        this.privService.updatePhotoUrl(this.photoPath).pipe(this._scavenger.collect()).subscribe(
-            (photo) => {
-                this.basicDatas.photoPath = photo.photoPath;
-                this.photoPath.photoPath = photo.photoPath;
-                this.sucessMessage =
-                    'Le chemin de la photo a été mis à jour avec succès.';
-                setInterval(() => {
-                    this.sucessMessage = undefined;
-                }, 7000);
-            },
-            () => {
-                this.errorMessage =
-                    'Une erreur est survenue durant la mise à jour du chemin de la photo de profil.';
-                setInterval(() => {
-                    this.errorMessage = undefined;
-                }, 7000);
-            }
-        );
+    updatePhoto(photo: Photo): void {
+        this.basicDatas.photoPath = photo.photoPath;
+        this.photoPath = photo;
+        this.completeUrl = `${environment.backendUrl}${photo.photoPath}`;
     }
 
     /**
-     * Send a new image to change the one stored in database as the profile  photo.
+     * Refresh the page to donwload the new photo.
      */
-    updatePhotoImage(): void {
-        this.formData.append('file', this.fileData);
-        this.privService.updateImage(this.formData, this.photoPath.imageId).pipe(this._scavenger.collect()).subscribe(
-            () => {
-                location.reload(); // to reload the image stored in the browser cache
-                this.sucessMessage = 'La photo de profil a été modifiée avec succès.';
-                setInterval(() => {
-                    this.sucessMessage = undefined;
-                }, 7000);
-            },
-            () => {
-                this.errorMessage = 'Une erreur est survenu durant le téléchargement, réessayez plus tard.';
-                setInterval(() => {
-                    this.errorMessage = undefined;
-                }, 7000);
-            }
-        );
-    }
-
-    /**
-     * Display upload progress
-     *
-     */
-    fileProgress(fileInput: any) {
-        this.fileData = fileInput.target.files[0] as File;
-        this.preview();
-    }
-
-    /**
-     * Display the new image preview
-     */
-    preview() {
-        const mimeType = this.fileData.type;
-        if (mimeType.match(/image\/*/) == null) {
-            return;
-        }
-        const reader = new FileReader();
-        reader.readAsDataURL(this.fileData);
-        reader.onload = (_event) => {
-            this.previewUrl = reader.result;
-        };
+    updatePhotoImage(event: string): void {
+        location.reload();
     }
 
     /**
      * Update the phone number
      */
-    updatePhoneNumber(): void {
-        this.privService.updatePhoneNumber(this.phoneNumber).pipe(this._scavenger.collect()).subscribe(
-            (updatedPhone) => {
-                this.phoneNumber = updatedPhone;
-                this.basicDatas.phoneNumber = updatedPhone.phoneNumber;
-                this.sucessMessage =
-                    'Le numéro de téléphone a été mis à jour avec succès.';
-                setInterval(() => {
-                   this.sucessMessage = undefined;
-                }, 7000);
-            },
-            () => {
-                this.errorMessage =
-                    'Une erreur est survenue durant la mise à jour du numéro de téléphone.';
-                setInterval(() => {
-                    this.errorMessage = undefined;
-                }, 7000);
-            }
-        );
+    updatePhoneNumber(phone: Phone): void {
+        this.phoneNumber = phone;
+        this.basicDatas.phoneNumber = phone.phoneNumber;
     }
 
     /**
      * Update the postal address
      */
-    updateAdress(): void {
-        this.privService.updateAdress(this.adress).pipe(this._scavenger.collect()).subscribe(
-            (updatedAdress) => {
-                this.adress = updatedAdress;
-                this.sucessMessage =
-                    'L\'adresse postale a bien été mise à jour.';
-                setInterval(() => {
-                    this.sucessMessage = undefined;
-                }, 7000);
-            },
-            () => {
-                this.errorMessage =
-                    'Une erreur est survenue durant la mise à jour de l\'adress postale.';
-                setInterval(() => {
-                    this.errorMessage = undefined;
-                }, 7000);
-            }
-        );
+    updateAdress(adress: Adress): void {
+        this.adress = adress;
     }
 
     /**
@@ -214,6 +122,5 @@ export class IdentificationComponent extends EditMode implements OnInit, OnDestr
         this.getAdress();
     }
 
-    ngOnDestroy(): void {
-    }
+    ngOnDestroy(): void {}
 }

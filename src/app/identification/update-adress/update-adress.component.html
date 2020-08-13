@@ -1,0 +1,52 @@
+<div *ngIf="adress">
+    <div class="alert alert-danger text-center" *ngIf="errorMessage">
+        <p><strong>{{ errorMessage }}</strong></p>
+    </div>
+    <div class="alert alert-succes text-center" *ngIf="sucessMessage">
+        <p><strong>{{ sucessMessage }}</strong></p>
+    </div>
+    <form #form3="ngForm" (ngSubmit)="updateAdress()">
+        <h4>Modifier l'adresse postale :</h4>
+        <br>
+        <div class="form-group">
+            <label for="streetNumber">Nouveau numéro de rue : </label>
+            <input type="number" [(ngModel)]="adress.streetNumber" #streetNumber="ngModel" class="form-control" id="streetNumber" name="streetNumber" required >
+            <div class="alert alert-danger" *ngIf="(streetNumber.dirty || streetNumber.touched) && streetNumber.errors">
+                Une adresse a obligatoirement un numéro de rue
+            </div>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="streetName">Nouveau nom de rue : </label>
+            <input type="text" [(ngModel)]="adress.street" #streetName="ngModel" class="form-control" id="streetName" name="streetName" required >
+            <div class="alert alert-danger" *ngIf="(streetName.dirty || streetName.touched) && streetName.errors">
+                Une adresse a obligatoirement un nom de rue
+            </div>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="appt">Nouvel appartement (optionnel) : </label>
+            <input type="text" [(ngModel)]="adress.appartment" #appt="ngModel" class="form-control" id="appt" name="appt" >
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="postalCode">Nouveau code postal : </label>
+            <input type="number" [(ngModel)]="adress.postalCode" #postalCode="ngModel" class="form-control" id="postalCode" name="postalCode" required pattern="^[0-9]{5}$" >
+            <div class="alert alert-danger" *ngIf="(postalCode.dirty || postalCode.touched) && postalCode.errors">
+                Une adresse a obligatoirement un code postal composé de 5 chiffres
+            </div>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="city">Nouveau nom de ville : </label>
+            <input type="text" [(ngModel)]="adress.town" #city="ngModel" class="form-control" id="city" name="city" required >
+            <div class="alert alert-danger" *ngIf="(city.dirty || city.touched) && city.errors">
+                Une adresse a obligatoirement un nom de ville
+            </div>
+        </div>
+        <hr>
+        <div class="text-center">
+            <button [disabled]="form3.invalid" type="submit" class="btn btn-primary">Modifier</button>
+        </div>
+    </form>
+</div>
