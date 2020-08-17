@@ -6,12 +6,15 @@
     <br>
     <app-display-photo [photoUrl]='completeUrl'></app-display-photo>
     <hr>
-    <app-display-email [email]="basicDatas.email"></app-display-email>
     <p>{{ age }} ans</p>
     <p>{{ basicDatas.firstName }} {{ basicDatas.lastName | uppercase }}</p>
     <app-display-phone [phone]="phoneNumber"></app-display-phone>
     <app-display-adress [adress]="adress"></app-display-adress>
     <hr>
+    <button type="button" (click)="setVisibleForm()">Me Contacter</button>
+    <div *ngIf="emailForm">
+        <app-display-email [email]="basicDatas.email"></app-display-email>
+    </div>
 </div>
 
 

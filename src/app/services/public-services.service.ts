@@ -10,6 +10,7 @@ import { XpPro } from '../models/XpPro';
 import { Project } from '../models/Project';
 import { SkillGroup } from '../models/SkillGroup';
 import { Techno } from '../models/Techno';
+import { EmailMessage } from '../models/EmailMessage';
 
 /**
  * Public services for getting CV datas to display for the visitor.
@@ -77,6 +78,16 @@ export class PublicServicesService {
      */
     getTechnos(): Observable<Techno[]> {
         return this._http.get<Techno[]>(`${this.URL_BACKEND}/technos/cv/1`, { withCredentials: true });
+    }
+
+    /**
+     * Post to the back part of the application the mail from the visitor.
+     * The mail will be sent by the back part of the application to my personal email box.
+     *
+     * @param mail Object that contains the message from the visitor and his email address.
+     */
+    sendEmail(mail: EmailMessage): Observable<EmailMessage> {
+        return this._http.post<EmailMessage>(`${this.URL_BACKEND}/mail`, mail, { withCredentials: true });
     }
 
 }

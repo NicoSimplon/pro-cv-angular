@@ -33,6 +33,7 @@ export class IdentificationComponent extends EditMode implements OnInit, OnDestr
     phoneNumber: Phone;
     photoPath: Photo;
     completeUrl: string;
+    emailForm: boolean;
 
     constructor(private service: PublicServicesService) {
         super();
@@ -116,10 +117,18 @@ export class IdentificationComponent extends EditMode implements OnInit, OnDestr
         );
     }
 
+    /**
+     * Display or not the contact form.
+     */
+    setVisibleForm(): void {
+        this.emailForm = !this.emailForm;
+    }
+
     ngOnInit(): void {
         // Datas initialisation
         this.getDatas();
         this.getAdress();
+        this.emailForm = false;
     }
 
     ngOnDestroy(): void {}
