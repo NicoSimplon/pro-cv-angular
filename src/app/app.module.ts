@@ -49,6 +49,8 @@ import { UpdatePhotoComponent } from './identification/update-photo/update-photo
 import { DisplayPhoneComponent } from './identification/display-phone/display-phone.component';
 import { UpdatePhoneComponent } from './identification/update-phone/update-phone.component';
 import { DisplayEmailComponent } from './identification/display-email/display-email.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -101,7 +103,9 @@ import { DisplayEmailComponent } from './identification/display-email/display-em
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(ROUTES),
-    FormsModule
+    FormsModule,
+    NgbModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

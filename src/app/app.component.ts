@@ -15,12 +15,15 @@ export class AppComponent implements OnInit, OnDestroy {
 
     private _scavenger = new Scavenger(this);
 
-    title = 'Ingénieur d\'étude et développement';
+    title = 'Ingénieur d\'étude et développement Java';
 
     user: LoggedUser;
 
     constructor(private service: AuthService) {}
 
+    /**
+     * Clean the user when logout of the application.
+     */
     disconnect(event: boolean): void {
         this.user = null;
     }
@@ -32,6 +35,5 @@ export class AppComponent implements OnInit, OnDestroy {
         );
     }
 
-    ngOnDestroy(): void {
-    }
+    ngOnDestroy(): void {}
 }

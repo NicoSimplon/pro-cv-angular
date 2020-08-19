@@ -19,10 +19,7 @@ export class DisplayEmailComponent implements OnInit, OnDestroy {
     sucessMessage: string;
     errorMessage: string;
 
-    @Input()
-    email: string;
-
-    message = new EmailMessage('', this.email, '', '');
+    message = new EmailMessage('', '', '');
 
     constructor(private service: PublicServicesService) {}
 
@@ -36,7 +33,7 @@ export class DisplayEmailComponent implements OnInit, OnDestroy {
             .subscribe(
                 () => {
                     this.sucessMessage = 'Merci pour votre message. J\'y répondrai dès que possible.';
-                    this.message = new EmailMessage('', this.email, '', '');
+                    this.message = new EmailMessage('', '', '');
                 },
                 () => {
                     this.errorMessage = 'Une erreur est survenue lors de l\'envoie de votre message.\n'

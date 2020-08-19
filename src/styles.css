@@ -1,1 +1,72 @@
-/* You can add global styles to this file, and also import other style files */
+/* Here are the global settings */
+body,
+html {
+    height: 100%;
+    /* Font */
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: 400;
+    color: #939ca3;
+}
+
+.sectionTitle {
+    font-weight: 700;
+    margin: 1.5rem;
+}
+
+.pageTitle {
+    font-weight: 900;
+}
+
+#wallpaper {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.blockColor {
+    background-color: #1f282f;
+    padding: 10px;
+}
+
+/* Overriding bootstrap button colors */
+.btn-primary, .btn-primary.disabled, .btn-primary:disabled {
+    color: white !important;
+    background-color: grey !important;
+    border-color: grey !important;
+}
+
+.btn-primary.hover, .btn-primary:hover {
+    color: white !important;
+    background-color: #939ca3 !important;
+    border-color: #939ca3 !important;
+}
+
+.btn-primary.active, .btn-primary:active {
+    color: #939ca3 !important;
+    background-color: white !important;
+    border-color: #939ca3 !important;
+}
+
+.btn-primary.focus, .btn-primary:focus {
+    color: white !important;
+    background-color: grey !important;
+    border-color: grey !important;
+    box-shadow: 0 0 0 .2rem rgba(0, 0, 0, .5) !important;
+}
+
+.btn-primary.visited, .btn-primary:visited {
+    color: white !important;
+    background-color: #939ca3 !important;
+    border-color: #939ca3 !important;
+    box-shadow: 0 0 0 .1rem rgba(0, 0, 0, .5) !important;
+}
+
+/* Overriding background color for cards */
+.bg-dark {
+    background-color: #1f282f !important;
+}

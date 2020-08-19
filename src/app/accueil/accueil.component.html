@@ -1,13 +1,28 @@
-<app-identification [editMode]=false></app-identification>
-<br>
-<app-formations [editMode]=false></app-formations>
-<br>
-<app-hobbies [editMode]=false></app-hobbies>
-<br>
-<app-experiences [editMode]=false></app-experiences>
-<br>
-<app-projects [editMode]=false></app-projects>
-<br>
-<app-technos [editMode]=false></app-technos>
-<br>
-<app-skills [editMode]=false></app-skills>
+
+<section class="container-fluid">
+    <div class="row mr-3 ml-3">
+        <div class="col-2">
+            <app-identification [editMode]=false></app-identification>
+            <app-hobbies [editMode]=false></app-hobbies>
+        </div>
+        <div class="col-2">
+            <app-technos [editMode]=false></app-technos>
+        </div>
+        <div class="col-8">
+            <div class="row">
+                <div class="col-6">
+                    <app-experiences [editMode]=false></app-experiences>
+                </div>
+                <div class="col-6">
+                    <app-formations [editMode]=false></app-formations>
+                </div>
+                <div class="col-12">
+                    <app-projects [editMode]=false></app-projects>
+                </div>
+                <div class="col-12">
+                    <app-skills [editMode]=false></app-skills>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

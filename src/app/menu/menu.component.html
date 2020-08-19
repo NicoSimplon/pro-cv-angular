@@ -1,18 +1,30 @@
-<div *ngIf="connected">
-    <h1>Mode édition du CV</h1>
-    <br>
-    <p>Bienvenue {{ user.firstName }} {{ user.lastName | uppercase }}, <a href="#" (click)="disconnect()">Se déconnecter</a> ?</p>
+<section *ngIf="connected">
+    <h2 class="sectionTitle">Mode édition du CV</h2>
+    <ng-template #tipContent>Se déconnecter ?</ng-template>
+    <p>Bienvenue <b>{{ user.firstName }} {{ user.lastName | uppercase }}</b>, <span class="pr-3 pl-3"><a href="#" [ngbTooltip]="tipContent" (click)="disconnect()"><fa-icon [icon]="logout" class="logoutIconColor"></fa-icon></a></span></p>
     <div class="alert alert-danger text-center" *ngIf="errorMessage">
         <p><b>{{ errorMessage }}</b></p>
     </div>
     <br>
-    <p><a href="#" routerLink="/accueil">Retourner à l'accueil</a> / <a href="#" routerLink="/edit">Retourner au mode édition</a> / <button type="button" (click)="editUser()">Profil</button></p>
-</div>
+    <div class="d-flex justify-content-center">
+        <nav class="btn-group btn-group-toggle">
+            <button class="btn btn-secondary" routerLink="/accueil"><fa-icon [icon]="home" class="menuButtonSize"></fa-icon> Retourner à l'accueil</button>
+            <button class="btn btn-secondary" routerLink="/edit"><fa-icon [icon]="edit" class="menuButtonSize"></fa-icon> Retourner au mode édition</button>
+            <ng-template #tipContent2>Cliquez pour faire apparaitre ou disparaitre le formulaire d'édition du profil</ng-template>
+            <button class="btn btn-secondary" type="button" (click)="editUser()" [ngbTooltip]="tipContent2"><fa-icon [icon]="profil" class="menuButtonSize"></fa-icon> Editer le profil</button>
+        </nav>
+    </div>
+</section>
 
-<div *ngIf="!connected">
-    <a href="#" routerLink="/edit">Editer</a>
-</div>
+<footer *ngIf="!connected" class="p-3">
+    <div class="float-right">
+        <ng-template #tipContent>Passer en mode édition ?</ng-template>
+        <ng-template #tipContent2>Retourner à la page d'accueil</ng-template>
+        <p *ngIf="!loginPage"><a href="#" routerLink="/edit" (click)="setVisibility()"><fa-icon [icon]="edit" [ngbTooltip]="tipContent" class="editIconColor"></fa-icon></a></p>
+        <p *ngIf="loginPage"><a href="#" routerLink="/accueil" (click)="setVisibility()"><fa-icon [icon]="home" [ngbTooltip]="tipContent2" class="editIconColor"></fa-icon></a></p>
+    </div>
+</footer>
 
-<div *ngIf="profileVisible && user != undefined">
+<section *ngIf="profileVisible && user != undefined" class="container">
     <app-account [user]="user"></app-account>
-</div>
+</section>

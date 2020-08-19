@@ -1,22 +1,24 @@
 <div *ngIf="!editMode && basicDatas">
-    <h3>Identification</h3>
     <div class="alert alert-danger text-center" *ngIf="errorMessage">
         <p><strong>{{ errorMessage }}</strong></p>
     </div>
-    <br>
-    <app-display-photo [photoUrl]='completeUrl'></app-display-photo>
-    <hr>
-    <p>{{ age }} ans</p>
-    <p>{{ basicDatas.firstName }} {{ basicDatas.lastName | uppercase }}</p>
-    <app-display-phone [phone]="phoneNumber"></app-display-phone>
-    <app-display-adress [adress]="adress"></app-display-adress>
-    <hr>
-    <button type="button" (click)="setVisibleForm()">Me Contacter</button>
-    <div *ngIf="emailForm">
-        <app-display-email [email]="basicDatas.email"></app-display-email>
+    <div class="card bg-dark mb-3">
+        <app-display-photo [photoUrl]='completeUrl'></app-display-photo>
+        <div class="card-body">
+            <p>{{ basicDatas.firstName }} {{ basicDatas.lastName | uppercase }}</p>
+            <p>{{ age }} ans</p>
+            <app-display-adress [adress]="adress"></app-display-adress>
+            <app-display-phone [phone]="phoneNumber"></app-display-phone>
+            <br>
+            <div class="text-center">
+                <button class="btn btn-secondary btn-lg" type="button" (click)="setVisibleForm()">Me Contacter</button>
+            </div>
+            <div *ngIf="emailForm">
+                <app-display-email></app-display-email>
+            </div>
+        </div>
     </div>
 </div>
-
 
 <div *ngIf="editMode">
     <div *ngIf="basicDatas" id="display">

@@ -3,6 +3,7 @@ import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { Authentification } from '../models/Authentification';
 import { Scavenger } from '@wishtack/rx-scavenger';
+import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 
 /**
  * Login component. Authentication is required in order to use private services.
@@ -20,6 +21,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     errorMessage: string;
     successMessage: string;
+
+    login = faSignInAlt;
 
     constructor(private service: AuthService, private router: Router) {}
 

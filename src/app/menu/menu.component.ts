@@ -3,6 +3,7 @@ import { LoggedUser } from '../models/LoggedUser';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { Scavenger } from '@wishtack/rx-scavenger';
+import { faEdit, faSignOutAlt, faHome, faUsers } from '@fortawesome/free-solid-svg-icons';
 
 /**
  * This menu component is used for login/logout purpose.
@@ -29,7 +30,22 @@ export class MenuComponent implements OnInit, OnDestroy {
 
     profileVisible = false;
 
+    // FontAwesome icons
+    edit = faEdit;
+    logout = faSignOutAlt;
+    home = faHome;
+    profil = faUsers;
+
+    loginPage = false;
+
     constructor(private service: AuthService, private router: Router) {}
+
+    /**
+     * Hide or show the link to go in edit mode.
+     */
+    setVisibility(): void {
+        this.loginPage = !this.loginPage;
+    }
 
     /**
      * Display the profile part

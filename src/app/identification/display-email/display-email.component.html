@@ -1,5 +1,5 @@
-<div *ngIf="email">
-    <h4>Votre message :</h4>
+<div *ngIf="message" class="mt-4">
+    <h4 class="pb-3">Votre message :</h4>
     <div class="alert alert-danger text-center" *ngIf="errorMessage">
         <p><strong>{{ errorMessage }}</strong></p>
     </div>
@@ -15,7 +15,6 @@
                 Merci d'indiquer une adresse mail valide afin que je puisse vous répondre.
             </div>
         </div>
-        <br>
         <div class="form-group">
             <label for="subject">Objet : </label>
             <input type="text" [(ngModel)]="message.subject" #subject="ngModel" class="form-control" id="subject" name="subject" required >
@@ -23,7 +22,6 @@
                 Merci d'indiquer le sujet de votre message afin que je puisse vous répondre de manière plus efficace.
             </div>
         </div>
-        <br>
         <div class="form-group">
             <label for="messageText">Message : </label>
             <textarea type="text" [(ngModel)]="message.message" #messageText="ngModel" class="form-control" id="messageText" name="messageText" required ></textarea>
@@ -31,9 +29,8 @@
                 Le contenu de votre message est vide.
             </div>
         </div>
-        <br>
         <div class="text-center">
-            <button [disabled]="mailForm.invalid" type="button" class="btn btn-primary" (click)="sendMail()">Envoyer</button>
+            <button [disabled]="mailForm.invalid" type="button" class="btn btn-primary btn-lg" (click)="sendMail()">Envoyer</button>
         </div>
     </form>
 </div>

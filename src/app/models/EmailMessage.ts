@@ -3,6 +3,6 @@
  */
 export class EmailMessage {
 
-    constructor(public from: string, public to: string, public subject: string, public message: string) {}
+    constructor(public from: string, public subject: string, public message: string) {}
 
 }
