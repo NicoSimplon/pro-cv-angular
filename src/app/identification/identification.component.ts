@@ -3,11 +3,11 @@ import { PublicServicesService } from '../services/public-services.service';
 import { IdentificationDatas } from '../models/IdenthificationDatas';
 import { Adress } from '../models/Adress';
 import { EditMode } from '../models/EditMode';
-import { PrivateServicesService } from '../services/private-services.service';
 import { Photo } from '../models/Photo';
 import { Phone } from '../models/Phone';
 import { environment } from 'src/environments/environment';
 import { Scavenger } from '@wishtack/rx-scavenger';
+import { faBirthdayCake, faAddressCard, faPhoneAlt, faAt } from '@fortawesome/free-solid-svg-icons';
 
 /**
  * This component gather together the basic information about the CV (ID, adress, ...)
@@ -34,6 +34,12 @@ export class IdentificationComponent extends EditMode implements OnInit, OnDestr
     photoPath: Photo;
     completeUrl: string;
     emailForm: boolean;
+
+    // FontAwesome icons
+    birthday = faBirthdayCake;
+    postalAdress = faAddressCard;
+    phone = faPhoneAlt;
+    mail = faAt;
 
     constructor(private service: PublicServicesService) {
         super();

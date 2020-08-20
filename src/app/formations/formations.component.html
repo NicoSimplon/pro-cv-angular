@@ -1,14 +1,17 @@
-<div *ngIf="!editMode">
-    <h3>Formations / Diplômes :</h3>
-    <hr>
-    <div class="alert alert-danger text-center" *ngIf="errorMessage">
-        <p><strong>{{ errorMessage }}</strong></p>
+<section *ngIf="!editMode" class="card bg-dark mb-3">
+    <div class="card-header">
+        <h4 class="sectionTitle colorTitle">Formations / Diplômes :</h4>
     </div>
-    <div *ngFor="let formation of formations;">
-        <app-formation [formation]="formation"></app-formation>
+    <div class="card-body">
+        <div class="alert alert-danger text-center" *ngIf="errorMessage">
+            <p><strong>{{ errorMessage }}</strong></p>
+        </div>
+        <ul *ngFor="let formation of formations; last as isLast">
+            <p><fa-icon [icon]="circle" class="colorSectionIcon mr-3"></fa-icon><app-formation [formation]="formation"></app-formation></p>
+            <hr *ngIf="!isLast">
+        </ul>
     </div>
-    <hr>
-</div>
+</section>
 
 <div *ngIf="editMode">
     <h3>Formations / Diplômes :</h3>

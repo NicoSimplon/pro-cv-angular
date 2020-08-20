@@ -9,7 +9,7 @@
     <form #mailForm="ngForm">
         <div class="form-group">
             <label for="from">Votre adresse mail : </label>
-            <input type="text" [(ngModel)]="message.from" #from="ngModel" class="form-control" id="from" name="from" aria-describedby="emailHelp" required pattern="[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+.[a-zA-Z.]{2,15}" >
+            <input type="text" [(ngModel)]="message.from" #from="ngModel" class="form-control" id="from" name="from" aria-describedby="emailHelp" required pattern="[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+.[a-zA-Z.]{2,15}" placeholder="exemple : xxx@xxx.fr" >
             <small id="emailHelp" class="form-text text-muted"> Vottre adresse mail me sert uniquement à vous répondre, elle n'est ni stockée, ni communiquée.</small>
             <div class="alert alert-danger" *ngIf="(from.dirty || from.touched) && from.errors">
                 Merci d'indiquer une adresse mail valide afin que je puisse vous répondre.
@@ -17,14 +17,14 @@
         </div>
         <div class="form-group">
             <label for="subject">Objet : </label>
-            <input type="text" [(ngModel)]="message.subject" #subject="ngModel" class="form-control" id="subject" name="subject" required >
+            <input type="text" [(ngModel)]="message.subject" #subject="ngModel" class="form-control" id="subject" name="subject" required placeholder="Le sujet de votre mail" >
             <div class="alert alert-danger" *ngIf="(subject.dirty || subject.touched) && subject.errors">
                 Merci d'indiquer le sujet de votre message afin que je puisse vous répondre de manière plus efficace.
             </div>
         </div>
         <div class="form-group">
             <label for="messageText">Message : </label>
-            <textarea type="text" [(ngModel)]="message.message" #messageText="ngModel" class="form-control" id="messageText" name="messageText" required ></textarea>
+            <textarea type="text" [(ngModel)]="message.message" #messageText="ngModel" class="form-control" id="messageText" name="messageText" required placeholder="Le contenu de votre mail" ></textarea>
             <div class="alert alert-danger" *ngIf="(messageText.dirty || messageText.touched) && messageText.errors">
                 Le contenu de votre message est vide.
             </div>

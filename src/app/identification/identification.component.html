@@ -5,13 +5,14 @@
     <div class="card bg-dark mb-3">
         <app-display-photo [photoUrl]='completeUrl'></app-display-photo>
         <div class="card-body">
-            <p>{{ basicDatas.firstName }} {{ basicDatas.lastName | uppercase }}</p>
-            <p>{{ age }} ans</p>
-            <app-display-adress [adress]="adress"></app-display-adress>
-            <app-display-phone [phone]="phoneNumber"></app-display-phone>
+            <p class="nameFontSize text-center"><b>{{ basicDatas.firstName }} {{ basicDatas.lastName | uppercase }}</b></p>
+            <p><fa-icon [icon]="birthday" class="profilIcons"></fa-icon> {{ age }} ans</p>
+            <app-display-adress [adress]="adress" [postalAdress]="postalAdress"></app-display-adress>
+            <app-display-phone [phone]="phoneNumber" [phoneIcon]="phone"></app-display-phone>
             <br>
             <div class="text-center">
-                <button class="btn btn-secondary btn-lg" type="button" (click)="setVisibleForm()">Me Contacter</button>
+                <ng-template #tipContent>Cliquez pour faire apparaître ou disparaître le formulaire de contact.</ng-template>
+                <button class="btn btn-secondary btn-lg" type="button" (click)="setVisibleForm()" [ngbTooltip]="tipContent"><fa-icon [icon]="mail" class="buttonIcons"></fa-icon> Me Contacter</button>
             </div>
             <div *ngIf="emailForm">
                 <app-display-email></app-display-email>
@@ -24,7 +25,7 @@
     <div *ngIf="basicDatas" id="display">
         <h3>Identification</h3>
         <hr>
-        <app-display-photo [photoUrl]='completeUrl'></app-display-photo>
+        <img height="200px" *ngIf="completeUrl" src="{{ completeUrl }}" alt="Photo de profil" />
         <hr>
         <app-display-phone [phone]="phoneNumber"></app-display-phone>
         <app-display-adress [adress]="adress"></app-display-adress>

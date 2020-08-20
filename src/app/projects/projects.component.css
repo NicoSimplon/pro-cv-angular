@@ -1,0 +1,13 @@
+.colorTitle {
+    color: #be251d;
+}
+
+.colorSectionIcon {
+    color: #be251d;
+    font-size: 1.0rem;
+}
+
+ul {
+    list-style: inside;
+    margin-left: -2.3rem;
+}

@@ -1,3 +1,4 @@
+import { faCircle } from '@fortawesome/free-solid-svg-icons';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PublicServicesService } from '../services/public-services.service';
 import { Formation } from '../models/Formation';
@@ -22,6 +23,8 @@ export class FormationsComponent extends EditMode implements OnInit, OnDestroy {
     sucessMessage: string;
 
     formations: Formation[];
+
+    circle = faCircle;
 
     constructor(private service: PublicServicesService) {
         super();

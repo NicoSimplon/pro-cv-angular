@@ -1,14 +1,16 @@
-<div *ngIf="!editMode">
-    <h3>Technos</h3>
-    <hr>
-    <div class="alert alert-danger text-center" *ngIf="errorMessage">
-        <p><strong>{{ errorMessage }}</strong></p>
+<section *ngIf="!editMode" class="card bg-dark">
+    <div class="card-header">
+        <h4 class="sectionTitle">Langages et outils</h4>
     </div>
-    <ul *ngFor="let tech of technos;">
-        <app-techno [techno]="tech"></app-techno>
-    </ul>
-    <hr>
-</div>
+    <div class="card-body">
+        <div class="alert alert-danger text-center" *ngIf="errorMessage">
+            <p><strong>{{ errorMessage }}</strong></p>
+        </div>
+        <div *ngFor="let tech of technos;" class="inlineLogos p-2">
+            <app-techno [techno]="tech"></app-techno>
+        </div>
+    </div>
+</section>
 
 <div *ngIf="editMode">
     <h3>Editer les technos</h3>

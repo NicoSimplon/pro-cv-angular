@@ -4,6 +4,7 @@ import { Hobby } from '../models/Hobby';
 import { EditMode } from '../models/EditMode';
 import { PrivateServicesService } from '../services/private-services.service';
 import { Scavenger } from '@wishtack/rx-scavenger';
+import { faCircle } from '@fortawesome/free-solid-svg-icons';
 
 /**
  * Display the list of hobbies.
@@ -22,6 +23,8 @@ export class HobbiesComponent extends EditMode implements OnInit, OnDestroy {
     sucessMessage: string;
 
     hobbies: Hobby[];
+
+    circle = faCircle;
 
     constructor(private service: PublicServicesService) {
         super();

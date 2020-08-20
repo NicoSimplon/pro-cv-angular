@@ -1,14 +1,16 @@
-<div *ngIf="!editMode">
-    <h3>Compétences</h3>
-    <hr>
-    <div class="alert alert-danger text-center" *ngIf="errorMessage">
-        <p><strong>{{ errorMessage }}</strong></p>
+<section *ngIf="!editMode" class="card bg-dark mb-3">
+    <div class="card-header">
+        <h4 class="sectionTitle colorTitle">Compétences</h4>
     </div>
-    <div *ngFor="let group of skills;">
-        <app-skill-group-display [skillGroup]="group"></app-skill-group-display>
+    <div class="card-body">
+        <div class="alert alert-danger text-center" *ngIf="errorMessage">
+            <p><strong>{{ errorMessage }}</strong></p>
+        </div>
+        <div *ngFor="let group of skills;">
+            <app-skill-group-display [skillGroup]="group"></app-skill-group-display>
+        </div>
     </div>
-    <hr>
-</div>
+</section>
 
 <div *ngIf="editMode">
     <h3>Compétences :</h3>

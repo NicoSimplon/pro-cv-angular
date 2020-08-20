@@ -1,3 +1,1 @@
-<li *ngIf="experience">
-    <p><b>{{ experience.period }}</b> : <i>{{ experience.title }}</i> => {{ experience.description }}</p>
-</li>
+<span *ngIf="experience"><i>{{ experience.period }}</i> : <b>{{ experience.title }}</b> : {{ experience.description }}</span>

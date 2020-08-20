@@ -1,14 +1,17 @@
-<div *ngIf="!editMode">
-    <h3>Expériences Professionnelles</h3>
-    <hr>
-    <div class="alert alert-danger text-center" *ngIf="errorMessage">
-        <p><strong>{{ errorMessage }}</strong></p>
+<section *ngIf="!editMode" class="card bg-dark mb-3">
+    <div class="card-header">
+        <h4 class="sectionTitle colorTitle">Expériences Professionnelles</h4>
     </div>
-    <div *ngFor="let xp of experiences;">
-        <app-xp [experience]="xp"></app-xp>
+    <div class="card-body">
+        <div class="alert alert-danger text-center" *ngIf="errorMessage">
+            <p><strong>{{ errorMessage }}</strong></p>
+        </div>
+        <ul *ngFor="let xp of experiences; last as isLast">
+            <p><fa-icon [icon]="circle" class="colorSectionIcon mr-3"></fa-icon><app-xp [experience]="xp"></app-xp></p>
+            <hr *ngIf="!isLast">
+        </ul>
     </div>
-    <hr>
-</div>
+</section>
 
 <div *ngIf="editMode">
     <h3>Expériences Professionnelles</h3>

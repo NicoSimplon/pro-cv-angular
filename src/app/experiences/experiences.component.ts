@@ -1,3 +1,4 @@
+import { faCircle } from '@fortawesome/free-solid-svg-icons';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PublicServicesService } from '../services/public-services.service';
 import { XpPro } from '../models/XpPro';
@@ -21,6 +22,8 @@ export class ExperiencesComponent extends EditMode implements OnInit, OnDestroy 
     sucessMessage: string;
 
     experiences: XpPro[];
+
+    circle = faCircle;
 
     constructor(private service: PublicServicesService) {
         super();

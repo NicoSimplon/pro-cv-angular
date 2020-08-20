@@ -14,6 +14,9 @@ export class DisplayPhoneComponent implements OnInit {
     @Input()
     phone: Phone;
 
+    @Input()
+    phoneIcon: any;
+
     constructor() {}
 
     ngOnInit(): void {}

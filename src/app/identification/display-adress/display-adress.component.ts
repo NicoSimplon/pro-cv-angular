@@ -14,6 +14,9 @@ export class DisplayAdressComponent implements OnInit {
     @Input()
     adress: Adress;
 
+    @Input()
+    postalAdress: any;
+
     constructor() {}
 
     ngOnInit(): void {}

@@ -1,17 +1,19 @@
-<div *ngIf="!editMode">
-    <h3>Hobbies</h3>
-    <hr>
-    <div class="alert alert-danger text-center" *ngIf="errorMessage">
-        <p><strong>{{ errorMessage }}</strong></p>
+<section *ngIf="!editMode" class="card bg-dark">
+    <div class="card-header">
+        <h4 class="sectionTitle colorTitle">Mes centres d'intérêt</h4>
     </div>
-    <div *ngFor="let hobby of hobbies;">
-        <app-hobby [hobby]="hobby"></app-hobby>
+    <div class="card-body">
+        <div class="alert alert-danger text-center" *ngIf="errorMessage">
+            <p><strong>{{ errorMessage }}</strong></p>
+        </div>
+        <ul *ngFor="let hobby of hobbies;">
+            <p><fa-icon [icon]="circle" class="colorSectionIcon mr-3"></fa-icon><app-hobby [hobby]="hobby"></app-hobby></p>
+        </ul>
     </div>
-    <hr>
-</div>
+</section>
 
 <div *ngIf="editMode">
-    <h3>Hobbies :</h3>
+    <h3>Mes centres d'intérêt :</h3>
     <hr>
     <div class="alert alert-danger text-center" *ngIf="errorMessage">
         <p><strong>{{ errorMessage }}</strong></p>
@@ -23,7 +25,7 @@
     <app-add-hobby (create)="createHobby($event)"></app-add-hobby>
     <br>
     <div *ngIf="hobbies">
-        <ul *ngFor="let hobby of hobbies;">
+        <ul *ngFor="let hobby of hobbies">
             <app-update-hobby [hobby]="hobby" (update)="updateHobby($event)"></app-update-hobby>
             <app-delete-hobby [hobby]="hobby" (delete)="deleteHobby($event)"></app-delete-hobby>
             <hr>
