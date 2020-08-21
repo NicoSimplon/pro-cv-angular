@@ -3,19 +3,24 @@
         <p><strong>{{ errorMessage }}</strong></p>
     </div>
     <div class="card bg-dark mb-3">
-        <app-display-photo [photoUrl]='completeUrl'></app-display-photo>
-        <div class="card-body">
-            <p class="nameFontSize text-center"><b>{{ basicDatas.firstName }} {{ basicDatas.lastName | uppercase }}</b></p>
-            <p><fa-icon [icon]="birthday" class="profilIcons"></fa-icon> {{ age }} ans</p>
-            <app-display-adress [adress]="adress" [postalAdress]="postalAdress"></app-display-adress>
-            <app-display-phone [phone]="phoneNumber" [phoneIcon]="phone"></app-display-phone>
-            <br>
-            <div class="text-center">
-                <ng-template #tipContent>Cliquez pour faire apparaître ou disparaître le formulaire de contact.</ng-template>
-                <button class="btn btn-secondary btn-lg" type="button" (click)="setVisibleForm()" [ngbTooltip]="tipContent"><fa-icon [icon]="mail" class="buttonIcons"></fa-icon> Me Contacter</button>
+        <app-display-photo [photoUrl]='completeUrl' id="profilePhoto" class="d-md-none d-lg-none d-xl-block"></app-display-photo>
+        <div class="card-body row">
+            <div class="col-md-6 col-lg-6 d-none d-md-block d-lg-block d-xl-none">
+                <app-display-photo [photoUrl]='completeUrl' id="profilePhoto"></app-display-photo>
             </div>
-            <div *ngIf="emailForm">
-                <app-display-email></app-display-email>
+            <div class="col-md-6 col-lg-6 col-xl-12">
+                <p class="nameFontSize text-center"><b>{{ basicDatas.firstName }} {{ basicDatas.lastName | uppercase }}</b></p>
+                <p><fa-icon [icon]="birthday" class="profilIcons"></fa-icon> {{ age }} ans</p>
+                <app-display-adress [adress]="adress" [postalAdress]="postalAdress"></app-display-adress>
+                <app-display-phone [phone]="phoneNumber" [phoneIcon]="phone"></app-display-phone>
+                <br>
+                <div class="text-center contact">
+                    <ng-template #tipContent>Cliquez pour faire apparaître ou disparaître le formulaire de contact.</ng-template>
+                    <button class="btn btn-secondary btn-lg" type="button" (click)="setVisibleForm()" [ngbTooltip]="tipContent"><fa-icon [icon]="mail" class="buttonIcons"></fa-icon> Me Contacter</button>
+                </div>
+                <div *ngIf="emailForm" class="contact">
+                    <app-display-email></app-display-email>
+                </div>
             </div>
         </div>
     </div>

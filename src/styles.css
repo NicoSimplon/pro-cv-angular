@@ -16,6 +16,14 @@ html {
     font-weight: 900;
 }
 
+.titleSection {
+    margin: auto;
+    padding: 2rem;
+	background-color: rgba(0, 0, 0, 0.5);
+	width: 50%;
+}
+
+
 #wallpaper {
     height: 100%;
     width: 100%;
@@ -89,3 +97,72 @@ hr {
 .bg-dark {
     background-color: #1f282f !important;
 }
+
+/* Media queries for managing the titles size in regard of the screen size */
+@media screen and (max-width: 768px) {
+    .pageTitle {
+        font-weight: 700;
+        font-size: 2rem;
+    }
+
+    .titleSection {
+        margin: auto;
+        padding: 2rem;
+        background-color: rgba(0, 0, 0, 0.5);
+        width: 60%;
+    }
+
+
+    .sectionTitle {
+        font-weight: 600;
+    }
+}
+
+@media screen and (max-width: 585px) {
+    .pageTitle {
+        font-weight: 600;
+        font-size: 1.8rem;
+    }
+
+    .titleSection {
+        margin: auto;
+        padding: 2rem;
+        background-color: rgba(0, 0, 0, 0.5);
+        width: 80%;
+    }
+
+
+    .sectionTitle {
+        font-weight: 500;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .pageTitle {
+        font-weight: 500;
+        font-size: 1.5rem;
+    }
+
+    .titleSection {
+        margin: auto;
+        padding: 2rem;
+        background-color: rgba(0, 0, 0, 0.5);
+        width: 100%;
+    }
+
+
+    .sectionTitle {
+        font-weight: 400;
+    }
+
+}
+
+@media print {
+    menu, .contact, #follow, #hobbies, #profilePhoto, .alert {
+      display:none;
+    }
+
+    body {
+      font-size:120%;
+    }
+  }

@@ -4,8 +4,10 @@
     </div>
     <div class="card-body">
         <p>
-            <a href="{{ linkedinLink }}" target="_blank"><img src="/assets/logos_liens/LinkedIn.png"/></a>
-            <a href="{{ gitHubLink }}" target="_blank"><img src="/assets/logos_liens/Github.png"/></a>
+            <ng-template #infoBulleGit>Lien vers mon profil GiHub</ng-template>
+            <ng-template #infoBulleLinkedin>Lien vers mon profil Linkedin</ng-template>
+            <a href="{{ linkedinLink }}" [ngbTooltip]="infoBulleLinkedin" target="_blank"><img src="/assets/logos_liens/LinkedIn.png" alt="logo du réseau social Linkedin"/></a>
+            <a href="{{ gitHubLink }}" [ngbTooltip]="infoBulleGit" target="_blank"><img src="/assets/logos_liens/Github.png" alt="logo de GitHub"/></a>
         </p>
     </div>
 </section>

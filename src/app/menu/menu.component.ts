@@ -29,6 +29,7 @@ export class MenuComponent implements OnInit, OnDestroy {
     user: LoggedUser;
 
     profileVisible = false;
+    public isMenuCollapsed = true;
 
     // FontAwesome icons
     edit = faEdit;
