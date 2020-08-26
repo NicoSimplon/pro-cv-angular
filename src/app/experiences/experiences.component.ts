@@ -23,6 +23,8 @@ export class ExperiencesComponent extends EditMode implements OnInit, OnDestroy 
 
     experiences: XpPro[];
 
+    selectedXp: XpPro;
+
     circle = faCircle;
 
     constructor(private service: PublicServicesService) {

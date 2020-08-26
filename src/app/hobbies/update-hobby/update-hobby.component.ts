@@ -25,6 +25,9 @@ export class UpdateHobbyComponent implements OnInit, OnDestroy {
     @Output()
     update = new EventEmitter<Hobby>();
 
+    @Output()
+    delete = new EventEmitter<string>();
+
     constructor(private privService: PrivateServicesService) {}
 
     /**
@@ -47,6 +50,16 @@ export class UpdateHobbyComponent implements OnInit, OnDestroy {
                 }, 7000);
             }
         );
+    }
+
+    /**
+     * Send the delete event to the mother component.
+     *
+     * @param message the notification message sent by the delete component
+     */
+    deleteHobby(message: string) {
+        this.hobby = undefined;
+        this.delete.emit(message);
     }
 
     ngOnInit(): void {}

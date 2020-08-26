@@ -26,23 +26,10 @@
     </div>
 </div>
 
-<div *ngIf="editMode">
-    <div *ngIf="basicDatas" id="display">
-        <h3>Identification</h3>
-        <hr>
-        <img height="200px" *ngIf="completeUrl" src="{{ completeUrl }}" alt="Photo de profil" />
-        <hr>
-        <app-display-phone [phone]="phoneNumber"></app-display-phone>
-        <app-display-adress [adress]="adress"></app-display-adress>
-        <hr>
-    </div>
-    <br>
-    <div id="edit">
-        <app-update-photo [photo]="photoPath" (update)="updatePhoto($event)" (updateImage)="updatePhotoImage($event)"></app-update-photo>
-        <hr>
-        <app-update-phone [phone]="phoneNumber" (updateNum)="updatePhoneNumber($event)"></app-update-phone>
-        <hr>
-        <app-update-adress [adress]="adress" (updateAddress)="updateAdress($event)"></app-update-adress>
-        <hr>
-    </div>
+<div class="container-fluid" *ngIf="editMode">
+    <app-update-photo [photo]="photoPath" (update)="updatePhoto($event)" (updateImage)="updatePhotoImage($event)"></app-update-photo>
+    <hr>
+    <app-update-phone [phone]="phoneNumber" (updateNum)="updatePhoneNumber($event)"></app-update-phone>
+    <hr>
+    <app-update-adress [adress]="adress" (updateAddress)="updateAdress($event)"></app-update-adress>
 </div>

@@ -1,5 +1,6 @@
 import { SkillGroup } from './../../models/SkillGroup';
 import { Component, OnInit, Input } from '@angular/core';
+import { faCircle } from '@fortawesome/free-solid-svg-icons';
 
 /**
  * Component to display a skill group and it's subsequent skills.
@@ -13,6 +14,8 @@ export class SkillGroupDisplayComponent implements OnInit {
 
     @Input()
     skillGroup: SkillGroup;
+
+    circle = faCircle;
 
     constructor() {}
 

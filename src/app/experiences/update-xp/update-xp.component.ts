@@ -25,6 +25,9 @@ export class UpdateXpComponent implements OnInit, OnDestroy {
     @Output()
     update = new EventEmitter<XpPro>(true);
 
+    @Output()
+    delete = new EventEmitter<string>(true);
+
     constructor(private privService: PrivateServicesService) {}
 
     /**
@@ -47,6 +50,16 @@ export class UpdateXpComponent implements OnInit, OnDestroy {
                 }, 7000);
             }
         );
+    }
+
+    /**
+     * Send the delete event to the mother component.
+     *
+     * @param message the notification message sent by the delete component.
+     */
+    deleteXp(message: string) {
+        this.experience = undefined;
+        this.delete.emit(message);
     }
 
     ngOnInit(): void {}

@@ -1,3 +1,4 @@
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { Scavenger } from '@wishtack/rx-scavenger';
 import { Formation } from 'src/app/models/Formation';
@@ -23,6 +24,8 @@ export class DeleteFormationComponent implements OnInit, OnDestroy {
 
     @Output()
     delete = new EventEmitter<string>(true);
+
+    trash = faTrashAlt;
 
     constructor(private priService: PrivateServicesService) {}
 

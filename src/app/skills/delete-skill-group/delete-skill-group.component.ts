@@ -1,3 +1,4 @@
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { PrivateServicesService } from 'src/app/services/private-services.service';
 import { SkillGroup } from 'src/app/models/SkillGroup';
@@ -23,6 +24,8 @@ export class DeleteSkillGroupComponent implements OnInit, OnDestroy {
 
     @Output()
     delete = new EventEmitter<string>(true);
+
+    trash = faTrashAlt;
 
     constructor(private privService: PrivateServicesService) {}
 

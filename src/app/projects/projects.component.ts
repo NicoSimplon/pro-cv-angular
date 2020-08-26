@@ -24,6 +24,8 @@ export class ProjectsComponent extends EditMode implements OnInit, OnDestroy {
 
     projects: Project[];
 
+    selectedProject: Project;
+
     circle = faCircle;
 
     constructor(private service: PublicServicesService) {

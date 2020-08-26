@@ -1,7 +1,13 @@
 <div *ngIf="hobby">
+    <h4 class="sectionTitle colorTitle">Modifier ce centre d'intérêt :</h4>
+    <br>
+    <div class="alert alert-danger text-center" *ngIf="errorMessage">
+        <p><strong>{{ errorMessage }}</strong></p>
+    </div>
+    <div class="alert alert-success text-center" *ngIf="sucessMessage">
+        <p><strong>{{ sucessMessage }}</strong></p>
+    </div>
     <form #form="ngForm" (ngSubmit)="updateHobby()">
-        <h4>Modifier le hobby :</h4>
-        <br>
         <div class="form-group">
             <label for="modifiedHobbyTitle">Intitullé du hobby : </label>
             <input type="text" [(ngModel)]="hobby.title" #modifiedHobbyTitle="ngModel" class="form-control" id="modifiedHobbyTitle" name="modifiedHobbyTitle" required >
@@ -18,7 +24,7 @@
         </div>
         <br>
         <div class="text-center">
-            <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Modifier</button>
+            <p><button [disabled]="form.invalid" type="submit" class="btn btn-warning btn-lg mr-3">Modifier</button><app-delete-hobby [hobby]="hobby" (delete)="deleteHobby($event)"></app-delete-hobby></p>
         </div>
         <br>
     </form>

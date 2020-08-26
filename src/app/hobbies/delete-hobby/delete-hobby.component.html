@@ -1,13 +1,4 @@
-<div *ngIf="hobby">
-    <div class="alert alert-danger text-center" *ngIf="errorMessage">
-        <p><strong>{{ errorMessage }}</strong></p>
-    </div>
-    <form #form="ngForm" (ngSubmit)="deleteHobby()">
-        <h4>Supprimer le hobby :</h4>
-        <br>
-        <div class="text-center">
-            <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Supprimer</button>
-        </div>
-        <br>
-    </form>
-</div>
+<ng-template #tipContent>
+    Voulez vous supprimer ce centre d'intérêt ?
+</ng-template>
+<button *ngIf="hobby" (click)="deleteHobby()" type="button" class="btn btn-danger btn-lg"><fa-icon [icon]="trash" [ngbTooltip]="tipContent" class="trashIcon"></fa-icon></button>

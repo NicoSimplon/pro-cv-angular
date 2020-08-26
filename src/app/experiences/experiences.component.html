@@ -13,23 +13,22 @@
     </div>
 </section>
 
-<div *ngIf="editMode">
-    <h3>Expériences Professionnelles</h3>
-    <hr>
+<div *ngIf="editMode" class="container">
     <div class="alert alert-danger text-center" *ngIf="errorMessage">
         <p><strong>{{ errorMessage }}</strong></p>
     </div>
-    <div class="alert alert-succes text-center" *ngIf="sucessMessage">
+    <div class="alert alert-success text-center" *ngIf="sucessMessage">
         <p><strong>{{ sucessMessage }}</strong></p>
     </div>
     <app-add-new-xp (create)="addNewXp($event)"></app-add-new-xp>
-    <br>
-    <div *ngIf="experiences">
-        <ul *ngFor="let xp of experiences;">
-            <app-update-xp [experience]="xp" (update)="updateXp($event)"></app-update-xp>
-            <app-delete-xp [experience]="xp" (delete)="deleteXp($event)"></app-delete-xp>
-            <hr>
-        </ul>
-    </div>
     <hr>
+    <div *ngIf="experiences">
+        <div class="mb-5" ngbDropdown>
+            <button class="btn btn-primary" id="dropdownBasic1" ngbDropdownToggle>Sélectionnez l'élément à modifier</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button *ngFor="let xp of experiences;" (click)="selectedXp = xp" ngbDropdownItem>{{ xp.order}} - {{ xp.title }}</button>
+            </div>
+        </div>
+        <app-update-xp [experience]="selectedXp" (update)="updateXp($event)" (delete)="deleteXp($event)"></app-update-xp>
+    </div>
 </div>

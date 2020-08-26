@@ -24,6 +24,8 @@ export class FormationsComponent extends EditMode implements OnInit, OnDestroy {
 
     formations: Formation[];
 
+    selectedFormation: Formation;
+
     circle = faCircle;
 
     constructor(private service: PublicServicesService) {

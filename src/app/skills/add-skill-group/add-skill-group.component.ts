@@ -1,3 +1,4 @@
+import { faCircle } from '@fortawesome/free-solid-svg-icons';
 import { SkillGroup } from './../../models/SkillGroup';
 import { Component, OnInit, EventEmitter, OnDestroy, Output } from '@angular/core';
 import { Scavenger } from '@wishtack/rx-scavenger';
@@ -25,6 +26,8 @@ export class AddSkillGroupComponent implements OnInit, OnDestroy {
 
     @Output()
     create = new EventEmitter<SkillGroup>(true);
+
+    circle = faCircle;
 
     constructor(private privService: PrivateServicesService) {}
 

@@ -1,7 +1,13 @@
 <div *ngIf="newHobby">
+    <h4 class="sectionTitle colorTitle">Ajouter un nouveau centre d'intérêt :</h4>
+    <br>
+    <div class="alert alert-danger text-center" *ngIf="errorMessage">
+        <p><strong>{{ errorMessage }}</strong></p>
+    </div>
+    <div class="alert alert-success text-center" *ngIf="sucessMessage">
+        <p><strong>{{ sucessMessage }}</strong></p>
+    </div>
     <form #form1="ngForm" (ngSubmit)="createHobby()">
-        <h4>Créer une nouveau hobby :</h4>
-        <br>
         <div class="form-group">
             <label for="hobbyTitle">Intitullé du hobby : </label>
             <input type="text" [(ngModel)]="newHobby.title" #hobbyTitle="ngModel" class="form-control" id="hobbyTitle" name="hobbyTitle" required >
@@ -18,7 +24,7 @@
         </div>
         <br>
         <div class="text-center">
-            <button [disabled]="form1.invalid" type="submit" class="btn btn-primary">Créer</button>
+            <button [disabled]="form1.invalid" type="submit" class="btn btn-success btn-lg">Ajouter</button>
         </div>
         <br>
     </form>

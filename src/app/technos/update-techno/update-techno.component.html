@@ -1,17 +1,13 @@
 <div *ngIf="techno">
-    <div class="image-preview mb-3" *ngIf="previewUrl">
-        <img [src]="previewUrl" height="300" />
-    </div>
-    <hr />
+    <br>
     <div class="alert alert-danger text-center" *ngIf="errorMessage">
         <p><strong>{{ errorMessage }}</strong></p>
     </div>
-    <div class="alert alert-succes text-center" *ngIf="sucessMessage">
+    <div class="alert alert-success text-center" *ngIf="sucessMessage">
         <p><strong>{{ sucessMessage }}</strong></p>
     </div>
+    <br>
     <form #form="ngForm" (ngSubmit)="updateLogoPath()">
-        <h4>Modifier la techno :</h4>
-        <br />
         <div class="form-group">
             <label for="titleLogo">Nom de la techno : </label>
             <input type="text" [(ngModel)]="techno.title" #titleLogo="ngModel" class="form-control" id="titleLogo" name="titleLogo" required />
@@ -37,19 +33,22 @@
         </div>
         <br />
         <div class="text-center">
-            <button [disabled]="form.invalid" type="submit" class="btn btn-primary">
-                Modifier
-            </button>
+            <p><button [disabled]="form.invalid" type="submit" class="btn btn-warning btn-lg mr-3">Modifier</button><app-delete-techno [techno]="techno" (delete)="deleteTechno($event)"></app-delete-techno></p>
         </div>
     </form>
     <br>
     <form #form3="ngForm" (ngSubmit)="updateImage()">
-        <h4>Choisir une nouvelle image :</h4>
-        <div class="form-group">
-            <input type="file" name="image" (change)="fileProgress($event)" />
+        <h4 class="sectionTitle colorTitle">Choisir une nouvelle image :</h4>
+        <br>
+        <div class="image-preview mb-3" *ngIf="previewUrl">
+            <img [src]="previewUrl" height="300" />
         </div>
-        <div class="form-group">
-            <button [disabled]="form3.invalid" type="submit" class="btn btn-primary">Télécharger</button>
+        <div class="custom-file mb-3">
+            <input type="file" name="image" (change)="fileProgress($event)" class="custom-file-input" id="fileInput" />
+            <label class="custom-file-label" for="fileInput">Choisissez un fichier</label>
+        </div>
+        <div class="form-group text-center">
+            <button [disabled]="form3.invalid" type="submit" class="btn btn-success btn-lg">Télécharger</button>
         </div>
     </form>
 </div>

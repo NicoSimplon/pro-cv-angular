@@ -23,6 +23,7 @@ export class HobbiesComponent extends EditMode implements OnInit, OnDestroy {
     sucessMessage: string;
 
     hobbies: Hobby[];
+    selectedHobby: Hobby;
 
     circle = faCircle;
 

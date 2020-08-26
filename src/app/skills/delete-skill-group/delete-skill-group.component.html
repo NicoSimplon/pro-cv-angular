@@ -1,6 +1,4 @@
-<div *ngIf="skillGroup" class="text-center">
-    <div class="alert alert-danger text-center" *ngIf="errorMessage">
-        <p><strong>{{ errorMessage }}</strong></p>
-    </div>
-    <button (click)="deleteGroup()" class="btn btn-primary">Supprimer le groupe de compétences</button>
-</div>
+<ng-template #tipContent>
+    Voulez vous supprimer ce groupe de compétence ?
+</ng-template>
+<button *ngIf="skillGroup" type="button" (click)="deleteGroup()" class="btn btn-danger btn-lg"><fa-icon [icon]="trash" [ngbTooltip]="tipContent" class="trashIcon"></fa-icon></button>

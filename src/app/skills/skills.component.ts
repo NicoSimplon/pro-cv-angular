@@ -20,6 +20,8 @@ export class SkillsComponent extends EditMode implements OnInit, OnDestroy {
 
     skills: SkillGroup[];
 
+    selectedSkillGroup: SkillGroup;
+
     constructor(private service: PublicServicesService) {
         super();
     }

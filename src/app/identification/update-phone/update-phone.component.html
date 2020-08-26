@@ -2,11 +2,11 @@
     <div class="alert alert-danger text-center" *ngIf="errorMessage">
         <p><strong>{{ errorMessage }}</strong></p>
     </div>
-    <div class="alert alert-succes text-center" *ngIf="sucessMessage">
+    <div class="alert alert-success text-center" *ngIf="sucessMessage">
         <p><strong>{{ sucessMessage }}</strong></p>
     </div>
-    <form #form2="ngForm" (ngSubmit)="updatePhoneNumber()">
-        <h4>Modifier le numérode téléphone :</h4>
+    <form #form2="ngForm" (ngSubmit)="updatePhoneNumber()" class="mb-4">
+        <h4 class="sectionTitle">Modifier le numéro de téléphone</h4>
         <br>
         <div class="form-group">
             <label for="phoneNum">Nouveau numéro : </label>
@@ -15,9 +15,8 @@
                 Le format du nouveau numéro est invalide. Il doit correspondre au format suivant : 0X.XX.XX.XX.XX
             </div>
         </div>
-        <hr>
         <div class="text-center">
-            <button [disabled]="form2.invalid" type="submit" class="btn btn-primary">Modifier</button>
+            <button [disabled]="form2.invalid" type="submit" class="btn btn-warning btn-lg">Modifier</button>
         </div>
     </form>
 </div>

@@ -25,6 +25,9 @@ export class UpdateProjectComponent implements OnInit, OnDestroy {
     @Output()
     update = new EventEmitter<Project>(true);
 
+    @Output()
+    delete = new EventEmitter<string>(true);
+
     constructor(private privService: PrivateServicesService) {}
 
     /**
@@ -50,6 +53,16 @@ export class UpdateProjectComponent implements OnInit, OnDestroy {
                     }, 7000);
                 }
             );
+    }
+
+    /**
+     * Send a delete event to the mother component.
+     *
+     * @param message the notification message sent by the delete component
+     */
+    deleteProject(message: string) {
+        this.project = undefined;
+        this.delete.emit(message);
     }
 
     ngOnInit(): void {}

@@ -1,0 +1,21 @@
+.colorTitle {
+    color: #765791;
+}
+
+.colorSectionIcon {
+    color: #765791;
+    font-size: 1.0rem;
+}
+
+ul {
+    list-style: inside;
+    margin-left: -2.3rem;
+}
+
+.colorText {
+    color: #1f282f;
+}
+
+.bg-light {
+    background-color: #939ca3 !important
+}

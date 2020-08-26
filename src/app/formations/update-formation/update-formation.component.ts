@@ -25,6 +25,9 @@ export class UpdateFormationComponent implements OnInit, OnDestroy {
     @Output()
     update = new EventEmitter<Formation>(true);
 
+    @Output()
+    delete = new EventEmitter<string>(true);
+
     constructor(private priService: PrivateServicesService) {}
 
     /**
@@ -47,6 +50,16 @@ export class UpdateFormationComponent implements OnInit, OnDestroy {
                 }, 7000);
             }
         );
+    }
+
+    /**
+     * Send the delete event to the mother component.
+     *
+     * @param message the notification message sent by the delete component
+     */
+    deleteFormation(message: string) {
+        this.formation = undefined;
+        this.delete.emit(message);
     }
 
     ngOnInit(): void {}

@@ -34,6 +34,9 @@ export class UpdateTechnoComponent extends ManageImage implements OnInit, OnDest
     @Output()
     updateLogoImage = new EventEmitter<string>(true);
 
+    @Output()
+    delete = new EventEmitter<string>(true);
+
     constructor(private privService: PrivateServicesService) {
         super();
     }
@@ -75,6 +78,16 @@ export class UpdateTechnoComponent extends ManageImage implements OnInit, OnDest
                 }, 7000);
             }
         );
+    }
+
+    /**
+     * Send a delete event to the mother component.
+     *
+     * @param message the notification message emit by the delete component
+     */
+    deleteTechno(message: string) {
+        this.techno = undefined;
+        this.delete.emit(message);
     }
 
     ngOnInit(): void {}

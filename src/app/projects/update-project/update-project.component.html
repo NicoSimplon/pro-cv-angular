@@ -1,13 +1,13 @@
 <div *ngIf="project">
+    <h4 class="sectionTitle colorTitle">Modifier ce projet</h4>
+    <br>
     <div class="alert alert-danger text-center" *ngIf="errorMessage">
         <p><strong>{{ errorMessage }}</strong></p>
     </div>
-    <div class="alert alert-succes text-center" *ngIf="sucessMessage">
+    <div class="alert alert-success text-center" *ngIf="sucessMessage">
         <p><strong>{{ sucessMessage }}</strong></p>
     </div>
     <form #form="ngForm" (ngSubmit)="updateProject()">
-        <h4>Modifier le projet :</h4>
-        <br>
         <div class="form-group">
             <label for="modifiedProjectTitle">Titre du projet : </label>
             <input type="text" [(ngModel)]="project.title" #modifiedProjectTitle="ngModel" class="form-control" id="modifiedProjectTitle" name="modifiedProjectTitle" required >
@@ -22,9 +22,8 @@
                 Veuillez fournir une description du projet (Ce champ est obligatoire).
             </div>
         </div>
-        <br>
         <div class="text-center">
-            <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Modifier</button>
+            <p><button [disabled]="form.invalid" type="submit" class="btn btn-warning btn-lg mr-3">Modifier</button><app-delete-project [project]="project" (delete)="deleteProject($event)"></app-delete-project></p>
         </div>
         <br>
     </form>

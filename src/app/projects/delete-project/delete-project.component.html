@@ -1,13 +1,4 @@
-<div *ngIf="project">
-    <div class="alert alert-danger text-center" *ngIf="errorMessage">
-        <p><strong>{{ errorMessage }}</strong></p>
-    </div>
-    <form #form2="ngForm" (ngSubmit)="deleteProject()">
-        <h4>Supprimer le projet :</h4>
-        <br>
-        <div class="text-center">
-            <button [disabled]="form2.invalid" type="submit" class="btn btn-primary">Supprimer</button>
-        </div>
-        <br>
-    </form>
-</div>
+<ng-template #tipContent>
+    Voulez vous supprimer cette formation ?
+</ng-template>
+<button *ngIf="project" type="button" (click)="deleteProject()" class="btn btn-danger btn-lg"><fa-icon [icon]="trash" [ngbTooltip]="tipContent" class="trashIcon"></fa-icon></button>

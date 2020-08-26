@@ -23,6 +23,7 @@ export class TechnosComponent extends EditMode implements OnInit, OnDestroy {
     errorMessage: string;
 
     technos: Techno[];
+    selectedTechno: Techno;
 
     constructor(private service: PublicServicesService) {
         super();

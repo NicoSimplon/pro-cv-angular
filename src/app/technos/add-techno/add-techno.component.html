@@ -2,11 +2,8 @@
     <div class="alert alert-danger text-center" *ngIf="errorMessage">
         <p><strong>{{ errorMessage }}</strong></p>
     </div>
-    <div class="alert alert-succes text-center" *ngIf="sucessMessage">
+    <div class="alert alert-success text-center" *ngIf="sucessMessage">
         <p><strong>{{ sucessMessage }}</strong></p>
-    </div>
-    <div class="image-preview mb-3" *ngIf="previewUrl">
-        <img [src]="previewUrl" height="300" />
     </div>
     <form #form4="ngForm" (ngSubmit)="addNewTechno()">
         <div class="form-group">
@@ -23,14 +20,16 @@
                 Indiquer un ordre d'affichage du logo (ils sont affiché dans l'ordre croissant).
             </div>
         </div>
-        <br>
-        <div class="form-group">
-            <label for="image">Nouveau logo :</label>
-            <input type="file" name="image" id="image" (change)="fileProgress($event)" />
+        <div class="image-preview mb-3" *ngIf="previewUrl">
+            <img [src]="previewUrl" height="300" />
         </div>
-        <hr>
+        <div class="custom-file mb-3">
+            <input type="file" name="image" (change)="fileProgress($event)" class="custom-file-input" id="fileInput" />
+            <label class="custom-file-label" for="fileInput">Choisissez une image</label>
+        </div>
         <div class="text-center">
-            <button [disabled]="form4.invalid" type="submit" class="btn btn-primary">Ajouter</button>
+            <button [disabled]="form4.invalid" type="submit" class="btn btn-success btn-lg">Ajouter</button>
         </div>
+        <br>
     </form>
 </div>

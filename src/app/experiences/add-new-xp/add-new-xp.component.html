@@ -1,13 +1,13 @@
 <div *ngIf="newExperience">
+    <h4 class="sectionTitle colorTitle">Créer une nouvelle expérience professionnelle</h4>
+    <br>
     <div class="alert alert-danger text-center" *ngIf="errorMessage">
         <p><strong>{{ errorMessage }}</strong></p>
     </div>
-    <div class="alert alert-succes text-center" *ngIf="sucessMessage">
+    <div class="alert alert-success text-center" *ngIf="sucessMessage">
         <p><strong>{{ sucessMessage }}</strong></p>
     </div>
     <form #form1="ngForm" (ngSubmit)="createXp()">
-        <h4>Créer une nouvelle expérience professionnelle :</h4>
-        <br>
         <div class="form-group">
             <label for="xpTitle">Intitullé de l'expérience : </label>
             <input type="text" [(ngModel)]="newExperience.title" #xpTitle="ngModel" class="form-control" id="xpTitle" name="xpTitle" required >
@@ -23,23 +23,22 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="xpPeriod">Période de l'expérience professionnelle : </label>
+            <label for="xpPeriod">Période de l'expérience : </label>
             <input type="text" [(ngModel)]="newExperience.period" #xpPeriod="ngModel" class="form-control" id="xpPeriod" name="xpPeriod" required >
             <div class="alert alert-danger" *ngIf="(xpPeriod.dirty || xpPeriod.touched) && xpPeriod.errors">
                 Veuillez renseigner la période de cette expérience (Ce champ est obligatoire).
             </div>
         </div>
         <div class="form-group">
-            <label for="xpOrder">Ordre d'affichage de l'expérience professionnelle : </label>
+            <label for="xpOrder">Ordre d'affichage de l'expérience : </label>
             <input type="number" [(ngModel)]="newExperience.order" #xpOrder="ngModel" class="form-control" id="xpOrder" name="xpOrder" required >
             <div class="alert alert-danger" *ngIf="(xpOrder.dirty || xpOrder.touched) && xpOrder.errors">
                 Veuillez définir l'ordre d'affichage de cette expérience (Par défaut elle est de 0).
             </div>
         </div>
-        <br>
         <div class="text-center">
-            <button [disabled]="form1.invalid" type="submit" class="btn btn-primary">Créer</button>
+            <button [disabled]="form1.invalid" type="submit" class="btn btn-success btn-lg">Créer</button>
         </div>
-        <br>
     </form>
+    <br>
 </div>

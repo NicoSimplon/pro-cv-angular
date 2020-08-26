@@ -1,3 +1,4 @@
+import { faCircle } from '@fortawesome/free-solid-svg-icons';
 import { Component, OnInit, OnDestroy, Input, EventEmitter, Output } from '@angular/core';
 import { PrivateServicesService } from 'src/app/services/private-services.service';
 import { Skill } from 'src/app/models/Skill';
@@ -34,6 +35,11 @@ export class UpdateSkillGroupComponent implements OnInit, OnDestroy {
 
     @Output()
     deleteASkill = new EventEmitter<SkillGroup>(true);
+
+    @Output()
+    delete = new EventEmitter<string>(true);
+
+    circle = faCircle;
 
     constructor(private privService: PrivateServicesService) {}
 
@@ -121,6 +127,16 @@ export class UpdateSkillGroupComponent implements OnInit, OnDestroy {
                     }, 7000);
                 }
             );
+    }
+
+    /**
+     * Send a delete event for skill group to the mother component.
+     *
+     * @param message the notification message sent by the delete component
+     */
+    deleteGroup(message: string) {
+        this.skillGroup = undefined;
+        this.delete.emit(message);
     }
 
     ngOnInit(): void {}

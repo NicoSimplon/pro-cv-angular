@@ -13,22 +13,20 @@
     </div>
 </section>
 
-<div *ngIf="editMode">
-    <h3>Projets :</h3>
-    <hr>
-    <div class="alert alert-succes text-center" *ngIf="sucessMessage">
+<div *ngIf="editMode" class="container mb-4">
+    <div class="alert alert-success text-center" *ngIf="sucessMessage">
         <p><strong>{{ sucessMessage }}</strong></p>
     </div>
-    <br>
     <app-add-project (create)="createProject($event)"></app-add-project>
-    <br>
-    <div *ngIf="projects">
-        <ul *ngFor="let project of projects;">
-            <app-update-project [project]="project" (update)="updateProject($event)"></app-update-project>
-            <app-delete-project [project]="project" (delete)="deleteProject($event)"></app-delete-project>
-            <hr>
-        </ul>
-    </div>
     <hr>
+    <div *ngIf="projects">
+        <div class="mb-5" ngbDropdown>
+            <button class="btn btn-primary" id="dropdownBasic1" ngbDropdownToggle>Sélectionnez l'élément à modifier</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button *ngFor="let project of projects;" (click)="selectedProject = project" ngbDropdownItem>{{ project.id}} - {{ project.title }}</button>
+            </div>
+        </div>
+        <app-update-project [project]="selectedProject" (update)="updateProject($event)" (delete)="deleteProject($event)"></app-update-project>
+    </div>
 </div>
 

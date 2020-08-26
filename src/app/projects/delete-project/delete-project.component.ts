@@ -1,3 +1,4 @@
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { Component, OnInit, OnDestroy, Input, EventEmitter, Output } from '@angular/core';
 import { Project } from 'src/app/models/Project';
 import { Scavenger } from '@wishtack/rx-scavenger';
@@ -24,6 +25,8 @@ export class DeleteProjectComponent implements OnInit, OnDestroy {
 
     @Output()
     delete = new EventEmitter<string>(true);
+
+    trash = faTrashAlt;
 
     constructor(private privService: PrivateServicesService) {}
 

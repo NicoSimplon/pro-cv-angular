@@ -1,7 +1,13 @@
-<div *ngIf="experience">
+<div *ngIf="experience" class="mb-4">
     <form #form="ngForm" (ngSubmit)="updateXp()">
-        <h4>Modifier l'epérience professionnelle :</h4>
+        <h4 class="sectionTitle colorTitle">Modifier cette expérience professionnelle</h4>
         <br>
+        <div class="alert alert-danger text-center" *ngIf="errorMessage">
+            <p><strong>{{ errorMessage }}</strong></p>
+        </div>
+        <div class="alert alert-success text-center" *ngIf="sucessMessage">
+            <p><strong>{{ sucessMessage }}</strong></p>
+        </div>
         <div class="form-group">
             <label for="modifiedxpTitle">Intitullé de l'expérience professionnelle : </label>
             <input type="text" [(ngModel)]="experience.title" #modifiedxpTitle="ngModel" class="form-control" id="modifiedxpTitle" name="modifiedxpTitle" required >
@@ -30,9 +36,8 @@
                 Veuillez définir l'ordre d'affichage de cette expérience (Par défaut elle est de 0).
             </div>
         </div>
-        <br>
         <div class="text-center">
-            <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Modifier</button>
+            <p><button [disabled]="form.invalid" type="submit" class="btn btn-warning btn-lg mr-3">Modifier</button><app-delete-xp [experience]="experience" (delete)="deleteXp($event)"></app-delete-xp></p>
         </div>
         <br>
     </form>

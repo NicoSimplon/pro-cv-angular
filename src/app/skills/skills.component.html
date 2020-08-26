@@ -2,35 +2,29 @@
     <div class="card-header">
         <h4 class="sectionTitle colorTitle">Compétences</h4>
     </div>
-    <div class="card-body">
-        <div class="alert alert-danger text-center" *ngIf="errorMessage">
-            <p><strong>{{ errorMessage }}</strong></p>
-        </div>
-        <div *ngFor="let group of skills;">
+    <div class="card-body row">
+        <div *ngFor="let group of skills;" class="col-xl-4 col-lg-6 col-sm-12">
             <app-skill-group-display [skillGroup]="group"></app-skill-group-display>
         </div>
     </div>
 </section>
 
-<div *ngIf="editMode">
-    <h3>Compétences :</h3>
-    <hr>
+<div *ngIf="editMode" class="container mb-4">
     <div class="alert alert-danger text-center" *ngIf="errorMessage">
         <p><strong>{{ errorMessage }}</strong></p>
     </div>
-    <div class="alert alert-succes text-center" *ngIf="sucessMessage">
+    <div class="alert alert-success text-center" *ngIf="sucessMessage">
         <p><strong>{{ sucessMessage }}</strong></p>
     </div>
-    <br>
     <app-add-skill-group (create)="createSkillGroup($event)"></app-add-skill-group>
-    <br>
-    <div *ngIf="skills">
-        <ul *ngFor="let group of skills;">
-            <app-update-skill-group [skillGroup]="group" (createSkill)="createSkillAlone($event)" (updateGroup)="updateSkillGroup($event)" (deleteASkill)="deleteSkill($event)"></app-update-skill-group>
-            <br>
-            <app-delete-skill-group [skillGroup]="group" (delete)="deleteGroup($event)"></app-delete-skill-group>
-            <br>
-        </ul>
-    </div>
     <hr>
+    <div *ngIf="skills">
+        <div class="mb-5" ngbDropdown>
+            <button class="btn btn-primary" id="dropdownBasic1" ngbDropdownToggle>Sélectionnez l'élément à modifier</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button *ngFor="let group of skills;" (click)="selectedSkillGroup = group" ngbDropdownItem>{{ group.id}} - {{ group.title }}</button>
+            </div>
+        </div>
+        <app-update-skill-group [skillGroup]="selectedSkillGroup" (createSkill)="createSkillAlone($event)" (updateGroup)="updateSkillGroup($event)" (deleteASkill)="deleteSkill($event)" (delete)="deleteGroup($event)"></app-update-skill-group>
+    </div>
 </div>

@@ -13,21 +13,19 @@
     </div>
 </section>
 
-<div *ngIf="editMode">
-    <h3>Formations / Diplômes :</h3>
-    <hr>
-    <div class="alert alert-succes text-center" *ngIf="sucessMessage">
+<div *ngIf="editMode" class="container">
+    <div class="alert alert-success text-center" *ngIf="sucessMessage">
         <p><strong>{{ sucessMessage }}</strong></p>
     </div>
-    <br>
     <app-add-formation (create)="createFormation($event)"></app-add-formation>
-    <br>
-    <div *ngIf="formations">
-        <ul *ngFor="let formation of formations;">
-            <app-update-formation [formation]="formation" (update)="updateFormation($event)"></app-update-formation>
-            <app-delete-formation [formation]="formation" (delete)="deleteFormation($event)"></app-delete-formation>
-            <hr>
-        </ul>
-    </div>
     <hr>
+    <div *ngIf="formations">
+        <div class="mb-5" ngbDropdown>
+            <button class="btn btn-primary" id="dropdownBasic1" ngbDropdownToggle>Sélectionnez l'élément à modifier</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button *ngFor="let formation of formations" (click)="selectedFormation = formation" ngbDropdownItem>{{ formation.year }} - {{ formation.title }}</button>
+            </div>
+        </div>
+        <app-update-formation *ngIf="selectedFormation" [formation]="selectedFormation" (update)="updateFormation($event)" (delete)="deleteFormation($event)"></app-update-formation>
+    </div>
 </div>

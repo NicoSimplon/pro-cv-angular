@@ -1,3 +1,4 @@
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { XpPro } from './../../models/XpPro';
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { Scavenger } from '@wishtack/rx-scavenger';
@@ -23,6 +24,8 @@ export class DeleteXpComponent implements OnInit, OnDestroy {
 
     @Output()
     delete = new EventEmitter<string>(true);
+
+    trash = faTrashAlt;
 
     constructor(private privService: PrivateServicesService) {}
 

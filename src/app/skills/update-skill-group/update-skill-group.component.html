@@ -1,13 +1,13 @@
 <div *ngIf="skillGroup">
+    <h4 class="sectionTitle colorTitle">Modifier ce groupe de compétences</h4>
+    <br>
     <div class="alert alert-danger text-center" *ngIf="errorMessage">
         <p><strong>{{ errorMessage }}</strong></p>
     </div>
-    <div class="alert alert-succes text-center" *ngIf="sucessMessage">
+    <div class="alert alert-success text-center" *ngIf="sucessMessage">
         <p><strong>{{ sucessMessage }}</strong></p>
     </div>
     <form #updateGroupForm="ngForm" (ngSubmit)="updateSkillGroup()">
-        <h4>Modifier le groupe de compétences :</h4>
-        <br>
         <div class="form-group">
             <label for="modifiedGroupTitle">Intitulé du groupe de compétences : </label>
             <input type="text" [(ngModel)]="skillGroup.title" #modifiedGroupTitle="ngModel" class="form-control" id="modifiedGroupTitle" name="modifiedGroupTitle" required >
@@ -15,27 +15,32 @@
                 Veuillez fournir un titre pour groupe de compétences (Ce champ est obligatoire).
             </div>
         </div>
+        <br>
         <ul *ngFor="let existingSkill of skillGroup.skills">
-            <li>
-                <form #modifySkill="ngForm">
+            <form #modifySkill="ngForm" class="row">
+                <div class="col-sm-6">
                     <div class="form-group">
-                        <label for="modifiedSkillTitle">Compétence à modifier : </label>
+                        <label for="modifiedSkillTitle"><fa-icon [icon]="circle" class="colorSectionIcon mr-3"></fa-icon>Compétence à modifier : </label>
                         <input type="text" [(ngModel)]="existingSkill.title" #modifiedSkillTitle="ngModel" class="form-control" id="modifiedSkillTitle" name="modifiedSkillTitle" required >
                         <div class="alert alert-danger" *ngIf="(modifiedSkillTitle.dirty || modifiedSkillTitle.touched) && modifiedSkillTitle.errors">
                             Veuillez décrire la compétence (Ce champ est obligatoire).
                         </div>
                     </div>
+                </div>
+                <div class="col-sm-6">
                     <div class="text-center">
-                        <button type="button" (click)="updateSkill(existingSkill)" class="btn btn-primary">Modifier la compétence</button>
+                        <button type="button" (click)="updateSkill(existingSkill)" class="btn btn-warning btn-lg">Modifier la compétence</button>
                     </div>
+                    <br>
                     <div class="text-center">
-                        <button type="button" (click)="deleteSkill(existingSkill)" class="btn btn-primary">Supprimer la compétence</button>
+                        <ng-template #tooltipContent>Etes-vous sûr de vouloir supprimer cette compétence ? La suppression est prise en compte immédiatement.</ng-template>
+                        <button type="button" (click)="deleteSkill(existingSkill)" [ngbTooltip]="tooltipContent" class="btn btn-danger btn-lg">Supprimer la compétence</button>
                     </div>
-                </form>
-                <br>
-            </li>
+                </div>
+            </form>
+            <br>
         </ul>
-        <form #addSkill="ngForm" (ngSubmit)="createSkillAlone()">
+        <form #addSkill="ngForm" (ngSubmit)="createSkillAlone()" class="mb-3">
             <div class="form-group">
                 <label for="aloneSkillTitle">Compétence à ajouter : </label>
                 <input type="text" [(ngModel)]="newAloneSkill.title" #aloneSkillTitle="ngModel" class="form-control" id="aloneSkillTitle" name="aloneSkillTitle" required >
@@ -44,12 +49,12 @@
                 </div>
             </div>
             <div class="text-center">
-                <button [disabled]="addSkill.invalid" type="submit" class="btn btn-primary">Ajouter</button>
+                <ng-template #tooltipContent2>Il est nécessaire de modifier le groupe pour que l'ajout soit pris en compte.</ng-template>
+                <button [disabled]="addSkill.invalid" type="submit" [ngbTooltip]="tooltipContent2" class="btn btn-success btn-lg">Ajouter la compétence</button>
             </div>
         </form>
-        <br>
         <div class="text-center">
-            <button [disabled]="updateGroupForm.invalid" type="submit" class="btn btn-primary">Modifier le groupe</button>
+            <p><button [disabled]="updateGroupForm.invalid" type="submit" class="btn btn-warning btn-lg mr-3">Modifier le groupe</button><app-delete-skill-group [skillGroup]="skillGroup" (delete)="deleteGroup($event)"></app-delete-skill-group></p>
         </div>
         <br>
     </form>

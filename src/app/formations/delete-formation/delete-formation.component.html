@@ -1,10 +1,4 @@
-<div *ngIf="formation">
-    <form #form2="ngForm" (ngSubmit)="deleteFormation()">
-        <h4>Supprimer la formation :</h4>
-        <br>
-        <div class="text-center">
-            <button [disabled]="form2.invalid" type="submit" class="btn btn-primary">Supprimer</button>
-        </div>
-        <br>
-    </form>
-</div>
+<ng-template #tipContent>
+    Voulez vous supprimer cette formation ?
+</ng-template>
+<button *ngIf="formation" type="button" (click)="deleteFormation()" class="btn btn-danger btn-lg"><fa-icon [icon]="trash" [ngbTooltip]="tipContent" class="trashIcon"></fa-icon></button>

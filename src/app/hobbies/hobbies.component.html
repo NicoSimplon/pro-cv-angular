@@ -12,24 +12,23 @@
     </div>
 </section>
 
-<div *ngIf="editMode">
-    <h3>Mes centres d'intérêt :</h3>
-    <hr>
+<div *ngIf="editMode" class="container">
     <div class="alert alert-danger text-center" *ngIf="errorMessage">
         <p><strong>{{ errorMessage }}</strong></p>
     </div>
-    <div class="alert alert-succes text-center" *ngIf="sucessMessage">
+    <div class="alert alert-success text-center" *ngIf="sucessMessage">
         <p><strong>{{ sucessMessage }}</strong></p>
     </div>
-    <br>
     <app-add-hobby (create)="createHobby($event)"></app-add-hobby>
-    <br>
-    <div *ngIf="hobbies">
-        <ul *ngFor="let hobby of hobbies">
-            <app-update-hobby [hobby]="hobby" (update)="updateHobby($event)"></app-update-hobby>
-            <app-delete-hobby [hobby]="hobby" (delete)="deleteHobby($event)"></app-delete-hobby>
-            <hr>
-        </ul>
-    </div>
     <hr>
+    <div *ngIf="hobbies">
+        <div class="mb-5" ngbDropdown>
+            <button class="btn btn-primary" id="dropdownBasic1" ngbDropdownToggle>Sélectionnez l'élément à modifier</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button *ngFor="let hobby of hobbies" (click)="selectedHobby = hobby" ngbDropdownItem>{{ hobby.id }} - {{ hobby.title }}</button>
+            </div>
+        </div>
+        <br>
+        <app-update-hobby *ngIf="selectedHobby" [hobby]="selectedHobby" (update)="updateHobby($event)" (delete)="deleteHobby($event)"></app-update-hobby>
+    </div>
 </div>

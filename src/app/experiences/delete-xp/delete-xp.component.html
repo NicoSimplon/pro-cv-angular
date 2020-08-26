@@ -1,13 +1,4 @@
-<div *ngIf="experience">
-    <div class="alert alert-danger text-center" *ngIf="errorMessage">
-        <p><strong>{{ errorMessage }}</strong></p>
-    </div>
-    <form #form2="ngForm" (ngSubmit)="deleteXp()">
-        <h4>Supprimer l'expérience professionnelle :</h4>
-        <br>
-        <div class="text-center">
-            <button [disabled]="form2.invalid" type="submit" class="btn btn-primary">Supprimer</button>
-        </div>
-        <br>
-    </form>
-</div>
+<ng-template #tipContent>
+    Voulez vous supprimer cette expérience professionnelle ?
+</ng-template>
+<button *ngIf="experience" type="button" (click)="deleteXp()" class="btn btn-danger btn-lg"><fa-icon [icon]="trash" [ngbTooltip]="tipContent" class="trashIcon"></fa-icon></button>

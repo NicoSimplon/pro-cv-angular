@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angu
 import { Scavenger } from '@wishtack/rx-scavenger';
 import { Hobby } from 'src/app/models/Hobby';
 import { PrivateServicesService } from 'src/app/services/private-services.service';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 /**
  * Component for deleting an hobby.
@@ -23,6 +24,8 @@ export class DeleteHobbyComponent implements OnInit, OnDestroy {
 
     @Output()
     delete = new EventEmitter<string>(true);
+
+    trash = faTrashAlt;
 
     constructor(private privService: PrivateServicesService) {}
 
