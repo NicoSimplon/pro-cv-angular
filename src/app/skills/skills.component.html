@@ -1,8 +1,8 @@
-<section *ngIf="!editMode" class="card bg-dark mb-3">
-    <div class="card-header">
+<section *ngIf="!editMode" class="card bg-light mb-3">
+    <div class="card-header bg-dark">
         <h4 class="sectionTitle colorTitle">Compétences</h4>
     </div>
-    <div class="card-body row">
+    <div class="card-body row ">
         <div *ngFor="let group of skills;" class="col-xl-4 col-lg-6 col-sm-12">
             <app-skill-group-display [skillGroup]="group"></app-skill-group-display>
         </div>

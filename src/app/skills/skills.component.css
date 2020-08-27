@@ -2,3 +2,7 @@
 .colorTitle {
     color: #765791;
 }
+
+.bg-light {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+}
