@@ -1,3 +1,4 @@
+import { environment } from 'src/environments/environment';
 import { Component, OnInit } from '@angular/core';
 
 /**
@@ -10,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FollowMeComponent implements OnInit {
 
+    startURIStaticResources = environment.startURIStaticResources;
     linkedinLink = 'https://www.linkedin.com/in/nicolas-marty-140216153';
     gitHubLink = 'https://github.com/NicoSimplon';
 
