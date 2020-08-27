@@ -1,7 +1,7 @@
 # Mon CV en ligne
 [![Build Status](https://travis-ci.org/NicoSimplon/pro-cv-angular.svg?branch=master)](https://travis-ci.org/NicoSimplon/pro-cv-angular)
 
-Ce projet a été réalisé en utilisant Angular 8 pour la partie FRONT et le framework JAVA Spring pour la partie back. Ce projet comporte également un système d'intégration continue. La partie back est automatiquement déployée sur Heroku. Pour des raisons de sécurité le repository contenant la partie back est privé.
+Ce projet a été réalisé en utilisant Angular 9 pour la partie FRONT et le framework JAVA Spring pour la partie back. Ce projet comporte également un système d'intégration continue. La partie back est automatiquement déployée sur Heroku. Pour des raisons de sécurité le repository contenant la partie back est privé.
 
 [lien vers l'application](https://nicosimplon.github.io/pro-cv-angular/)
 
