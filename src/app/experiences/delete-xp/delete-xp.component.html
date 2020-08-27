@@ -1,0 +1,4 @@
+<ng-template #tipContent>
+    Voulez vous supprimer cette expérience professionnelle ?
+</ng-template>
+<button *ngIf="experience" type="button" (click)="deleteXp()" class="btn btn-danger btn-lg"><fa-icon [icon]="trash" [ngbTooltip]="tipContent" class="trashIcon"></fa-icon></button>

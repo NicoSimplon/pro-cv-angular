@@ -1,1 +1,180 @@
-/* You can add global styles to this file, and also import other style files */
+/* Here are the global settings */
+body,
+html {
+    height: 100%;
+    /* Font */
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: 400;
+    color: #939ca3;
+}
+
+.sectionTitle {
+    font-weight: 700;
+}
+
+.pageTitle {
+    font-weight: 900;
+}
+
+.titleSection {
+    margin: auto;
+    padding: 2rem;
+	background-color: rgba(0, 0, 0, 0.5);
+	width: 50%;
+}
+
+
+#wallpaper {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.profilIcons {
+    color: #939ca3;
+    font-size: 1.5rem;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.buttonIcons {
+    color: white;
+    font-size: 1.5rem;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.trashIcon {
+    font-size: 1.5rem;
+}
+
+hr {
+    height: 1px;
+    background-color: #939ca3;
+    border: none;
+}
+
+/* Overriding bootstrap button colors */
+.btn-primary, .btn-primary.disabled, .btn-primary:disabled {
+    color: white !important;
+    background-color: grey !important;
+    border-color: grey !important;
+}
+
+.btn-primary.hover, .btn-primary:hover {
+    color: white !important;
+    background-color: #939ca3 !important;
+    border-color: #939ca3 !important;
+}
+
+.btn-primary.active, .btn-primary:active {
+    color: #939ca3 !important;
+    background-color: white !important;
+    border-color: #939ca3 !important;
+}
+
+.btn-primary.focus, .btn-primary:focus {
+    color: white !important;
+    background-color: grey !important;
+    border-color: grey !important;
+    box-shadow: 0 0 0 .2rem rgba(31, 40, 47, 0.5) !important;
+}
+
+.btn-primary.visited, .btn-primary:visited {
+    color: white !important;
+    background-color: #939ca3 !important;
+    border-color: rgb(147, 156, 163) !important;
+    box-shadow: 0 0 0 .1rem rgba(147, 156, 163, 0.5) !important;
+}
+
+.btn-link, .btn-link:hover, .btn-link:focus, .btn-link:visited, .btn-link:active {
+    text-decoration: none !important;
+    color: #939ca3;
+}
+
+.btn-link:focus, .btn-link:visited, .btn-link:active, .btn-link:hover {
+    box-shadow:  0 0 0 .2rem rgba(147, 156, 163, 0.5) !important;
+}
+
+/* Overriding background color for cards */
+.bg-dark {
+    background-color: #1f282f !important;
+}
+
+.card {
+    background-color: #1f282f !important;
+}
+
+/* Media queries for managing the titles size in regard of the screen size */
+@media screen and (max-width: 768px) {
+    .pageTitle {
+        font-weight: 700;
+        font-size: 2rem;
+    }
+
+    .titleSection {
+        margin: auto;
+        padding: 2rem;
+        background-color: rgba(0, 0, 0, 0.5);
+        width: 60%;
+    }
+
+
+    .sectionTitle {
+        font-weight: 600;
+    }
+}
+
+@media screen and (max-width: 585px) {
+    .pageTitle {
+        font-weight: 600;
+        font-size: 1.8rem;
+    }
+
+    .titleSection {
+        margin: auto;
+        padding: 2rem;
+        background-color: rgba(0, 0, 0, 0.5);
+        width: 80%;
+    }
+
+
+    .sectionTitle {
+        font-weight: 500;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .pageTitle {
+        font-weight: 500;
+        font-size: 1.5rem;
+    }
+
+    .titleSection {
+        margin: auto;
+        padding: 2rem;
+        background-color: rgba(0, 0, 0, 0.5);
+        width: 100%;
+    }
+
+
+    .sectionTitle {
+        font-weight: 400;
+    }
+
+}
+
+@media print {
+    menu, .contact, #follow, #hobbies, #profilePhoto, .alert {
+      display:none;
+    }
+
+    body {
+      font-size:120%;
+    }
+  }

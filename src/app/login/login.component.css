@@ -1,0 +1,11 @@
+.loginIconColor {
+    color: white;
+}
+
+.loginIconColor:active {
+    color: grey;
+}
+
+.loginIconSize {
+    font-size: 1.5rem;
+}

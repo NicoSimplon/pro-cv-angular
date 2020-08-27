@@ -1,0 +1,32 @@
+<section *ngIf="!editMode" class="card bg-dark mb-3">
+    <div class="card-header">
+        <h4 class="sectionTitle colorTitle">Projets</h4>
+    </div>
+    <div class="card-body">
+        <div class="alert alert-danger text-center" *ngIf="errorMessage">
+            <p><strong>{{ errorMessage }}</strong></p>
+        </div>
+        <ul *ngFor="let project of projects; last as isLast">
+            <p><fa-icon [icon]="circle" class="colorSectionIcon mr-3"></fa-icon><app-project [project]="project"></app-project></p>
+            <hr *ngIf="!isLast">
+        </ul>
+    </div>
+</section>
+
+<div *ngIf="editMode" class="container mb-4">
+    <div class="alert alert-success text-center" *ngIf="sucessMessage">
+        <p><strong>{{ sucessMessage }}</strong></p>
+    </div>
+    <app-add-project (create)="createProject($event)"></app-add-project>
+    <hr>
+    <div *ngIf="projects">
+        <div class="mb-5" ngbDropdown>
+            <button class="btn btn-primary" id="dropdownBasic1" ngbDropdownToggle>Sélectionnez l'élément à modifier</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button *ngFor="let project of projects;" (click)="selectedProject = project" ngbDropdownItem>{{ project.id}} - {{ project.title }}</button>
+            </div>
+        </div>
+        <app-update-project [project]="selectedProject" (update)="updateProject($event)" (delete)="deleteProject($event)"></app-update-project>
+    </div>
+</div>
+

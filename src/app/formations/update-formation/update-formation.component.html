@@ -1,0 +1,30 @@
+<div *ngIf="formation" class="mb-4">
+    <h4 class="sectionTitle colorTitle">Modifier cette formation formation</h4>
+    <br>
+    <div class="alert alert-danger text-center" *ngIf="errorMessage">
+        <p><strong>{{ errorMessage }}</strong></p>
+    </div>
+    <div class="alert alert-success text-center" *ngIf="sucessMessage">
+        <p><strong>{{ sucessMessage }}</strong></p>
+    </div>
+    <form #form="ngForm" (ngSubmit)="updateFormation()">
+        <div class="form-group">
+            <label for="modifiedFormation">Intitullé de la formation : </label>
+            <input type="text" [(ngModel)]="formation.title" #modifiedFormation="ngModel" class="form-control" id="modifiedFormation" name="modifiedFormation" required >
+            <div class="alert alert-danger" *ngIf="(modifiedFormation.dirty || modifiedFormation.touched) && modifiedFormation.errors">
+                L'intitulé de la formation est invalide (Ce champ est obligatoire).
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="formationYear">Année de la formation : </label>
+            <input type="number" [(ngModel)]="formation.year" #formationYear="ngModel" class="form-control" id="formationYear" name="formationYear" required >
+            <div class="alert alert-danger" *ngIf="(formationYear.dirty || formationYear.touched) && formationYear.errors">
+                Une formation a nécessairement une année (Ce champ est obligatoire).
+            </div>
+        </div>
+        <div class="text-center">
+            <p><button [disabled]="form.invalid" type="submit" class="btn btn-warning btn-lg mr-3">Modifier</button><app-delete-formation [formation]="formation" (delete)="deleteFormation($event)"></app-delete-formation></p>
+        </div>
+        <br>
+    </form>
+</div>

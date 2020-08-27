@@ -1,0 +1,75 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-4">
+            <ngb-accordion [closeOthers]="true" activeIds="static-1">
+                <ngb-panel id="static-1">
+                    <ng-template ngbPanelTitle>
+                        <h4 class="sectionTitle">Modifier le profil</h4>
+                    </ng-template>
+                    <ng-template ngbPanelContent>
+                        <app-identification [editMode]=true></app-identification>
+                    </ng-template>
+                </ngb-panel>
+                <ngb-panel id="static-2">
+                    <ng-template ngbPanelTitle>
+                        <h4 class="sectionTitle">Modifier les centres d'intérêts</h4>
+                    </ng-template>
+                    <ng-template ngbPanelContent>
+                        <app-hobbies [editMode]=true></app-hobbies>
+                    </ng-template>
+                </ngb-panel>
+            </ngb-accordion>
+            <br>
+        </div>
+        <div class="col-xl-4">
+            <ngb-accordion [closeOthers]="true" activeIds="static-1">
+                <ngb-panel id="static-1">
+                    <ng-template ngbPanelTitle>
+                        <h4 class="colorTitle sectionTitle">Modifier les technologies utilisées</h4>
+                    </ng-template>
+                    <ng-template ngbPanelContent>
+                        <app-technos [editMode]=true></app-technos>
+                    </ng-template>
+                </ngb-panel>
+            </ngb-accordion>
+            <br>
+        </div>
+        <div class="col-xl-4">
+            <ngb-accordion [closeOthers]="true" activeIds="static-1">
+                <ngb-panel id="static-1">
+                    <ng-template ngbPanelTitle>
+                        <h4 class="colorTitle sectionTitle">Modifier les formations</h4>
+                    </ng-template>
+                    <ng-template ngbPanelContent>
+                        <app-formations [editMode]=true></app-formations>
+                    </ng-template>
+                </ngb-panel>
+                <ngb-panel id="static-2">
+                    <ng-template ngbPanelTitle>
+                        <h4 class="colorTitle sectionTitle">Modifier les expériences professionnelles</h4>
+                    </ng-template>
+                    <ng-template ngbPanelContent>
+                        <app-experiences [editMode]=true></app-experiences>
+                    </ng-template>
+                </ngb-panel>
+                <ngb-panel id="static-3">
+                    <ng-template ngbPanelTitle>
+                        <h4 class="colorTitle sectionTitle">Modifier les projets</h4>
+                    </ng-template>
+                    <ng-template ngbPanelContent>
+                        <app-projects [editMode]=true></app-projects>
+                    </ng-template>
+                </ngb-panel>
+                <ngb-panel id="static-4">
+                    <ng-template ngbPanelTitle>
+                        <h4 class="colorTitle sectionTitle">Modifier les compétences</h4>
+                    </ng-template>
+                    <ng-template ngbPanelContent>
+                        <app-skills [editMode]=true></app-skills>
+                    </ng-template>
+                </ngb-panel>
+            </ngb-accordion>
+            <br>
+        </div>
+    </div>
+</div>

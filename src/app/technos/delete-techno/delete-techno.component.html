@@ -1,0 +1,4 @@
+<ng-template #tipContent>
+    Voulez vous supprimer ce langage ou cet outil ?
+</ng-template>
+<button type="button" *ngIf="techno"  class="btn btn-danger btn-lg" (click)="deleteTechno()"><fa-icon [icon]="trash" [ngbTooltip]="tipContent" class="trashIcon"></fa-icon></button>

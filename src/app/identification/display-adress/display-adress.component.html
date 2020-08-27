@@ -1,0 +1,3 @@
+<!-- <p *ngIf="adress"><fa-icon [icon]="postalAdress" class="profilIcons"></fa-icon> {{ adress.streetNumber }} {{ adress.street }}, <span *ngIf="adress.appartment != null && adress.appartment != ''">{{ adress.appartment }},</span> {{ adress.postalCode }} {{ adress.town | uppercase }}</p> -->
+
+<p *ngIf="adress"><fa-icon [icon]="postalAdress" class="profilIcons"></fa-icon> {{ adress.postalCode }} {{ adress.town | uppercase }}</p>

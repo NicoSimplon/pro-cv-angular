@@ -1,0 +1,54 @@
+<div *ngIf="techno">
+    <br>
+    <div class="alert alert-danger text-center" *ngIf="errorMessage">
+        <p><strong>{{ errorMessage }}</strong></p>
+    </div>
+    <div class="alert alert-success text-center" *ngIf="sucessMessage">
+        <p><strong>{{ sucessMessage }}</strong></p>
+    </div>
+    <br>
+    <form #form="ngForm" (ngSubmit)="updateLogoPath()">
+        <div class="form-group">
+            <label for="titleLogo">Nom de la techno : </label>
+            <input type="text" [(ngModel)]="techno.title" #titleLogo="ngModel" class="form-control" id="titleLogo" name="titleLogo" required />
+            <div class="alert alert-danger" *ngIf="(titleLogo.dirty || titleLogo.touched) && titleLogo.errors">
+                Une techno a obligatoirement un nom (Ce champ est obligatoire).
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="logo">Nouveau chemin du logo : </label>
+            <input type="text" [(ngModel)]="techno.logoPath" #logo="ngModel" class="form-control" id="logo" name="logo" required />
+            <div class="alert alert-danger" *ngIf="(logo.dirty || logo.touched) && logo.errors">
+                Le chemin du nouveau logo est invalide (Ce champ est obligatoire).
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="updatedlogoOrder">
+                Ordre d'affichage de la techno :
+            </label>
+            <input type="number" [(ngModel)]="techno.order" #updatedlogoOrder="ngModel" class="form-control" id="updatedlogoOrder" name="updatedlogoOrder" required />
+            <div class="alert alert-danger" *ngIf="(updatedlogoOrder.dirty || updatedlogoOrder.touched) && updatedlogoOrder.errors">
+                Indiquer un ordre d'affichage du logo (ils sont affiché dans l'ordre croissant).
+            </div>
+        </div>
+        <br />
+        <div class="text-center">
+            <p><button [disabled]="form.invalid" type="submit" class="btn btn-warning btn-lg mr-3">Modifier</button><app-delete-techno [techno]="techno" (delete)="deleteTechno($event)"></app-delete-techno></p>
+        </div>
+    </form>
+    <br>
+    <form #form3="ngForm" (ngSubmit)="updateImage()">
+        <h4 class="sectionTitle colorTitle">Choisir une nouvelle image :</h4>
+        <br>
+        <div class="image-preview mb-3" *ngIf="previewUrl">
+            <img [src]="previewUrl" height="300" />
+        </div>
+        <div class="custom-file mb-3">
+            <input type="file" name="image" (change)="fileProgress($event)" class="custom-file-input" id="fileInput" />
+            <label class="custom-file-label" for="fileInput">Choisissez un fichier</label>
+        </div>
+        <div class="form-group text-center">
+            <button [disabled]="form3.invalid" type="submit" class="btn btn-success btn-lg">Télécharger</button>
+        </div>
+    </form>
+</div>

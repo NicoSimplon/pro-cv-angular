@@ -1,0 +1,34 @@
+<section *ngIf="!editMode" class="card bg-dark mb-3">
+    <div class="card-header">
+        <h4 class="sectionTitle colorTitle">Expériences Professionnelles</h4>
+    </div>
+    <div class="card-body">
+        <div class="alert alert-danger text-center" *ngIf="errorMessage">
+            <p><strong>{{ errorMessage }}</strong></p>
+        </div>
+        <ul *ngFor="let xp of experiences; last as isLast">
+            <p><fa-icon [icon]="circle" class="colorSectionIcon mr-3"></fa-icon><app-xp [experience]="xp"></app-xp></p>
+            <hr *ngIf="!isLast">
+        </ul>
+    </div>
+</section>
+
+<div *ngIf="editMode" class="container">
+    <div class="alert alert-danger text-center" *ngIf="errorMessage">
+        <p><strong>{{ errorMessage }}</strong></p>
+    </div>
+    <div class="alert alert-success text-center" *ngIf="sucessMessage">
+        <p><strong>{{ sucessMessage }}</strong></p>
+    </div>
+    <app-add-new-xp (create)="addNewXp($event)"></app-add-new-xp>
+    <hr>
+    <div *ngIf="experiences">
+        <div class="mb-5" ngbDropdown>
+            <button class="btn btn-primary" id="dropdownBasic1" ngbDropdownToggle>Sélectionnez l'élément à modifier</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button *ngFor="let xp of experiences;" (click)="selectedXp = xp" ngbDropdownItem>{{ xp.order}} - {{ xp.title }}</button>
+            </div>
+        </div>
+        <app-update-xp [experience]="selectedXp" (update)="updateXp($event)" (delete)="deleteXp($event)"></app-update-xp>
+    </div>
+</div>

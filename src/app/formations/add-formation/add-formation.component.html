@@ -1,0 +1,30 @@
+<div *ngIf="newFormation" class="mb-3">
+    <h4 class="sectionTitle colorTitle">Créer une nouvelle formation</h4>
+    <br>
+    <div class="alert alert-danger text-center" *ngIf="errorMessage">
+        <p><strong>{{ errorMessage }}</strong></p>
+    </div>
+    <div class="alert alert-success text-center" *ngIf="sucessMessage">
+        <p><strong>{{ sucessMessage }}</strong></p>
+    </div>
+    <form #form1="ngForm" (ngSubmit)="createFormation()">
+        <div class="form-group">
+            <label for="formationTitle">Intitullé de la formation : </label>
+            <input type="text" [(ngModel)]="newFormation.title" #formationTitle="ngModel" class="form-control" id="formationTitle" name="formationTitle" required >
+            <div class="alert alert-danger" *ngIf="(formationTitle.dirty || formationTitle.touched) && formationTitle.errors">
+                L'intitulé de la formation est invalide (Ce champ est obligatoire).
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="newFormationYear">Année de la formation : </label>
+            <input type="number" [(ngModel)]="newFormation.year" #newFormationYear="ngModel" class="form-control" id="newFormationYear" name="newFormationYear" required >
+            <div class="alert alert-danger" *ngIf="(newFormationYear.dirty || newFormationYear.touched) && newFormationYear.errors">
+                Une formation a nécessairement une année (Ce champ est obligatoire).
+            </div>
+        </div>
+        <div class="text-center">
+            <button [disabled]="form1.invalid" type="submit" class="btn btn-success btn-lg">Créer</button>
+        </div>
+        <br>
+    </form>
+</div>

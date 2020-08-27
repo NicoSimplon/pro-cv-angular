@@ -1,0 +1,36 @@
+<section *ngIf="!editMode" class="card bg-dark mb-3">
+    <div class="card-header">
+        <h4 class="sectionTitle">Langages et outils</h4>
+    </div>
+    <div class="card-body">
+        <div class="alert alert-danger text-center" *ngIf="errorMessage">
+            <p><strong>{{ errorMessage }}</strong></p>
+        </div>
+        <div *ngFor="let tech of technos;" class="inlineLogos p-2">
+            <app-techno [techno]="tech"></app-techno>
+        </div>
+    </div>
+</section>
+
+<div *ngIf="editMode" class="container">
+    <h4 class="sectionTitle colorTitle">Ajouter un langage ou un outil</h4>
+    <br>
+    <div class="alert alert-succes text-center" *ngIf="sucessMessage">
+        <p><strong>{{ sucessMessage }}</strong></p>
+    </div>
+    <app-add-techno (create)="addNewTechno($event)"></app-add-techno>
+    <hr>
+    <h4 class="sectionTitle colorTitle">Editer un langage ou un outil</h4>
+    <br>
+    <div *ngIf="technos" class="mb-5" ngbDropdown>
+        <button class="btn btn-primary" id="dropdownBasic1" ngbDropdownToggle>Sélectionnez l'élément à modifier</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button *ngFor="let tech of technos;" (click)="selectedTechno = tech" ngbDropdownItem>{{ tech.order }} - {{ tech.title }}</button>
+        </div>
+    </div>
+    <div *ngIf="selectedTechno">
+        <app-techno [techno]="selectedTechno"></app-techno>
+        <app-update-techno [techno]="selectedTechno" (update)="updateLogoPath($event)" (updateLogoImage)="updateImage($event)" (delete)="deleteTechno($event)"></app-update-techno>
+        <br>
+    </div>
+</div>

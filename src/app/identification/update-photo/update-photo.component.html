@@ -1,0 +1,39 @@
+<div *ngIf="photo">
+    <div class="alert alert-danger text-center" *ngIf="errorMessage">
+        <p><strong>{{ errorMessage }}</strong></p>
+    </div>
+    <div class="alert alert-success text-center" *ngIf="sucessMessage">
+        <p><strong>{{ sucessMessage }}</strong></p>
+    </div>
+    <form #form="ngForm" (ngSubmit)="updatePhoto()" class="mb-4">
+        <h4 class="sectionTitle">Modifier la photo de profil</h4>
+        <br>
+        <div class="form-group">
+            <label for="photoPath">Chemin de la nouvelle photo : </label>
+            <input type="text" [(ngModel)]="photo.photoPath" #photoPath="ngModel" class="form-control" id="photoPath" name="photoPath" required >
+            <div class="alert alert-danger" *ngIf="(photoPath.dirty || photoPath.touched) && photoPath.errors">
+                Le chemin de la nouvelle photo est invalide (Ce champ est obligatoire).
+            </div>
+        </div>
+        <br>
+        <div class="text-center">
+            <button [disabled]="form.invalid" type="submit" class="btn btn-warning btn-lg">Modifier</button>
+        </div>
+    </form>
+    <form #form4="ngForm" (ngSubmit)="updatePhotoImage()" class="mb-4">
+        <h4 class="sectionTitle">Choisir une nouvelle photo</h4>
+        <br>
+        <div class="custom-file">
+            <input type="file" name="image" (change)="fileProgress($event)" class="custom-file-input" id="fileInput" />
+            <label class="custom-file-label" for="fileInput">Choisissez un fichier</label>
+        </div>
+        <br>
+        <div class="image-preview mb-3" *ngIf="previewUrl">
+            <img [src]="previewUrl" height="300" />
+        </div>
+        <br>
+        <div class="form-group text-center">
+            <button type="submit" class="btn btn-success btn-lg">Télécharger</button>
+        </div>
+    </form>
+</div>

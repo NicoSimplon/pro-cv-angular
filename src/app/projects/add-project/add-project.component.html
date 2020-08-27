@@ -1,0 +1,30 @@
+<div *ngIf="newProject">
+    <h4 class="sectionTitle colorTitle">Créer un nouveau projet</h4>
+    <br>
+    <div class="alert alert-danger text-center" *ngIf="errorMessage">
+        <p><strong>{{ errorMessage }}</strong></p>
+    </div>
+    <div class="alert alert-success text-center" *ngIf="sucessMessage">
+        <p><strong>{{ sucessMessage }}</strong></p>
+    </div>
+    <form #form1="ngForm" (ngSubmit)="createProject()">
+        <div class="form-group">
+            <label for="projectTitle">Titre du projet : </label>
+            <input type="text" [(ngModel)]="newProject.title" #projectTitle="ngModel" class="form-control" id="projectTitle" name="projectTitle" required >
+            <div class="alert alert-danger" *ngIf="(projectTitle.dirty || projectTitle.touched) && projectTitle.errors">
+                Veuillez renseigner un titre pour ce projet (Ce champ est obligatoire).
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="projectDescription">Description du projet : </label>
+            <input type="text" [(ngModel)]="newProject.description" #projectDescription="ngModel" class="form-control" id="projectDescription" name="projectDescription" required >
+            <div class="alert alert-danger" *ngIf="(projectDescription.dirty || projectDescription.touched) && projectDescription.errors">
+                Veuillez remplir une description du projet (Ce champ est obligatoire).
+            </div>
+        </div>
+        <div class="text-center">
+            <button [disabled]="form1.invalid" type="submit" class="btn btn-success btn-lg">Ajouter</button>
+        </div>
+        <br>
+    </form>
+</div>

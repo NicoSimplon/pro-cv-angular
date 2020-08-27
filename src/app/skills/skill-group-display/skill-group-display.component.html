@@ -1,0 +1,10 @@
+<div *ngIf="skillGroup" class="card bg-dark mb-3">
+    <div class="card-header">
+        <h5 class="sectionTitle colorTitle">{{ skillGroup.title }}</h5>
+    </div>
+    <div class="card-body colorText">
+        <ul *ngFor="let skill of skillGroup.skills">
+            <p><fa-icon [icon]="circle" class="colorSectionIcon mr-3"></fa-icon>{{ skill.title }}</p>
+        </ul>
+    </div>
+</div>

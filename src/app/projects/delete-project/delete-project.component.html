@@ -1,0 +1,4 @@
+<ng-template #tipContent>
+    Voulez vous supprimer cette formation ?
+</ng-template>
+<button *ngIf="project" type="button" (click)="deleteProject()" class="btn btn-danger btn-lg"><fa-icon [icon]="trash" [ngbTooltip]="tipContent" class="trashIcon"></fa-icon></button>

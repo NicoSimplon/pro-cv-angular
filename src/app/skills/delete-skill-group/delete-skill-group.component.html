@@ -1,0 +1,4 @@
+<ng-template #tipContent>
+    Voulez vous supprimer ce groupe de compétence ?
+</ng-template>
+<button *ngIf="skillGroup" type="button" (click)="deleteGroup()" class="btn btn-danger btn-lg"><fa-icon [icon]="trash" [ngbTooltip]="tipContent" class="trashIcon"></fa-icon></button>

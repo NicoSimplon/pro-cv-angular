@@ -1,0 +1,2 @@
+<ng-template #tipContent>{{ techno.title }}</ng-template>
+<img *ngIf="techno" src="{{ basicUrl + techno.logoPath }}" alt="Logo de {{ techno.title }}" [ngbTooltip]="tipContent" class="technoIcon" />

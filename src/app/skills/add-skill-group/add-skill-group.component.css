@@ -1,0 +1,15 @@
+
+.colorTitle {
+    color: #765791;
+}
+
+.leftBorder {
+    border-left-style: solid;
+    border-left-color: #939ca3;
+    border-left-width: 1px;
+}
+
+.colorSectionIcon {
+    color: #765791;
+    font-size: 1.0rem;
+}

@@ -1,0 +1,30 @@
+<div *ngIf="project">
+    <h4 class="sectionTitle colorTitle">Modifier ce projet</h4>
+    <br>
+    <div class="alert alert-danger text-center" *ngIf="errorMessage">
+        <p><strong>{{ errorMessage }}</strong></p>
+    </div>
+    <div class="alert alert-success text-center" *ngIf="sucessMessage">
+        <p><strong>{{ sucessMessage }}</strong></p>
+    </div>
+    <form #form="ngForm" (ngSubmit)="updateProject()">
+        <div class="form-group">
+            <label for="modifiedProjectTitle">Titre du projet : </label>
+            <input type="text" [(ngModel)]="project.title" #modifiedProjectTitle="ngModel" class="form-control" id="modifiedProjectTitle" name="modifiedProjectTitle" required >
+            <div class="alert alert-danger" *ngIf="(modifiedProjectTitle.dirty || modifiedProjectTitle.touched) && modifiedProjectTitle.errors">
+                Veuillez fournir un titre pour le projet (Ce champ est obligatoire).
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="modifiedProjectDescription">Description du projet : </label>
+            <input type="text" [(ngModel)]="project.description" #modifiedProjectDescription="ngModel" class="form-control" id="modifiedProjectDescription" name="modifiedProjectDescription" required >
+            <div class="alert alert-danger" *ngIf="(modifiedProjectDescription.dirty || modifiedProjectDescription.touched) && modifiedProjectDescription.errors">
+                Veuillez fournir une description du projet (Ce champ est obligatoire).
+            </div>
+        </div>
+        <div class="text-center">
+            <p><button [disabled]="form.invalid" type="submit" class="btn btn-warning btn-lg mr-3">Modifier</button><app-delete-project [project]="project" (delete)="deleteProject($event)"></app-delete-project></p>
+        </div>
+        <br>
+    </form>
+</div>

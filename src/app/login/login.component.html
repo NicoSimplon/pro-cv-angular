@@ -1,0 +1,35 @@
+<div>
+    <section class="container">
+        <div class="card bg-dark pr-5 pl-5">
+            <div class="card-header">
+                <h2 class="sectionTitle">Se Connecter</h2>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-danger text-center" *ngIf="errorMessage">
+                    <p><strong>{{ errorMessage }}</strong></p>
+                </div>
+                <br>
+                <form  #form="ngForm" (ngSubmit)="connect()">
+                    <div class="form-group">
+                        <label for="email">Email : </label>
+                        <input type="email" [(ngModel)]="auth.email" #email="ngModel" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Renseigner votre email" name="email" required pattern="[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+.[a-zA-Z.]{2,15}">
+                        <small id="emailHelp" class="form-text text-muted">Nous ne communiquerons jamais votre email à qui que ce soit.</small>
+                        <div class="alert alert-danger" *ngIf="(email.dirty || email.touched) && email.errors">
+                            Le champ email est invalide (Ce champ est obligatoire et doit avoir le format mail@mail.com).
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Mot de passe : </label>
+                        <input type="password" [(ngModel)]="auth.motDePasse" #password="ngModel" class="form-control" id="password" name="password" placeholder="Mot de passe" required>
+                        <div class="alert alert-danger" *ngIf="(password.dirty || password.touched) && password.errors">
+                            Le champ mot de passe est invalide (Ce champ est obligatoire).
+                        </div>
+                    </div>
+                    <div class="text-center pb-4">
+                        <button [disabled]="form.invalid" type="submit" class="btn btn-primary btn-lg loginIconColor"><fa-icon [icon]="login" class="loginIconSize"></fa-icon> Se connecter</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
