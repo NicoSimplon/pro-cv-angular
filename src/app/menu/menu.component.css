@@ -1,16 +1,3 @@
-.editIconColor {
-    color: #939ca3;
-    font-size: 1.5rem;
-}
-
-.editIconColor:hover {
-    color: #b4c3ce;
-}
-
-.editIconColor:active {
-    color: #1f282f;
-}
-
 .logoutIconColor {
     color: #1f282f;
     font-size: 1.5rem;

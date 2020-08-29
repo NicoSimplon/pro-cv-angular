@@ -1,0 +1,8 @@
+<ng-template #tipContent>Télécharger la version PDF du CV ?</ng-template>
+<a *ngIf="!editMode" href="{{ pdfURI }}" target="_blank" class="ml-3">
+    <fa-icon [icon]="pdfIcon" [ngbTooltip]="tipContent" class="editIconColor"></fa-icon>
+</a>
+
+<section *ngIf="editMode" class="card">
+    <app-upload-file></app-upload-file>
+</section>

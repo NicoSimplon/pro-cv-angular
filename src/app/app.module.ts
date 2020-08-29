@@ -52,6 +52,8 @@ import { DisplayEmailComponent } from './identification/display-email/display-em
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FollowMeComponent } from './follow-me/follow-me.component';
+import { PdfComponent } from './pdf/pdf.component';
+import { UploadFileComponent } from './pdf/upload-file/upload-file.component';
 
 @NgModule({
   declarations: [
@@ -99,7 +101,9 @@ import { FollowMeComponent } from './follow-me/follow-me.component';
     DisplayPhoneComponent,
     UpdatePhoneComponent,
     DisplayEmailComponent,
-    FollowMeComponent
+    FollowMeComponent,
+    PdfComponent,
+    UploadFileComponent
   ],
   imports: [
     BrowserModule,
