@@ -4,7 +4,7 @@
     </section>
     <br />
     <menu class="container-fluid">
-        <app-menu *ngIf="user" [connected]="true" [user]="user"></app-menu>
+        <app-menu *ngIf="user" [connected]="true" [user]="user" (deco)="disconnect($event)"></app-menu>
         <app-menu *ngIf="!user" [connected]="false" [user]="undefined"></app-menu>
     </menu>
     <br />
