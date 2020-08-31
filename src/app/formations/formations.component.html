@@ -20,7 +20,7 @@
     <app-add-formation (create)="createFormation($event)"></app-add-formation>
     <hr>
     <div *ngIf="formations">
-        <div class="mb-5" ngbDropdown>
+        <div class="mb-5" ngbDropdown container="body">
             <button class="btn btn-primary" id="dropdownBasic1" ngbDropdownToggle>Sélectionnez l'élément à modifier</button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                 <button *ngFor="let formation of formations" (click)="selectedFormation = formation" ngbDropdownItem>{{ formation.year }} - {{ formation.title }}</button>

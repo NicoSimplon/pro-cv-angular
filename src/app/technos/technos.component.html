@@ -22,7 +22,7 @@
     <hr>
     <h4 class="sectionTitle colorTitle">Editer un langage ou un outil</h4>
     <br>
-    <div *ngIf="technos" class="mb-5" ngbDropdown>
+    <div *ngIf="technos" class="mb-5" ngbDropdown container="body">
         <button class="btn btn-primary" id="dropdownBasic1" ngbDropdownToggle>Sélectionnez l'élément à modifier</button>
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
             <button *ngFor="let tech of technos;" (click)="selectedTechno = tech" ngbDropdownItem>{{ tech.order }} - {{ tech.title }}</button>
