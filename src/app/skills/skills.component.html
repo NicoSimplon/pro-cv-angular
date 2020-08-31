@@ -19,7 +19,7 @@
     <app-add-skill-group (create)="createSkillGroup($event)"></app-add-skill-group>
     <hr>
     <div *ngIf="skills">
-        <div class="mb-5" ngbDropdown>
+        <div class="mb-5" ngbDropdown container="body">
             <button class="btn btn-primary" id="dropdownBasic1" ngbDropdownToggle>Sélectionnez l'élément à modifier</button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                 <button *ngFor="let group of skills;" (click)="selectedSkillGroup = group" ngbDropdownItem>{{ group.id}} - {{ group.title }}</button>

@@ -20,7 +20,7 @@
     <app-add-project (create)="createProject($event)"></app-add-project>
     <hr>
     <div *ngIf="projects">
-        <div class="mb-5" ngbDropdown>
+        <div class="mb-5" ngbDropdown container="body">
             <button class="btn btn-primary" id="dropdownBasic1" ngbDropdownToggle>Sélectionnez l'élément à modifier</button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                 <button *ngFor="let project of projects;" (click)="selectedProject = project" ngbDropdownItem>{{ project.id}} - {{ project.title }}</button>
