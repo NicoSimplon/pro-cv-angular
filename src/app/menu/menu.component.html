@@ -44,13 +44,13 @@
     <div class="float-right">
         <ng-template #tipContent>Passer en mode édition ?</ng-template>
         <ng-template #tipContent2>Retourner à la page d'accueil</ng-template>
-        <p *ngIf="!loginPage" class="mr-3">
+        <p *ngIf="!loginPage" class="mr-4">
             <a href="#" routerLink="/edit" (click)="setVisibility()">
                 <fa-icon [icon]="edit" [ngbTooltip]="tipContent" class="editIconColor"></fa-icon>
             </a>
             <app-pdf [editMode]="false"></app-pdf>
         </p>
-        <p *ngIf="loginPage" class="mr-3">
+        <p *ngIf="loginPage" class="mr-4">
             <a href="#" routerLink="/accueil" (click)="setVisibility()">
                 <fa-icon [icon]="home" [ngbTooltip]="tipContent2" class="editIconColor"></fa-icon>
             </a>

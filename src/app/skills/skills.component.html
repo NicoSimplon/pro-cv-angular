@@ -2,9 +2,11 @@
     <div class="card-header bg-dark">
         <h4 class="sectionTitle colorTitle">Compétences</h4>
     </div>
-    <div class="card-body row ">
-        <div *ngFor="let group of skills;" class="col-xl-4 col-lg-6 col-sm-12">
-            <app-skill-group-display [skillGroup]="group"></app-skill-group-display>
+    <div class="card-body">
+        <div class="card-columns">
+            <div *ngFor="let group of skills;">
+                <app-skill-group-display [skillGroup]="group"></app-skill-group-display>
+            </div>
         </div>
     </div>
 </section>
