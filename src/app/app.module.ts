@@ -54,6 +54,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FollowMeComponent } from './follow-me/follow-me.component';
 import { PdfComponent } from './pdf/pdf.component';
 import { UploadFileComponent } from './pdf/upload-file/upload-file.component';
+import { PrintComponent } from './print/print.component';
 
 @NgModule({
   declarations: [
@@ -103,7 +104,8 @@ import { UploadFileComponent } from './pdf/upload-file/upload-file.component';
     DisplayEmailComponent,
     FollowMeComponent,
     PdfComponent,
-    UploadFileComponent
+    UploadFileComponent,
+    PrintComponent
   ],
   imports: [
     BrowserModule,

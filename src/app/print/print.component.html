@@ -1,0 +1,27 @@
+<section class="container-fluid">
+    <div class="row">
+        <div class="col-8">
+            <app-identification [editMode]="false" ></app-identification>
+        </div>
+        <div class="col-4">
+            <h1 class="pageTitle">{{ title }}</h1>
+        </div>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-6">
+                    <app-experiences [editMode]="false"></app-experiences>
+                </div>
+                <div class="col-6">
+                    <app-formations [editMode]="false"></app-formations>
+                    <app-technos [editMode]="false"></app-technos>
+                </div>
+                <div class="col-12">
+                    <app-projects [editMode]="false"></app-projects>
+                </div>
+                <div class="col-12">
+                    <app-skills [editMode]="false"></app-skills>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

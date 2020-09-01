@@ -1,13 +1,13 @@
 <header>
-    <section class="text-center titleSection">
+    <section class="text-center titleSection print-suppress">
         <h1 class="pageTitle">{{ title }}</h1>
     </section>
-    <br />
-    <menu class="container-fluid">
+    <br class="print-suppress" />
+    <menu class="container-fluid print-suppress">
         <app-menu *ngIf="user" [connected]="true" [user]="user" (deco)="disconnect($event)"></app-menu>
         <app-menu *ngIf="!user" [connected]="false" [user]="undefined"></app-menu>
     </menu>
-    <br />
+    <br class="print-suppress" />
 
     <router-outlet></router-outlet>
 </header>

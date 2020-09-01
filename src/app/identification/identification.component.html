@@ -13,12 +13,13 @@
                 <p><fa-icon [icon]="birthday" class="profilIcons"></fa-icon> {{ age }} ans</p>
                 <app-display-adress [adress]="adress" [postalAdress]="postalAdress"></app-display-adress>
                 <app-display-phone [phone]="phoneNumber" [phoneIcon]="phone"></app-display-phone>
+                <p *ngIf="emailAdress" class="print-display"><fa-icon [icon]="mail" class="profilIcons"></fa-icon> {{ emailAdress }}</p>
                 <br>
-                <div class="text-center contact">
+                <div class="text-center print-suppress">
                     <ng-template #tipContent>Cliquez pour faire apparaître ou disparaître le formulaire de contact.</ng-template>
                     <button class="btn btn-secondary btn-lg" type="button" (click)="setVisibleForm()" [ngbTooltip]="tipContent"><fa-icon [icon]="mail" class="buttonIcons"></fa-icon> Me Contacter</button>
                 </div>
-                <div *ngIf="emailForm" class="contact">
+                <div *ngIf="emailForm" class="print-suppress">
                     <app-display-email></app-display-email>
                 </div>
             </div>

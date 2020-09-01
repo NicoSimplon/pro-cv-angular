@@ -1,28 +1,29 @@
 
-<section class="container-fluid">
+<section class="container-fluid print-suppress">
     <div class="row mr-4 ml-4">
         <div class="col-xl-2">
-            <app-identification [editMode]=false class="d-print-table-cell"></app-identification>
-            <app-follow-me id="follow"></app-follow-me>
-            <app-hobbies id="hobbies" [editMode]=false></app-hobbies>
+            <app-identification [editMode]=false></app-identification>
+            <app-follow-me class="print-suppress"></app-follow-me>
+            <app-hobbies class="print-suppress" [editMode]="false"></app-hobbies>
         </div>
         <div class="col-xl-10">
             <div class="row">
-
                     <div class="col-xl-6">
-                        <app-experiences [editMode]=false></app-experiences>
+                        <app-experiences [editMode]="false"></app-experiences>
                     </div>
                     <div class="col-xl-6">
-                        <app-formations [editMode]=false></app-formations>
-                        <app-technos [editMode]=false></app-technos>
+                        <app-formations [editMode]="false"></app-formations>
+                        <app-technos [editMode]="false"></app-technos>
                     </div>
                 <div class="col-xl-12">
-                    <app-projects [editMode]=false></app-projects>
+                    <app-projects [editMode]="false"></app-projects>
                 </div>
                 <div class="col-xl-12">
-                    <app-skills [editMode]=false></app-skills>
+                    <app-skills [editMode]="false"></app-skills>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<app-print></app-print>

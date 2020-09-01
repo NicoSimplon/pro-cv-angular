@@ -24,7 +24,7 @@ html {
     width: 50%;
 }
 
-#wallpaper {
+.wallpaper {
     height: 100%;
     width: 100%;
     position: fixed;
@@ -191,15 +191,25 @@ hr {
     }
 }
 
+/* Print display */
+app-print {
+    display: none;
+}
+
+.print-display {
+    display: none;
+}
+
 @media print {
-    menu,
-    .contact,
-    #follow,
-    #hobbies,
-    #profilePhoto,
-    .alert {
+    .alert,
+    .print-suppress {
         display: none;
     }
+
+    app-print, .print-display {
+        display: block;
+    }
+
     body {
         font-size: 120%;
     }

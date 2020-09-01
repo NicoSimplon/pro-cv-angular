@@ -1,4 +1,4 @@
-<section *ngIf="connected">
+<section *ngIf="connected" class="print-suppress">
     <h2 class="sectionTitle">Mode édition du CV</h2>
     <ng-template #tipContent>Se déconnecter ?</ng-template>
     <p>Bienvenue <b>{{ user.firstName }} {{ user.lastName | uppercase }}</b>, <span class="pr-3 pl-3"><a href="#" [ngbTooltip]="tipContent" (click)="disconnect()"><fa-icon [icon]="logout" class="logoutIconColor"></fa-icon></a></span></p>
@@ -40,7 +40,7 @@
     </div>
 </section>
 
-<section *ngIf="!connected" class="p-3">
+<section *ngIf="!connected" class="p-3 print-suppress">
     <div class="float-right">
         <ng-template #tipContent>Passer en mode édition ?</ng-template>
         <ng-template #tipContent2>Retourner à la page d'accueil</ng-template>
@@ -59,6 +59,6 @@
     </div>
 </section>
 
-<section *ngIf="profileVisible && user != undefined" class="container">
+<section *ngIf="profileVisible && user != undefined" class="container print-suppress">
     <app-account [user]="user"></app-account>
 </section>

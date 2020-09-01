@@ -34,6 +34,7 @@ export class IdentificationComponent extends EditMode implements OnInit, OnDestr
     photoPath: Photo;
     completeUrl: string;
     emailForm: boolean;
+    emailAdress: string;
 
     // FontAwesome icons
     birthday = faBirthdayCake;
@@ -87,6 +88,7 @@ export class IdentificationComponent extends EditMode implements OnInit, OnDestr
                 this.photoPath = new Photo(this.basicDatas.photoPath);
                 this.completeUrl = `${environment.backendUrl}${this.basicDatas.photoPath}`;
                 this.phoneNumber = new Phone(datas.phoneNumber);
+                this.emailAdress = datas.emailAdress;
                 // I display my age instead of my birth date
                 // I calculate it so i don't have to update it manualy.
                 this.age = Math.abs(
