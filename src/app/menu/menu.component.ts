@@ -64,6 +64,7 @@ export class MenuComponent implements OnInit, OnDestroy {
             () => {
                 this.connected = false;
                 this.user = undefined;
+                localStorage.removeItem('AUTH-TOKEN');
                 this.deco.emit(true);
             },
             () => {

@@ -25,7 +25,7 @@ export class AppComponent implements OnInit, OnDestroy {
      * Clean the user when logout of the application.
      */
     disconnect(event: boolean): void {
-        this.user = null;
+        this.user = undefined;
     }
 
     ngOnInit(): void {
