@@ -1,7 +1,7 @@
 <section *ngIf="connected" class="print-suppress">
     <h2 class="sectionTitle">Mode édition du CV</h2>
     <ng-template #tipContent>Se déconnecter ?</ng-template>
-    <p>Bienvenue <b>{{ user.firstName }} {{ user.lastName | uppercase }}</b>, <span class="pr-3 pl-3"><a href="#" [ngbTooltip]="tipContent" (click)="disconnect()"><fa-icon [icon]="logout" class="logoutIconColor"></fa-icon></a></span></p>
+    <p>Bienvenue <b>{{ user.firstName }} {{ user.lastName | uppercase }}</b>, <span class="pr-3 pl-3"><button type="button" [ngbTooltip]="tipContent" class="btn btn-link" (click)="disconnect()"><fa-icon [icon]="logout" class="logoutIconColor"></fa-icon></button></span></p>
     <div class="alert alert-danger text-center" *ngIf="errorMessage">
         <p><b>{{ errorMessage }}</b></p>
     </div>
